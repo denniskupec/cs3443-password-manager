@@ -1,0 +1,30 @@
+/* build.gradle | password-manager */
+plugins {
+	id 'java'
+	id 'application'
+	id 'org.openjfx.javafxplugin' version '0.0.8'
+	id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+repositories {
+	//jcenter()
+	mavenCentral()
+}
+
+dependencies {
+	implementation "org.openjfx:javafx-graphics:$javafx.version"
+	implementation "org.openjfx:javafx-controls:$javafx.version"
+	implementation "org.openjfx:javafx-fxml:$javafx.version"
+	implementation "org.openjfx:javafx-base:$javafx.version"
+}
+
+javafx {
+	version = "11.0.2"
+	mainClassName = "passmanager.Launcher"
+	modules = [
+		"javafx.base",
+		"javafx.fxml",
+		"javafx.graphics",
+		"javafx.controls"
+	]
+}
