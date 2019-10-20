@@ -25,6 +25,14 @@
 			}
 		},
 		{
+			"name": "Compile",
+			"working_dir": "$project_path",
+			"shell_cmd": "gradlew compileJava",
+			"windows": {
+				"shell_cmd": "gradlew.bat compileJava"
+			}
+		},
+		{
 			"name": "Build",
 			"working_dir": "$project_path",
 			"shell_cmd": "gradlew build",
