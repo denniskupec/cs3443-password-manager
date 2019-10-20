@@ -1,0 +1,52 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"file_exclude_patterns": ["*.class", "*.jar", "gradlew", "gradlew.bat"],
+			"folder_exclude_patterns": [".gradle", ".idea"]
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4,
+		"default_encoding": "UTF-8",
+		"default_line_ending": "unix",
+		"trim_automatic_white_space": true,
+		"use_tab_stops": true,
+	},
+	"build_systems":
+	[
+		{
+			"name": "Build & Run",
+			"working_dir": "$project_path",
+			"shell_cmd": "gradlew run",
+			"windows": {
+				"shell_cmd": "gradlew.bat run"
+			}
+		},
+		{
+			"name": "Build",
+			"working_dir": "$project_path",
+			"shell_cmd": "gradlew build",
+			"windows": {
+				"shell_cmd": "gradlew.bat build"
+			}
+		},
+		{
+			"name": "Create JAR",
+			"working_dir": "$project_path",
+			"shell_cmd": "gradlew shadowJar",
+			"windows": {
+				"shell_cmd": "gradlew.bat shadowJar"
+			}
+		},
+		{
+			"name": "Clean",
+			"working_dir": "$project_path",
+			"shell_cmd": "gradlew clean",
+			"windows": {
+				"shell_cmd": "gradlew.bat clean"
+			}
+		}
+	]
+}
