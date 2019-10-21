@@ -14,13 +14,14 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/layout/app.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
 
-			Scene scene = new Scene(root, 500, 400);
+			Scene scene = new Scene(root, 1133, 700);
 				  scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
 			
 			primaryStage.setTitle("Password Manager");
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		}
 		catch (Exception e) {
