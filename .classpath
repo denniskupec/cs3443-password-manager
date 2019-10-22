@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin/default"/>
+	<classpathentry output="bin/main" kind="src" path="src/main/java">
+		<attributes>
+			<attribute name="gradle_scope" value="main"/>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry output="bin/main" kind="src" path="src/main/resources">
+		<attributes>
+			<attribute name="gradle_scope" value="main"/>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/11.0.2/2b7bb98d32266093bd49acd8778bedb55a326c20/javafx-fxml-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/11.0.2/23291af49fb53d2686c6995018775d19805247a2/javafx-fxml-11.0.2-mac.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/11.0.2/1535a8b57f01a712405a739a0d69e09ab99dbb6b/javafx-controls-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/11.0.2/996371d2868035845572cdb19179dca2bfd1139f/javafx-controls-11.0.2-mac.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/11.0.2/1535a8b57f01a712405a739a0d69e09ab99dbb6b/javafx-controls-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/11.0.2/4ab633cf1eea60f76e2ae9905aedac862da88b08/javafx-controls-11.0.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/15eadef01f327a851a6d3af0ac89d56292076b13/javafx-graphics-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/c1d99ae5bc48e7173f4514a941d27d8f8c972c71/javafx-graphics-11.0.2-mac.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/15eadef01f327a851a6d3af0ac89d56292076b13/javafx-graphics-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/e522eb4ea422eceeee207b1c266ba3db19b2343a/javafx-graphics-11.0.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/c082cdf645f9833408dcd960bf68344c9384f569/javafx-base-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/b774922e5da6a56afee221d1a288d179a1342aa9/javafx-base-11.0.2-mac.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/c082cdf645f9833408dcd960bf68344c9384f569/javafx-base-11.0.2-sources.jar" kind="lib" path="/Users/baud/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/7fb2e4a8528ec9e434a9ac9ee98b39af79e6dcb8/javafx-base-11.0.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+</classpath>
