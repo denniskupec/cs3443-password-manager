@@ -19,41 +19,41 @@
 		{
 			"name": "Build & Run",
 			"working_dir": "$project_path",
-			"shell_cmd": "gradlew run",
+			"shell_cmd": "$project_path/gradlew run",
 			"windows": {
-				"shell_cmd": "gradlew.bat run"
+				"shell_cmd": "$project_path/gradlew.bat run"
 			}
 		},
 		{
 			"name": "Compile",
 			"working_dir": "$project_path",
-			"shell_cmd": "gradlew compileJava",
+			"shell_cmd": "$project_path/gradlew compileJava",
 			"windows": {
-				"shell_cmd": "gradlew.bat compileJava"
+				"shell_cmd": "$project_path/gradlew.bat compileJava"
 			}
 		},
 		{
 			"name": "Build",
 			"working_dir": "$project_path",
-			"shell_cmd": "gradlew build",
+			"shell_cmd": "$project_path/gradlew build",
 			"windows": {
-				"shell_cmd": "gradlew.bat build"
+				"shell_cmd": "$project_path/gradlew.bat build"
 			}
 		},
 		{
 			"name": "Create JAR",
 			"working_dir": "$project_path",
-			"shell_cmd": "gradlew shadowJar",
+			"shell_cmd": "$project_path/gradlew shadowJar",
 			"windows": {
-				"shell_cmd": "gradlew.bat shadowJar"
+				"shell_cmd": "$project_path/gradlew.bat shadowJar"
 			}
 		},
 		{
 			"name": "Clean",
 			"working_dir": "$project_path",
-			"shell_cmd": "gradlew clean",
+			"shell_cmd": "$project_path/gradlew clean",
 			"windows": {
-				"shell_cmd": "gradlew.bat clean"
+				"shell_cmd": "$project_path/gradlew.bat clean"
 			}
 		}
 	]
