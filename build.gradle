@@ -10,4 +10,8 @@ repositories {
 	mavenCentral()
 }
 
+dependencies {
+	implementation "org.xerial:sqlite-jdbc:3.28.0"
+}
+
 mainClassName = "passmanager.App"
