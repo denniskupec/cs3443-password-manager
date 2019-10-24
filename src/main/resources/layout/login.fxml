@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<HBox alignment="center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="center" prefHeight="216.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.AppController">
    <children>
-   	<VBox alignment="center">
+   	<VBox alignment="center" prefHeight="32.0" prefWidth="304.0" spacing="10.0">
          <children>
             <PasswordField alignment="CENTER" prefHeight="25.0" prefWidth="304.0" promptText="Enter Password to Unlock">
                <font>
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <Button mnemonicParsing="false" text="Unlock">
+            <Button mnemonicParsing="false" onAction="#processLogin" text="Unlock">
                <font>
                   <Font size="14.0" />
                </font>
@@ -24,6 +24,7 @@
                   <Insets top="14.0" />
                </VBox.margin>
             </Button>
+            <Button mnemonicParsing="false" onAction="#processLogin" prefHeight="30.0" prefWidth="95.0" text="New User" />
          </children>
       </VBox>
    </children>
