@@ -1,31 +1,16 @@
 package passmanager.controller;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class AppController {
-	
-	
-	private int sceneMarker;
-	
-	@FXML
-	public void processLogin(ActionEvent event) {
-	
-		String value = ((Button)event.getSource()).getText();
-		
-		if(value.equals("New User")) sceneMarker = 1;
-		
-		else if(value.equals("Unlock")) sceneMarker = 2;
-		
+
+	AppController(Stage primaryStage) {
+
 	}
-	
-	@FXML
-	public int currentScene() {
-		
-		return sceneMarker;
-	}
-	
+
 }
