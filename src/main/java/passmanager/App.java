@@ -6,17 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import passmanager.controller.AppController;
 
 public class App extends Application {
 
 	private final static Logger log = Util.getLogger(App.class);
+	private AppController app = new AppController();
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
+			Parent login = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
+			Parent newUser = FXMLLoader.load(getClass().getResource("/layout/newUser.fxml"));
 
-			Scene scene = new Scene(root, 1133, 700);
+			Scene scene = new Scene(login, 1133, 700);
 				  scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
 			
 			primaryStage.setTitle("Password Manager");
