@@ -1,9 +1,54 @@
+*.sublime-workspace
+
+### Java ###
 *.class
+*.log
 *.jar
-!gradle-wrapper.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+*.launch
+.factorypath
+.project
+.classpath
+
+### Intellij ###
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+out/
+*.iws
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+
+### Gradle ###
 .gradle
-.idea
 build/
+!gradle-wrapper.jar
 gradle-app.setting
 .gradletasknamecache
-*.sublime-workspace
+**/build/
