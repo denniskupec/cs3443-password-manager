@@ -35,7 +35,7 @@ public class AppController {
 			current = newUser;
 	        updateStage = (Stage)btnNewUser.getScene().getWindow();
 	        updated = FXMLLoader.load(getClass().getResource(current));
-	        Scene scene = new Scene(updated);
+	        Scene scene = new Scene(updated, 700, 500);
 	        updateStage.setScene(scene);
 	        updateStage.show();
 	        
