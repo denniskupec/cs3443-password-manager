@@ -24,7 +24,7 @@
                   <Insets top="14.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#processLogin" prefHeight="30.0" prefWidth="95.0" text="New User" />
+            <Button fx:id="btnNewUser" mnemonicParsing="false" onAction="#processLogin" prefHeight="30.0" prefWidth="95.0" text="New User" />
          </children>
       </VBox>
    </children>

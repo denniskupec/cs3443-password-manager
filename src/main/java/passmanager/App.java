@@ -14,7 +14,7 @@ import passmanager.controller.AppController;
 public class App extends Application {
 
 	private final static Logger log = Util.getLogger(App.class);
-	private AppController app = new AppController();
+//	private AppController app = new AppController();
 	private int sceneMarker;
 	private String login = "/layout/login.fxml";
 	private String newUser = "/layout/newUser.fxml";
@@ -28,26 +28,15 @@ public class App extends Application {
 
 			Scene scene = new Scene(root, 1133, 700);
 				  scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
-			
+				  
+				  
 			primaryStage.setTitle("Password Manager");
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		
 	}
-	
-	@FXML
-	public void processLogin(ActionEvent event) {
-		
-		
-	
-		String value = ((Button)event.getSource()).getText();
-		
-		if(value.equals("New User")) current = newUser;
-		
-		else if(value.equals("Unlock")) current = login;
-		
-	}
+
 
 	public static void main(String[] args) {
 		launch(args);
