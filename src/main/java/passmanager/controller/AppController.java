@@ -27,7 +27,7 @@ public class AppController {
 	@FXML
 	public TextField passwordText;
 	@FXML
-	public TextField enteredPassword;
+	public PasswordField enteredPassword;
 
 //	public AppController(Stage primaryStage) {
 //
@@ -51,7 +51,8 @@ public class AppController {
 	    }
 		else if(event.getSource() == btnUnlock && enteredPassword.getText().equals(password)) {
 			
-			System.out.println("passowrd accepted");
+			System.out.println("password accepted");
+//			System.out.println(enteredPassword.getText());
 			
 		}
 		
