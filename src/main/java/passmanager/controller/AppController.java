@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AppController {
@@ -15,8 +15,15 @@ public class AppController {
 	private String login = "/layout/login.fxml";
 	private String newUser = "/layout/newUser.fxml";
 	private String current = "/layout/login.fxml";
+	private String username, password;
 	@FXML
 	public Button btnNewUser;
+	@FXML
+	public Button btnLogin;
+	@FXML
+	public TextField usernameText;
+	@FXML
+	public TextField passwordText;
 
 //	public AppController(Stage primaryStage) {
 //
@@ -27,10 +34,8 @@ public class AppController {
 		
 		Stage updateStage;
 	    Parent updated;
-	
-		String value = ((Button)event.getSource()).getText();
 		
-		if(event.getSource()==btnNewUser){
+		if(event.getSource() == btnNewUser){
 			
 			current = newUser;
 	        updateStage = (Stage)btnNewUser.getScene().getWindow();
@@ -41,7 +46,28 @@ public class AppController {
 	        
 	    }
 		
-		
 	}
 
+	@FXML
+	public void processNewUser(ActionEvent event) throws Exception{
+		
+		Stage updateStage;
+	    Parent updated;
+		
+		if (event.getSource() == btnLogin) {
+			
+			username = usernameText.getText();
+			password = passwordText.getText();
+			
+			current = login;
+	        updateStage = (Stage)btnNewUser.getScene().getWindow();
+	        updated = FXMLLoader.load(getClass().getResource(current));
+	        Scene scene = new Scene(updated, 1133, 700);
+	        updateStage.setScene(scene);
+	        updateStage.show();
+			
+		}
+		
+	}
+	
 }
