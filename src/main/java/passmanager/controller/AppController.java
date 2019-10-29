@@ -38,7 +38,7 @@ public class AppController {
 		
 		Stage updateStage;
 	    Parent updated;
-		
+	    
 		if(event.getSource() == btnNewUser){
 			
 			current = newUser;
@@ -50,10 +50,11 @@ public class AppController {
 	        
 	    }
 		
-		if(event.getSource() == btnUnlock && enteredPassword.getText().equals(password)) {
+		if(event.getSource() == btnUnlock) {// && enteredPassword.getText().equals(password)) {
 			
-				System.out.println("password accepted");
-//				System.out.println(enteredPassword.getText());
+//				System.out.println("password accepted");
+				System.out.println(enteredPassword.getText());
+				System.out.println(password);
 			
 		}
 		
@@ -69,6 +70,8 @@ public class AppController {
 			
 			username = usernameText.getText();
 			password = passwordText.getText();
+			
+			System.out.println(password);
 			
 			current = login;
 	        updateStage = (Stage)btnLogin.getScene().getWindow();
