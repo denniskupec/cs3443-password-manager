@@ -11,12 +11,12 @@
    <children>
    	<VBox alignment="center" prefHeight="32.0" prefWidth="304.0" spacing="10.0">
          <children>
-            <PasswordField alignment="CENTER" prefHeight="25.0" prefWidth="304.0" promptText="Enter Password to Unlock">
+            <PasswordField fx:id="enteredPassword" alignment="CENTER" onAction="#processLogin" prefHeight="25.0" prefWidth="304.0" promptText="Enter Password to Unlock">
                <font>
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <Button mnemonicParsing="false" onAction="#processLogin" text="Unlock">
+            <Button fx:id="btnUnlock" mnemonicParsing="false" onAction="#processLogin" text="Unlock">
                <font>
                   <Font size="14.0" />
                </font>
