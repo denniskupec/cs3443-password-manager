@@ -13,15 +13,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
       <VBox alignment="CENTER" prefHeight="377.0" prefWidth="391.0" style="-fx-background-color: blue;">
          <children>
-            <TextArea editable="false" prefHeight="25.0" prefWidth="328.0" text="Username">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets top="50.0" />
-               </opaqueInsets>
-            </TextArea>
-            <TextField fx:id="usernameText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0">
+            <TextField fx:id="usernameText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Username">
                <opaqueInsets>
                   <Insets left="30.0" />
                </opaqueInsets>
@@ -29,21 +21,13 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextArea editable="false" prefHeight="25.0" prefWidth="328.0" text="Password">
-               <opaqueInsets>
-                  <Insets top="80.0" />
-               </opaqueInsets>
+            <TextField fx:id="passwordText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Password">
                <font>
-                  <Font size="15.0" />
+                  <Font size="18.0" />
                </font>
                <VBox.margin>
                   <Insets top="30.0" />
-               </VBox.margin>
-            </TextArea>
-            <TextField fx:id="passwordText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0">
-               <font>
-                  <Font size="18.0" />
-               </font></TextField>
+               </VBox.margin></TextField>
             <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#processNewUser" prefHeight="42.0" prefWidth="97.0" text="Log In">
                <opaqueInsets>
                   <Insets top="30.0" />

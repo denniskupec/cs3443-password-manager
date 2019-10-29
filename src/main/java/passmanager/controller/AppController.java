@@ -49,10 +49,11 @@ public class AppController {
 	        updateStage.show();
 	        
 	    }
-		else if(event.getSource() == btnUnlock && enteredPassword.getText().equals(password)) {
+		
+		if(event.getSource() == btnUnlock && enteredPassword.getText().equals(password)) {
 			
-			System.out.println("password accepted");
-//			System.out.println(enteredPassword.getText());
+				System.out.println("password accepted");
+//				System.out.println(enteredPassword.getText());
 			
 		}
 		
@@ -72,12 +73,13 @@ public class AppController {
 			current = login;
 	        updateStage = (Stage)btnLogin.getScene().getWindow();
 	        updated = FXMLLoader.load(getClass().getResource(current));
-	        Scene scene = new Scene(updated, 1133, 700);
+	        Scene scene = new Scene(updated, 700, 500);
 	        updateStage.setScene(scene);
 	        updateStage.show();
 			
 		}
 		
 	}
+	
 	
 }
