@@ -69,9 +69,16 @@ public class Authenticator {
 	}
 	
 	/**
-	 * @param newPassword
+	 * @param String
 	 */
 	public void setPassword(String newPassword) {
+		this.password = newPassword.getBytes();
+	}
+	
+	/**
+	 * @param byte[]
+	 */
+	public void setPassword(byte[] newPassword) {
 		this.password = newPassword;
 	}
 	
