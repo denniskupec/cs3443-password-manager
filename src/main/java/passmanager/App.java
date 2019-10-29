@@ -61,7 +61,7 @@ public class App extends Application {
 		return u;
 	}
 	
-	/*
+	/**
 	 * Convenience method to fetch resource files.
 	 * @param String	name of the resource file
 	 * @return InputStream
