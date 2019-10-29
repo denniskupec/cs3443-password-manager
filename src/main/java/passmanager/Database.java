@@ -13,19 +13,13 @@ import java.nio.file.Files;
 public class Database {
 
 	private final static Logger Log = Util.getLogger(Database.class);
-	
-	/**
-	 * database file
-	 */
-	private File dbFile;
-	
-	/*
-	 * database connection
-	 */
-	private Connection conn;
-	
 
-	Database() throws SQLException {
+	/**
+	 * @return Connection
+	 * @throws SQLException
+	 */
+	public static Connection connect() throws SQLException {
+		File dbFile = null;
 		try {
 			dbFile = new File(App.getStoragePath("storage.sqlite3").toURI());
 		}
@@ -46,17 +40,7 @@ public class Database {
 			}
 		}
 		
-		conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getPath());
-	}
-
-	/**
-	 * Closes the database connection.
-	 * @throws SQLException
-	 */
-	public void close() throws SQLException {
-		if (conn != null) {
-			conn.close();
-		}
+		return DriverManager.getConnection("jdbc:sqlite:" + dbFile.getPath());
 	}
 
 }
