@@ -1,7 +1,9 @@
 package passmanager;
 
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.MissingResourceException;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -58,5 +60,20 @@ public class App extends Application {
 		}
 		return u;
 	}
+	
+	/*
+	 * Convenience method to fetch resource files.
+	 * @param String	name of the resource file
+	 * @return InputStream
+	 */
+	public static InputStream getResource(String name) {
+		InputStream is = App.class.getResourceAsStream(name);
+		if (is == null) {
+			throw new MissingResourceException("Requested resource doesn't exist.", App.class.getName(), name);
+		}
+		
+		return is;
+	}
+
 
 }
