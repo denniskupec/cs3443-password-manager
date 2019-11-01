@@ -5,11 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import passmanager.SignupGettersSetters;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +27,8 @@ public class loginController {
     private Label errorLabel;
     @FXML
     private Button login;
+    @FXML
+    private Hyperlink backtoSignup;
 
 
     @FXML
@@ -88,6 +90,20 @@ public class loginController {
             e.printStackTrace();
         }
         return password.equals(pass);
+    }
+
+    @FXML
+    public void signup(ActionEvent event) throws Exception{
+        Stage updateStage;
+        Parent updated;
+        if(event.getSource()==backtoSignup){
+            updateStage=(Stage)backtoSignup.getScene().getWindow();
+            String login = "/layout/signup.fxml";
+            updated = FXMLLoader.load(getClass().getResource(login));
+            Scene scene=new Scene(updated);
+            updateStage.setScene(scene);
+            updateStage.show();
+        }
     }
 }
 
