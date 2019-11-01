@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -24,6 +25,7 @@ public class App extends Application {
 		//Scene scene = new Scene(root, 1133, 700);
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
+		primaryStage.getIcons().add(new Image("/Icons/lock.png"));
 		primaryStage.setTitle("Password Manager");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
