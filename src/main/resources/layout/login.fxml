@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="300.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.AppController">
+<AnchorPane prefHeight="450.0" prefWidth="300.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.loginController">
    <children>
       <Group layoutY="29.0" AnchorPane.leftAnchor="22.0">
          <children>
@@ -44,6 +44,6 @@
          </rowConstraints>
       </GridPane>
       <Label fx:id="errorLabel" layoutX="22.0" layoutY="364.0" />
-      <Button layoutX="236.0" layoutY="329.0" mnemonicParsing="false" text="Confirm" />
+      <Button fx:id="login" layoutX="236.0" layoutY="329.0" mnemonicParsing="false" onAction="#Login" text="Confirm" />
    </children>
 </AnchorPane>

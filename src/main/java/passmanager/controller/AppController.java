@@ -3,6 +3,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import passmanager.SignupGettersSetters;
+
+import java.io.*;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -60,7 +62,7 @@ public class AppController {
 
 	@FXML
 	public void Signup(ActionEvent event) throws Exception{
-        if(!validateFields())
+        if(validateFields())
         {
             errorLabel.setTextFill(Color.web("#ff0000"));
             errorLabel.setText("one or more field is empty!");
@@ -68,6 +70,11 @@ public class AppController {
         else {
             if(validatePassword(password.getText(), confirmpass.getText()))
             {
+                String user = username.getText();
+                String pass = password.getText();
+                save(user, pass);
+                System.out.println(user);
+                System.out.println(pass);
                 confirmClicked = true;
                 Stage updateStage;
                 Parent updated;
@@ -89,7 +96,7 @@ public class AppController {
 	}
 
     private boolean validateFields() {
-        return !(username.getText() == null || username.getText().length() == 0 ||
+        return (username.getText() == null || username.getText().length() == 0 ||
                 password.getText() == null || password.getText().length() == 0 ||
                 confirmpass.getText() == null || confirmpass.getText().length() == 0);
     }
@@ -97,4 +104,16 @@ public class AppController {
     private boolean validatePassword(String password, String confirmpass) {
         return password.equals(confirmpass);
     }
+
+    void save(String name, String password) throws Exception {
+        FileOutputStream user_file = new FileOutputStream("./src/main/resources/users/"+name+".csv");
+        PrintWriter pw = new PrintWriter(user_file);
+        pw.println(name + "," + password);
+        pw.close();
+    }
+
+
+
+
+
 }
