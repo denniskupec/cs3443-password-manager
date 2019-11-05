@@ -24,4 +24,12 @@ test {
 	testLogging {
 		events "passed", "skipped", "failed"
 	}
+
+	doLast {
+		clean
+	}
+}
+
+clean {
+	delete "${projectDir}/bin/main/storage.sqlite3"
 }
