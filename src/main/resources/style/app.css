@@ -1,1 +1,5 @@
-/* intentionally left blank */
+
+/* newUser -> HBox */
+.newuser-hbox {
+	-fx-background-color: orange;
+}

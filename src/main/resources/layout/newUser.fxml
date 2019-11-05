@@ -8,12 +8,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.AppController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="601.0" styleClass="newuser-hbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.AppController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
-      <VBox alignment="CENTER" prefHeight="377.0" prefWidth="391.0" style="-fx-background-color: blue;">
+      <VBox alignment="CENTER" prefHeight="377.0" prefWidth="391.0">
          <children>
-            <TextField fx:id="usernameText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Enter New Password">
+            <Label text="New User">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="usernameText" alignment="CENTER" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Enter New Password">
                <opaqueInsets>
                   <Insets left="30.0" />
                </opaqueInsets>
@@ -21,14 +28,14 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="passwordText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Confirm Password">
+            <TextField fx:id="passwordText" alignment="CENTER" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Confirm Password">
                <font>
                   <Font size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="15.0" />
                </VBox.margin></TextField>
-            <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#processNewUser" prefHeight="42.0" prefWidth="97.0" text="Log In">
+            <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#processNewUser" prefHeight="42.0" prefWidth="97.0" text="Save">
                <opaqueInsets>
                   <Insets top="30.0" />
                </opaqueInsets>
@@ -44,6 +51,5 @@
             <Insets top="50.0" />
          </opaqueInsets>
       </VBox>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
    </children>
 </HBox>
