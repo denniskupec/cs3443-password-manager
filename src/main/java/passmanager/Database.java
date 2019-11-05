@@ -42,5 +42,22 @@ public class Database {
 		
 		return DriverManager.getConnection("jdbc:sqlite:" + dbFile.getPath());
 	}
+	
+	/**
+	 * Only checks if the database was copied already. 
+	 * true = exists, false = doesn't exist
+	 * @return boolean
+	 */
+	public static boolean exists() {
+		File dbFile = null;
+		try {
+			dbFile = new File(App.getStoragePath("storage.sqlite3").toURI());
+		}
+		catch (URISyntaxException e) {
+			e.printStackTrace(); // probably need a more graceful way of handling this
+		}
+		
+		return dbFile.exists();
+	}
 
 }

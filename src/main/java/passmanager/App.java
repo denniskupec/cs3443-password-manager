@@ -22,7 +22,9 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
+		URL resource = getClass().getResource(Database.exists() ? "/layout/login.fxml" : "/layout/newUser.fxml");
+		
+		Parent root = FXMLLoader.load(resource);
 
 		Scene scene = new Scene(root, 700, 500);
 			scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());

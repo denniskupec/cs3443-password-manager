@@ -13,7 +13,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" />
       <VBox alignment="CENTER" prefHeight="377.0" prefWidth="391.0" style="-fx-background-color: blue;">
          <children>
-            <TextField fx:id="usernameText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Username">
+            <TextField fx:id="usernameText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Enter New Password">
                <opaqueInsets>
                   <Insets left="30.0" />
                </opaqueInsets>
@@ -21,7 +21,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="passwordText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Password">
+            <TextField fx:id="passwordText" onAction="#processNewUser" prefHeight="50.0" prefWidth="328.0" promptText="Confirm Password">
                <font>
                   <Font size="18.0" />
                </font>

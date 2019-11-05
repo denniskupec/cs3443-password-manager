@@ -1,7 +1,7 @@
 package passmanager.controller;
 
 import java.util.logging.Logger;
-import javafx.application.Application;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import passmanager.Util;
 
 public class AppController {
+	
+	private final static Logger Log = Util.getLogger(AppController.class);
 	
 	private String login = "/layout/login.fxml";
 	private String newUser = "/layout/newUser.fxml";
@@ -61,7 +64,7 @@ public class AppController {
 	}
 
 	@FXML
-	public void processNewUser(ActionEvent event) throws Exception{
+	public void processNewUser(ActionEvent event) throws Exception {
 		
 		Stage updateStage;
 	    Parent updated;
