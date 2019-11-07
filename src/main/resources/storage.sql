@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS settings (
   updated_at       TEXT NOT NULL,
   last_login_at    TEXT NOT NULL,
   autolock_minutes INTEGER DEFAULT 0,
-  hide_passwords   INTEGER DEFAULT 0
+  hide_passwords   INTEGER DEFAULT 1
 );
 
 CREATE TABLE entries (
@@ -19,3 +19,8 @@ CREATE TABLE entries (
   note       TEXT
 );
 
+# check for fresh database
+SELECT count() FROM settings LIMIT 1;
+
+# insert new user
+INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, ?, ?);
