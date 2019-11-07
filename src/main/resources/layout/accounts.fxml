@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.3093645484949833" prefHeight="400.0" prefWidth="600.0">
         <items>
@@ -33,7 +32,7 @@
                <children>
                   <Pane layoutX="14.0" layoutY="14.0">
                      <children>
-                        <Label styleClass="label-header" text="What Account?" AnchorPane.bottomAnchor="367.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="356.0" AnchorPane.topAnchor="14.0" />
+                        <Label styleClass="label-header" text="What Account? " AnchorPane.bottomAnchor="367.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="356.0" AnchorPane.topAnchor="14.0" />
                      </children>
                   </Pane>
                   <GridPane layoutX="14.0" layoutY="55.0" prefHeight="212.0" prefWidth="370.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="75.0">
