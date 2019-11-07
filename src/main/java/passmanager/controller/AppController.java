@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import passmanager.App;
 import passmanager.Util;
 
 public class AppController {
@@ -18,7 +19,7 @@ public class AppController {
 	private String login = "/layout/login.fxml";
 	private String newUser = "/layout/newUser.fxml";
 	private String current = "/layout/login.fxml";
-	private String username, password;
+	public String username, password;
 	@FXML
 	public Button btnNewUser;
 	@FXML
@@ -56,7 +57,7 @@ public class AppController {
 		if(event.getSource() == btnUnlock) {// && enteredPassword.getText().equals(password)) {
 			
 //				System.out.println("password accepted");
-				System.out.println(enteredPassword.getText());
+//				System.out.println(enteredPassword.getText());
 				System.out.println(password);
 			
 		}
@@ -71,17 +72,17 @@ public class AppController {
 		
 		if (event.getSource() == btnLogin) {
 			
-			username = usernameText.getText();
-			password = passwordText.getText();
-			
-			System.out.println(password);
-			
-			current = login;
-	        updateStage = (Stage)btnLogin.getScene().getWindow();
-	        updated = FXMLLoader.load(getClass().getResource(current));
-	        Scene scene = new Scene(updated, 700, 500);
-	        updateStage.setScene(scene);
-	        updateStage.show();
+//			username = usernameText.getText();
+			if(usernameText.getText().equals(passwordText.getText())) {
+				password = passwordText.getText();
+				
+				current = login;
+		        updateStage = (Stage)btnLogin.getScene().getWindow();
+		        updated = FXMLLoader.load(getClass().getResource(current));
+		        Scene scene = new Scene(updated, 700, 500);
+		        updateStage.setScene(scene);
+		        updateStage.show();
+			}
 			
 		}
 		
