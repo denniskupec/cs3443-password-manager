@@ -72,7 +72,6 @@ public class AppController {
 		
 		if (event.getSource() == btnLogin) {
 			
-//			username = usernameText.getText();
 			if(usernameText.getText().equals(passwordText.getText())) {
 				password = passwordText.getText();
 				
@@ -86,6 +85,14 @@ public class AppController {
 			
 		}
 		
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
