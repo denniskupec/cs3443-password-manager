@@ -1,7 +1,8 @@
 package passmanager;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.logging.Logger;
@@ -35,33 +36,25 @@ public class App extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 
-		Log.info("Data path: " + App.getStoragePath().getPath());
+		Log.info("Data path: " + App.getStoragePath());
 	}
 
 
 	/**
-	 * In this application, data is stored in the same directory as the jarfile. 
-	 * @return URL
+	 * Configuration and database files are stored in the user home directory
+	 * @return Path
 	 */
-	public static URL getStoragePath() {
-		return App.class.getProtectionDomain().getCodeSource().getLocation();
+	public static Path getStoragePath() {
+		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager");
 	}
 	
 	/**
 	 * Returns the path to a specific file in the storage directory.
 	 * @param String 	name of the file
-	 * @return URL
-	 * @throws MalformedURLException 
+	 * @return Path
 	 */
-	public static URL getStoragePath(String filename)  {
-		URL u = null;
-		try {
-			u = new URL(App.getStoragePath(), filename);
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		return u;
+	public static Path getStoragePath(String filename)  {
+		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager", filename);
 	}
 	
 	/**

@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-
 import java.nio.file.Files;
 
 public class Database {
@@ -19,14 +17,8 @@ public class Database {
 	 * @throws SQLException
 	 */
 	public static Connection connect() throws SQLException {
-		File dbFile = null;
-		try {
-			dbFile = new File(App.getStoragePath("storage.sqlite3").toURI());
-		}
-		catch (URISyntaxException e) {
-			e.printStackTrace(); // probably need a more graceful way of handling this
-		}
-		
+		File dbFile = App.getStoragePath("storage.sqlite3").toFile();
+
 		/* First time running the application, database deleted, etc. 
 		 * This copies the database template file. */
 		if (!dbFile.exists()) {
@@ -49,15 +41,7 @@ public class Database {
 	 * @return boolean
 	 */
 	public static boolean exists() {
-		File dbFile = null;
-		try {
-			dbFile = new File(App.getStoragePath("storage.sqlite3").toURI());
-		}
-		catch (URISyntaxException e) {
-			e.printStackTrace(); // probably need a more graceful way of handling this
-		}
-		
-		return dbFile.exists();
+		return App.getStoragePath("storage.sqlite3").toFile().exists();
 	}
 
 }

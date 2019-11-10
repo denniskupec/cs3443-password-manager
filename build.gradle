@@ -18,6 +18,7 @@ dependencies {
 }
 
 mainClassName = "passmanager.App"
+def user_home = System.properties["user.home"]
 
 test {
 	useJUnitPlatform()
@@ -31,5 +32,5 @@ test {
 }
 
 clean {
-	delete "${projectDir}/bin/main/storage.sqlite3"
+	delete "${user_home}/.config/CS3443-passmanager/storage.sqlite3"
 }
