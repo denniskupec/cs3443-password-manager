@@ -1,4 +1,4 @@
-package passmanager;
+package passmanager.signuplogin;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement

@@ -1,4 +1,4 @@
-package passmanager.controller;
+package passmanager.signuplogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import passmanager.loginModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
-    passmanager.loginModel loginModel = new loginModel();
+    signupLoginModel signupLoginModel = new signupLoginModel();
     @FXML
     private TextField username;
     @FXML
@@ -33,7 +32,7 @@ public class loginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         try {
-            if(loginModel.count() > 0)
+            if(signupLoginModel.count() > 0)
             {
                 backtoSignup.setDisable(true);
             }
@@ -43,7 +42,7 @@ public class loginController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(this.loginModel.isConnected())
+        if(this.signupLoginModel.isConnected())
         {
             this.status.setText("Connected");
         }
@@ -63,7 +62,7 @@ public class loginController implements Initializable {
         {
             String user = username.getText();
             String pass = password.getText();
-            if (loginModel.validatePassword(user, pass)) {
+            if (signupLoginModel.validatePassword(user, pass)) {
                 Stage updateStage;
                 Parent updated;
                 if(event.getSource()==login){

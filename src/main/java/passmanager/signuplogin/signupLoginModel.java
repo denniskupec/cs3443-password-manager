@@ -1,4 +1,4 @@
-package passmanager;
+package passmanager.signuplogin;
 import passmanager.database.dbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class loginModel {
-    Connection connection;
-    public loginModel()
+public class signupLoginModel {
+    private Connection connection;
+    public signupLoginModel()
     {
         try {
             this.connection = dbConnection.getConnection();
@@ -43,7 +43,8 @@ public class loginModel {
         if (rs.next()) {
             count = rs.getInt("count(*)");
         }
-        connection.close();
+        rs.close();
+        pr.close();
         return count;
     }
     public void addUser(String username, String password) throws Exception {

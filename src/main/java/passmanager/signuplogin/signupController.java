@@ -1,4 +1,4 @@
-package passmanager.controller;
+package passmanager.signuplogin;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -10,10 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import passmanager.loginModel;
 
 public class signupController {
-    loginModel loginModel = new loginModel();
+    signupLoginModel signupLoginModel = new signupLoginModel();
     @FXML
 	private Button signup;
 	@FXML
@@ -53,7 +52,7 @@ public class signupController {
             {
                 String user = username.getText();
                 String pass = password.getText();
-                loginModel.addUser(user, pass);
+                signupLoginModel.addUser(user, pass);
                 System.out.println(user);
                 System.out.println(pass);
                 Stage updateStage;
