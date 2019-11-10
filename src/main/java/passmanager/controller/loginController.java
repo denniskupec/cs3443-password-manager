@@ -2,6 +2,7 @@ package passmanager.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,15 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import passmanager.loginModel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class loginController {
+public class loginController implements Initializable {
+    passmanager.loginModel loginModel = new loginModel();
     @FXML
     private TextField username;
     @FXML
@@ -29,8 +28,30 @@ public class loginController {
     private Button login;
     @FXML
     private Hyperlink backtoSignup;
-
-
+    @FXML
+    private Label status;
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        try {
+            if(loginModel.count() > 0)
+            {
+                backtoSignup.setDisable(true);
+            }
+            else{
+                backtoSignup.setDisable(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(this.loginModel.isConnected())
+        {
+            this.status.setText("Connected");
+        }
+        else
+        {
+            this.status.setText("Failed!");
+        }
+    }
     @FXML
     public void Login(ActionEvent event) throws Exception{
         if(validateFields())
@@ -42,30 +63,20 @@ public class loginController {
         {
             String user = username.getText();
             String pass = password.getText();
-            if(Files.exists(Paths.get("./src/main/resources/users/" + user + ".csv")))
-            {
-                if(validatePassword(user, pass))
-                {
-                    Stage updateStage;
-                    Parent updated;
-                    if(event.getSource()==login){
-                        updateStage=(Stage)login.getScene().getWindow();
-                        String signup = "/layout/accounts.fxml";
-                        updated= FXMLLoader.load(getClass().getResource(signup));
-                        Scene scene=new Scene(updated);
-                        updateStage.setScene(scene);
-                        updateStage.show();
-                    }
+            if (loginModel.validatePassword(user, pass)) {
+                Stage updateStage;
+                Parent updated;
+                if(event.getSource()==login){
+                    updateStage=(Stage)login.getScene().getWindow();
+                    String signup = "/layout/accounts.fxml";
+                    updated= FXMLLoader.load(getClass().getResource(signup));
+                    Scene scene=new Scene(updated);
+                    updateStage.setScene(scene);
+                    updateStage.show();
                 }
-                else {
-                    errorLabel.setTextFill(Color.web("#ff0000"));
-                    errorLabel.setText("invalid Password!");
-                }
-            }
-            else
-            {
+            } else {
                 errorLabel.setTextFill(Color.web("#ff0000"));
-                errorLabel.setText("User does not Exist!");
+                errorLabel.setText("invalid username or password!");
             }
         }
     }
@@ -73,25 +84,6 @@ public class loginController {
         return (username.getText() == null || username.getText().length() == 0 ||
                 password.getText() == null || password.getText().length() == 0);
     }
-
-    private boolean validatePassword(String name, String password) {
-        File file = new File("./src/main/resources/users/" + name + ".csv");
-        String pass = "";
-        try {
-            Scanner inputStream = new Scanner(file);
-            while(inputStream.hasNext()){
-                String data = inputStream.next();
-                String[] temp = data.split(",");
-                String user = temp[0];
-                pass = temp[1];
-            }
-            inputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return password.equals(pass);
-    }
-
     @FXML
     public void signup(ActionEvent event) throws Exception{
         Stage updateStage;

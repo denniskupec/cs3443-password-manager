@@ -11,18 +11,28 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
-
+	loginModel loginModel = new loginModel();
 	private final static Logger Log = Util.getLogger(App.class);
 
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
-		//Scene scene = new Scene(root, 1133, 700);
+		if(loginModel.count() > 0)
+		{
+			Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
+			newScene(primaryStage, root);
+		}
+		else {
+			Parent root = FXMLLoader.load(getClass().getResource("/layout/signup.fxml"));
+			newScene(primaryStage, root);
+		}
+
+		Log.info("Data path: " + App.getStoragePath().getPath());
+	}
+
+	private void newScene(Stage primaryStage, Parent root) {
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
 		primaryStage.getIcons().add(new Image("/Icons/lock.png"));
@@ -30,8 +40,6 @@ public class App extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-
-		Log.info("Data path: " + App.getStoragePath().getPath());
 	}
 
 

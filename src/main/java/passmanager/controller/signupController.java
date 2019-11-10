@@ -2,11 +2,6 @@ package passmanager.controller;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import passmanager.SignupGettersSetters;
-
-import java.io.*;
-import java.util.logging.Logger;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import passmanager.loginModel;
 
-public class AppController {
+public class signupController {
+    loginModel loginModel = new loginModel();
     @FXML
 	private Button signup;
 	@FXML
@@ -30,22 +27,6 @@ public class AppController {
     @FXML
     private Hyperlink login;
 
-    private boolean confirmClicked = false;
-    public boolean isConfirmClicked()
-    {
-        return confirmClicked;
-    }
-
-    public SignupGettersSetters getUser()
-    {
-        if(confirmClicked)
-        {
-            return new SignupGettersSetters(username.getText(), password.getText());
-        }
-        else {
-            return null;
-        }
-    }
     @FXML
     public void Login(ActionEvent event) throws Exception{
         Stage updateStage;
@@ -72,10 +53,9 @@ public class AppController {
             {
                 String user = username.getText();
                 String pass = password.getText();
-                save(user, pass);
+                loginModel.addUser(user, pass);
                 System.out.println(user);
                 System.out.println(pass);
-                confirmClicked = true;
                 Stage updateStage;
                 Parent updated;
                 if(event.getSource()==signup){
@@ -104,16 +84,4 @@ public class AppController {
     private boolean validatePassword(String password, String confirmpass) {
         return password.equals(confirmpass);
     }
-
-    void save(String name, String password) throws Exception {
-        FileOutputStream user_file = new FileOutputStream("./src/main/resources/users/"+name+".csv");
-        PrintWriter pw = new PrintWriter(user_file);
-        pw.println(name + "," + password);
-        pw.close();
-    }
-
-
-
-
-
 }
