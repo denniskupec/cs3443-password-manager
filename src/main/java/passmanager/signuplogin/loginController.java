@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
-    signupLoginModel signupLoginModel = new signupLoginModel();
+    databaseModel databaseModel = new databaseModel();
     @FXML
     private TextField username;
     @FXML
@@ -32,7 +32,7 @@ public class loginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         try {
-            if(signupLoginModel.count() > 0)
+            if(databaseModel.count() > 0)
             {
                 backtoSignup.setDisable(true);
             }
@@ -42,7 +42,7 @@ public class loginController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(this.signupLoginModel.isConnected())
+        if(this.databaseModel.isConnected())
         {
             this.status.setText("Connected");
         }
@@ -62,7 +62,7 @@ public class loginController implements Initializable {
         {
             String user = username.getText();
             String pass = password.getText();
-            if (signupLoginModel.validatePassword(user, pass)) {
+            if (databaseModel.validatePassword(user, pass)) {
                 Stage updateStage;
                 Parent updated;
                 if(event.getSource()==login){

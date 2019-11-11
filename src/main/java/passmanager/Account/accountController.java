@@ -2,15 +2,20 @@ package passmanager.Account;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import passmanager.database.dbConnection;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,16 +30,15 @@ public class accountController implements Initializable {
     @FXML
     private Hyperlink link;
     @FXML
-    private Label username;
+    private TextField username;
     @FXML
-    private Label password;
+    private TextField password;
     @FXML
     private TableView<accountData> accountDataTable;
     @FXML
     private TableColumn<accountData, String> accounts;
     private dbConnection db;
     private ObservableList<accountData> data;
-
     public void initialize(URL location, ResourceBundle resources) {
         db = new dbConnection();
         try {
@@ -54,6 +58,8 @@ public class accountController implements Initializable {
         }
         accounts.setCellValueFactory(new PropertyValueFactory<accountData, String>("website"));
         accountDataTable.setItems(data);
+        rs.close();
+        connection.close();
     }
     @FXML
     public void click(MouseEvent event)
@@ -66,5 +72,20 @@ public class accountController implements Initializable {
             username.setText(accountDataTable.getSelectionModel().getSelectedItem().getUsername());
             password.setText("********");
         }
+    }
+    @FXML
+    public void showPass(ActionEvent event)
+    {
+            password.setText(accountDataTable.getSelectionModel().getSelectedItem().getPassword());
+    }
+    @FXML
+    private void addAccountButton(ActionEvent event) throws IOException {
+        Stage update = new Stage();
+        Parent root;
+        String addAccount = "/layout/addAccount.fxml";
+        root = FXMLLoader.load(getClass().getResource(addAccount));
+        update.setScene(new Scene(root));
+        update.initModality(Modality.APPLICATION_MODAL);
+        update.show();
     }
 }

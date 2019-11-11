@@ -7,6 +7,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -56,24 +57,24 @@
                      <children>
                         <Label fx:id="URLname" styleClass="label-signin" text="URL name here" />
                         <Label styleClass="label-signin" text="Username" GridPane.rowIndex="2" />
-                        <Label fx:id="username" text="Usename here" GridPane.rowIndex="3">
-                           <styleClass>
-                              <String fx:value="label-bright" />
-                              <String fx:value="label" />
-                           </styleClass></Label>
                         <Label styleClass="label-signin" text="Password" GridPane.rowIndex="4" />
-                        <Label fx:id="password" styleClass="label-bright" text="password here" GridPane.rowIndex="5" />
                         <Hyperlink fx:id="link" text="link" GridPane.rowIndex="1" />
+                        <TextField fx:id="password" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: transparent; -fx-background-insets: 0px;" GridPane.rowIndex="5" />
+                        <TextField fx:id="username" layoutX="10.0" layoutY="122.0" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: transparent; -fx-background-insets: 0px;" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <HBox layoutX="206.0" layoutY="347.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                      <children>
-                        <Button layoutX="206.0" layoutY="347.0" mnemonicParsing="false" text="Add new account!" />
+                        <Button layoutX="206.0" layoutY="347.0" mnemonicParsing="false" onAction="#addAccountButton" text="Add new account!" />
                         <Button layoutX="332.0" layoutY="347.0" mnemonicParsing="false" text="Delete account!" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="14.0" />
                      </children>
                   </HBox>
-                  <Button layoutX="210.0" layoutY="298.0" mnemonicParsing="false" text="Show password" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="14.0" />
-                  <Button layoutX="71.0" layoutY="305.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="165.0" text="Edit" />
+                  <HBox layoutX="71.0" layoutY="309.0" spacing="10.0">
+                     <children>
+                        <Button layoutX="206.0" layoutY="347.0" mnemonicParsing="false" onAction="#showPass" prefHeight="33.0" prefWidth="165.0" text="Show password" />
+                        <Button layoutX="332.0" layoutY="347.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="150.0" text="Edit Account" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="14.0" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>

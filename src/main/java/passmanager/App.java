@@ -9,10 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import passmanager.signuplogin.signupLoginModel;
+import passmanager.signuplogin.databaseModel;
 
 public class App extends Application {
-	private passmanager.signuplogin.signupLoginModel signupLoginModel = new signupLoginModel();
+	private databaseModel databaseModel = new databaseModel();
 	private final static Logger Log = Util.getLogger(App.class);
 
 	public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class App extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		if(signupLoginModel.count() > 0)
+		if(databaseModel.count() > 0)
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
 			newScene(primaryStage, root);

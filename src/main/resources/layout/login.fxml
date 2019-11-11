@@ -21,7 +21,7 @@
          </children>
       </Group>
       <Label layoutX="96.0" layoutY="36.0" prefHeight="39.0" prefWidth="213.0" styleClass="label-signin-header" text="Welcome!" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="35.0" />
-      <GridPane layoutX="22.0" layoutY="183.0" prefHeight="137.0" prefWidth="310.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0">
+      <GridPane layoutX="22.0" layoutY="183.0" prefHeight="136.0" prefWidth="207.0" AnchorPane.bottomAnchor="131.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="115.0">
          <children>
             <Label text="Username">
                <font>
@@ -45,8 +45,8 @@
          </rowConstraints>
       </GridPane>
       <Label fx:id="errorLabel" layoutX="22.0" layoutY="332.0" />
-      <Button fx:id="login" layoutX="246.0" layoutY="337.0" mnemonicParsing="false" onAction="#Login" text="Login" />
-      <Hyperlink fx:id="backtoSignup" layoutX="267.0" layoutY="378.0" onAction="#signup" text="Sign up!" />
-      <Label fx:id="status" layoutX="22.0" layoutY="20.0" prefHeight="25.0" prefWidth="239.0" text="Label" />
+      <Button fx:id="login" layoutX="145.0" layoutY="361.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <Hyperlink fx:id="backtoSignup" layoutX="161.0" layoutY="403.0" onAction="#signup" text="Sign up!" />
+      <Label fx:id="status" layoutX="22.0" layoutY="14.0" prefHeight="25.0" prefWidth="239.0" text="Database Status" />
    </children>
 </AnchorPane>

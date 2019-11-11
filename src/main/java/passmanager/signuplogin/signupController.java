@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class signupController {
-    signupLoginModel signupLoginModel = new signupLoginModel();
+    databaseModel databaseModel = new databaseModel();
     @FXML
 	private Button signup;
 	@FXML
@@ -52,7 +52,7 @@ public class signupController {
             {
                 String user = username.getText();
                 String pass = password.getText();
-                signupLoginModel.addUser(user, pass);
+                databaseModel.addUser(user, pass);
                 System.out.println(user);
                 System.out.println(pass);
                 Stage updateStage;
