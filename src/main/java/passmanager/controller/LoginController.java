@@ -34,7 +34,6 @@ public class LoginController extends BaseController {
 
 		Log.info("Authenticated!");
 		
-		// TODO: Why is this causing a NullPointerException ?
 		loadScene("/layout/listview.fxml");
 	}
 	

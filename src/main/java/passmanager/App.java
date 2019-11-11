@@ -20,7 +20,8 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		BaseController.setup(primaryStage, "Password Manager");
 		BaseController.loadScene(Database.exists() ? "/layout/login.fxml" : "/layout/firstrun.fxml");
-		BaseController.getStage().show();
+		
+		primaryStage.show();
 		
 		Log.info("Data path: " + App.getStoragePath());
 	}
@@ -57,6 +58,7 @@ public class App extends Application {
 			e.printStackTrace();
 		}
 		
+		Log.warning("Couldn't find the resource: " + name);
 		return null;
 	}
 

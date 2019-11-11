@@ -36,18 +36,18 @@ public abstract class BaseController {
 		FXMLLoader loader = new FXMLLoader(resource);
 
 		try {
-			Parent root = loader.load();
-			
-			Scene s = new Scene(root, 970, 600);
+			Parent root2 = (Parent) loader.load();
+	
+			Scene s = new Scene(root2, 970, 600);
 				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
-			
+
 			T controller = loader.getController();
-				controller.root = root;
+
+				controller.root = root2;
 				controller.scene = s;
-				controller.stage.setScene(s);
-			
-			Log.info("Loaded controller: " + controller.getClass().getName());
-			
+				stage.setScene(s);
+				
+			Log.info("Controller loaded: " + controller.getClass().getName());
 			return controller;
 		}
 		catch (IOException e) {
@@ -55,6 +55,10 @@ public abstract class BaseController {
 		}
 	}
 	
+	/**
+	 * Changes the main window title.
+	 * @param title		string to set the main window title
+	 */
 	public void setTitle(String title) {
 		BaseController.stage.setTitle(title);
 	}
@@ -62,9 +66,13 @@ public abstract class BaseController {
 	public boolean isFocused() {
 		return stage.isFocused();
 	}
-	
+
 	public static Stage getStage() {
 		return stage;
+	}
+	
+	public void setStage(Stage newStage) {
+		stage = newStage;
 	}
 	
 	public Scene getScene() {
@@ -72,7 +80,6 @@ public abstract class BaseController {
 	}
 	
 	public void setScene(Scene newScene) {
-		this.scene = newScene;
+		stage.setScene(newScene);
 	}
-	
 }
