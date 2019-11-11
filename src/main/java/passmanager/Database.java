@@ -3,6 +3,7 @@ package passmanager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Logger;
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +28,8 @@ public class Database {
 			try {
 				// TODO: probably a good idea to encrypt the database, since it contains passwords and other secrets. leaving it alone until everything else works.
 				Files.createDirectories(dbFile.toPath().getParent());
-				Files.copy(App.getResource("storage.sqlite3"), dbFile.toPath());
-				
 				Files.createFile(dbFile.toPath());
+				Database.setup(dbFile);
 			} 
 			catch (IOException e) {
 				e.printStackTrace();
@@ -37,6 +37,41 @@ public class Database {
 		}
 		
 		return DriverManager.getConnection("jdbc:sqlite:" + dbFile.getPath());
+	}
+	
+	/**
+	 * Used to initialize the sqlite database with the proper schema.
+	 * @param dbFile		file to setup
+	 */
+	private static void setup(File dbFile) {	
+		try (	
+			Connection db = Database.connect();
+			Statement stmt = db.createStatement();
+		) {
+			stmt.addBatch("PRAGMA encoding = 'UTF-8'");
+			stmt.addBatch("CREATE TABLE IF NOT EXISTS settings (" + 
+					"	id         INTEGER PRIMARY KEY," + 
+					"	password         BLOB NOT NULL," + 
+					"	updated_at       TEXT NOT NULL," + 
+					"	last_login_at    TEXT NOT NULL," + 
+					"	autolock_minutes INTEGER DEFAULT 0," + 
+					"	hide_passwords   INTEGER DEFAULT 1" + 
+					")");
+			stmt.addBatch("CREATE TABLE IF NOT EXISTS entries (" + 
+					"	id         INTEGER PRIMARY KEY," + 
+					"	updated_at TEXT NOT NULL," + 
+					"	title      TEXT NOT NULL," + 
+					"	username   TEXT," + 
+					"	password   BLOB NOT NULL," + 
+					"	url        TEXT," + 
+					"	favicon    BLOB," + 
+					"	note       TEXT" + 
+					")");
+			stmt.executeBatch();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
