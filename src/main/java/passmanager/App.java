@@ -1,13 +1,12 @@
 package passmanager;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import passmanager.controller.BaseController;
 
 public class App extends Application {
 
@@ -19,45 +18,46 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		BaseController.setup(primaryStage, "Password Manager");
+		BaseController.loadScene(Database.exists() ? "/layout/login.fxml" : "/layout/firstrun.fxml");
+		BaseController.getStage().show();
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/layout/login.fxml"));
-
-		//Scene scene = new Scene(root, 1133, 700);
-		Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
-			  
-		primaryStage.setTitle("Password Manager");
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
-
-		Log.info("Data path: " + App.getStoragePath().getPath());
+		Log.info("Data path: " + App.getStoragePath());
 	}
 
-
 	/**
-	 * In this application, data is stored in the same directory as the jarfile. 
-	 * @return URL
+	 * Configuration and database files are stored in the user home directory.
+	 * (e.g. ~/.config/CS3443-passmanager)
+	 * @return Path
 	 */
-	public static URL getStoragePath() {
-		return App.class.getProtectionDomain().getCodeSource().getLocation();
+	public static Path getStoragePath() {
+		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager");
 	}
 	
 	/**
 	 * Returns the path to a specific file in the storage directory.
 	 * @param String 	name of the file
-	 * @return URL
-	 * @throws MalformedURLException 
+	 * @return Path
 	 */
-	public static URL getStoragePath(String filename)  {
-		URL u = null;
+	public static Path getStoragePath(String filename)  {
+		return Paths.get(App.getStoragePath().toString(), filename);
+	}
+
+	/**
+	 * Get the path of a resource file. 
+	 * @param String name 		name of the resource file requested
+	 * @return Path
+	 * @throws URISyntaxException
+	 */
+	public static Path getResourcePath(String name) {
 		try {
-			u = new URL(App.getStoragePath(), filename);
-		}
-		catch (MalformedURLException e) {
+			return Paths.get( App.class.getResource(name).toURI() );
+		} 
+		catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		return u;
+		
+		return null;
 	}
 
 }

@@ -1,4 +1,5 @@
-/* intentionally left blank */
-.button {
-	-fx-color: steelblue;
+
+/* newUser -> HBox */
+.newuser-hbox {
+	-fx-background-color: orange;
 }
