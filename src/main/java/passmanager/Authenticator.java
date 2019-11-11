@@ -1,11 +1,11 @@
 package passmanager;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+import javafx.scene.control.TextInputControl;
 import java.util.logging.Level;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -15,20 +15,18 @@ public class Authenticator {
 	
 	private final static Logger Log = Util.getLogger(Authenticator.class);
 	
-	/**
-	 * true = authenticated
-	 * false = otherwise
-	 */
-	private boolean status = false;
-	
 	private byte[] password;
 
-	Authenticator(String password) {
+	public Authenticator(String password) {
 		this.password = password.getBytes(Charset.forName("UTF-8"));
 	}
 	
-	Authenticator(byte[] password) {
+	public Authenticator(byte[] password) {
 		this.password = password;
+	}
+	
+	public Authenticator(TextInputControl input) {
+		this.password = input.getText().getBytes(Charset.forName("UTF-8"));
 	}
 	
 	/**
@@ -37,11 +35,9 @@ public class Authenticator {
 	 */
 	public boolean login() {
 		try (Connection db = Database.connect()) {
-			Blob pb = db.createBlob();
-				pb.setBytes(1, password);
 
 			PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=datetime() WHERE password=?");
-				stmt.setBlob(1, pb);
+				stmt.setBytes(1, this.password);
 				stmt.execute();
 				
 			return stmt.getUpdateCount() > 0;
@@ -55,7 +51,9 @@ public class Authenticator {
 	}
 	
 	public void logout() {
-		this.status = false;
+		/* TODO: Need to cleanup and switch views back to the login screen. 
+		 *	If not that, then just close the application when the user logs off. ¯\_(ツ)_/¯
+		 */
 	}
 	
 	/**
@@ -63,24 +61,21 @@ public class Authenticator {
 	 * @return boolean		true = success, false = failure (already exists, etc.)
 	 */
 	public boolean register() {
-		
 		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT COUNT() FROM settings LIMIT 1");
+			ResultSet rs = db.createStatement().executeQuery("SELECT COUNT(*) AS rowcount FROM settings LIMIT 1");
 			
-			if (rs.getInt(0) > 0) {
+			if (rs.next() && rs.getInt("rowcount") > 0) {
 				// TODO: better handling of this error
+				Log.warning("Tried to register a new user, but one already exists!");
 				return false;
 			}
 			
-			Blob pb = db.createBlob();
-				pb.setBytes(1, this.sha256(this.password));
-			
 			PreparedStatement stmt = db.prepareStatement("INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, datetime(), datetime())");
-				stmt.setBlob(1, pb);
+				stmt.setBytes(1,  this.sha256(this.password));
 				stmt.execute();
 				
 			if (stmt.getUpdateCount() != 1) {
-				Log.log(Level.SEVERE, "Failed to insert new row.");
+				Log.log(Level.SEVERE, "Failed to update credentials.");
 				return false;
 			}
 		}
@@ -89,7 +84,7 @@ public class Authenticator {
 			return false;
 		}
 		
-		return false;
+		return true;
 	}
 	
 	/**
@@ -103,15 +98,17 @@ public class Authenticator {
 	/**
 	 * @param newPassword
 	 */
-	public void setPassword(String newPassword) {
-		this.password = newPassword.getBytes();
+	public boolean setPassword(String newPassword) {
+		return this.setPassword(newPassword.getBytes());
 	}
 	
 	/**
 	 * @param newPassword
 	 */
-	public void setPassword(byte[] newPassword) {
+	public boolean setPassword(byte[] newPassword) {
 		this.password = newPassword;
+		
+		
 	}
 	
 	/**

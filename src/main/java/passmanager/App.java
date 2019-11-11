@@ -54,21 +54,30 @@ public class App extends Application {
 	 * @return Path
 	 */
 	public static Path getStoragePath(String filename)  {
-		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager", filename);
+		return Paths.get(App.getStoragePath().toString(), filename);
 	}
 	
 	/**
 	 * Convenience method to fetch resource files.
-	 * @param String	name of the resource file
+	 * @param String name		name of the resource file
 	 * @return InputStream
 	 */
 	public static InputStream getResource(String name) {
-		InputStream is = App.class.getResourceAsStream(name);
+		InputStream is = App.class.getResourceAsStream("/" + name);
 		if (is == null) {
 			throw new MissingResourceException("Requested resource doesn't exist.", App.class.getName(), name);
 		}
 		
 		return is;
+	}
+	
+	/**
+	 * Get the path of a resource file. 
+	 * @param String name 		name of the resource file requested
+	 * @return Path
+	 */
+	public static Path getResourcePath(String name) {
+		return Paths.get(App.class.getResource(name).getPath(), name);
 	}
 
 

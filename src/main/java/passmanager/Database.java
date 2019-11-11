@@ -25,7 +25,11 @@ public class Database {
 			Log.info("Initializing database.");
 			
 			try {
+				// TODO: probably a good idea to encrypt the database, since it contains passwords and other secrets. leaving it alone until everything else works.
+				Files.createDirectories(dbFile.toPath().getParent());
 				Files.copy(App.getResource("storage.sqlite3"), dbFile.toPath());
+				
+				Files.createFile(dbFile.toPath());
 			} 
 			catch (IOException e) {
 				e.printStackTrace();
@@ -42,6 +46,14 @@ public class Database {
 	 */
 	public static boolean exists() {
 		return App.getStoragePath("storage.sqlite3").toFile().exists();
+	}
+	
+	/**
+	 * Deletes the database from the disk. Don't use this, unless you're doing tests or something...
+	 * @return boolean		true = success
+	 */
+	public static boolean deleteFromDisk() {
+		return App.getStoragePath("storage.sqlite3").toFile().delete();
 	}
 
 }
