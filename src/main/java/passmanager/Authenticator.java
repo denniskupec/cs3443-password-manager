@@ -35,13 +35,12 @@ public class Authenticator {
 	 */
 	public boolean login() {
 		try (Connection db = Database.connect()) {
-
-			PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=datetime() WHERE password=?");
-				stmt.setBytes(1, this.password);
+			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=datetime() WHERE password=?")) {
+				stmt.setBytes(1, this.sha256(this.password));
 				stmt.execute();
 				
-			return stmt.getUpdateCount() > 0;
-			
+				return stmt.getUpdateCount() > 0;
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -62,7 +61,44 @@ public class Authenticator {
 	 */
 	public boolean register() {
 		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT COUNT(*) AS rowcount FROM settings LIMIT 1");
+			try (ResultSet rs = db.createStatement().executeQuery("SELECT COUNT(*) AS rowcount FROM settings")) {
+				if (rs.next() && rs.getInt("rowcount") > 0) {
+					return false;
+				}
+			}
+			
+			try (PreparedStatement stmt = db.prepareStatement("INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, datetime(), datetime())")) {
+				stmt.setBytes(1, this.sha256(this.password));
+				stmt.execute();
+				
+				if (stmt.getUpdateCount() != 1) {
+					return false;
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * @param newPassword
+	 */
+	public boolean setPassword(String newPassword) {
+		return this.setPassword(newPassword.getBytes());
+	}
+	
+	/**
+	 * @param newPassword
+	 */
+	public boolean setPassword(byte[] newPassword) {
+		this.password = newPassword;
+		
+		try (Connection db = Database.connect()) {
+			ResultSet rs = db.createStatement().executeQuery("UPDATE settings SET password=?, updated_at=datetime() WHERE ");
 			
 			if (rs.next() && rs.getInt("rowcount") > 0) {
 				// TODO: better handling of this error
@@ -85,28 +121,6 @@ public class Authenticator {
 		}
 		
 		return true;
-	}
-	
-	/**
-	 * true = authenticated, false = otherwise
-	 * @return boolean
-	 */
-	public boolean getStatus() {
-		return this.status;
-	}
-	
-	/**
-	 * @param newPassword
-	 */
-	public boolean setPassword(String newPassword) {
-		return this.setPassword(newPassword.getBytes());
-	}
-	
-	/**
-	 * @param newPassword
-	 */
-	public boolean setPassword(byte[] newPassword) {
-		this.password = newPassword;
 		
 		
 	}

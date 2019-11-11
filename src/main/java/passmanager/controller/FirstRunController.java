@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.fxml.*;
 import passmanager.*;
 
-public class FirstRunController {
+public class FirstRunController extends BaseController {
 	
 	private final static Logger Log = Util.getLogger(FirstRunController.class);
 	
@@ -40,5 +40,7 @@ public class FirstRunController {
 			errorMsg.setVisible(true);
 			return;
 		}
+		
+		loadScene("/layout/login.fxml");
 	}
 }

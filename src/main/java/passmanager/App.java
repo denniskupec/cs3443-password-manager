@@ -1,16 +1,12 @@
 package passmanager;
 
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.net.URL;
-import java.util.MissingResourceException;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import passmanager.controller.BaseController;
 
 public class App extends Application {
 
@@ -23,25 +19,16 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		BaseController.setup(primaryStage, "Password Manager");
+		BaseController.loadScene(Database.exists() ? "/layout/login.fxml" : "/layout/firstrun.fxml");
+		BaseController.getStage().show();
 		
-		URL resource = getClass().getResource(Database.exists() ? "/layout/login.fxml" : "/layout/newUser.fxml");
-		
-		Parent root = FXMLLoader.load(resource);
-
-		Scene scene = new Scene(root, 700, 500);
-			scene.getStylesheets().add(getClass().getResource("/style/app.css").toExternalForm());
-			  
-		primaryStage.setTitle("Password Manager");
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
-
 		Log.info("Data path: " + App.getStoragePath());
 	}
 
-
 	/**
-	 * Configuration and database files are stored in the user home directory
+	 * Configuration and database files are stored in the user home directory.
+	 * (e.g. ~/.config/CS3443-passmanager)
 	 * @return Path
 	 */
 	public static Path getStoragePath() {
@@ -56,31 +43,22 @@ public class App extends Application {
 	public static Path getStoragePath(String filename)  {
 		return Paths.get(App.getStoragePath().toString(), filename);
 	}
-	
-	/**
-	 * Convenience method to fetch resource files.
-	 * @param String name		name of the resource file
-	 * @return InputStream
-	 */
-	public static InputStream getResource(String name) {
-		InputStream is = App.class.getResourceAsStream("/" + name);
-		if (is == null) {
-			throw new MissingResourceException("Requested resource doesn't exist.", App.class.getName(), name);
-		}
-		
-		return is;
-	}
-	
+
 	/**
 	 * Get the path of a resource file. 
 	 * @param String name 		name of the resource file requested
 	 * @return Path
+	 * @throws URISyntaxException
 	 */
 	public static Path getResourcePath(String name) {
-		return Paths.get(App.class.getResource(name).getPath(), name);
+		try {
+			return Paths.get( App.class.getResource(name).toURI() );
+		} 
+		catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
-
-	
-	
 }
