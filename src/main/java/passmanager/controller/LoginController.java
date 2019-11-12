@@ -32,9 +32,11 @@ public class LoginController extends BaseController {
 			errorMsg.setVisible(true);
 		}
 
-		Log.info("Authenticated!");
+		if (auth.login()) {
+			Log.info("Authenticated!");
 		
-		loadScene("/layout/listview.fxml");
+			loadScene("/layout/listview.fxml");
+		}
 	}
 	
 }
