@@ -11,15 +11,16 @@ public class ListController extends BaseController {
 
 	private final static Logger Log = Util.getLogger(ListController.class);
 	
-	@FXML TextField website;
-	@FXML TextField username;
-	@FXML TextField password;
-	@FXML TextArea notes;
+	@FXML TextField website, displayWebsite;
+	@FXML TextField username, displayUsername;
+	@FXML TextField password, DisplayPassword;
+	@FXML TextArea notes, DisplayNotes;
 	@FXML TitledPane newPassword;
 	@FXML MenuItem choiceNew;
 	@FXML MenuItem choicePreferences;
 	@FXML MenuItem choiceQuit;
-	@FXML Button save;
+	@FXML Button save, DisplaySave;
+	@FXML CheckBox edit;
 	
 	/**
 	 * used to prompt user to create new password
@@ -47,6 +48,7 @@ public class ListController extends BaseController {
 		
 		if (event.getSource() == choiceNew) {
 			newPassword.setVisible(true);
+			Log.info("New Selected, inputting new password");
 			onNewEntry(event);
 		}
 		

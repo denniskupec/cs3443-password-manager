@@ -36,8 +36,8 @@
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
               </textFill>
             </Label>
-                  <TextArea layoutX="-11.0" layoutY="47.0" prefHeight="30.0" prefWidth="221.0" />
-                  <Button layoutX="207.0" layoutY="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Search" />
+                  <TextArea layoutX="7.0" layoutY="45.0" prefHeight="30.0" prefWidth="221.0" />
+                  <Button layoutX="239.0" layoutY="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Search" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
@@ -58,6 +58,12 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
+                        <TextField fx:id="DisplayWebsite" editable="false" layoutX="77.0" layoutY="95.0" prefHeight="25.0" prefWidth="195.0" />
+                        <TextField fx:id="DisplayUsername" editable="false" layoutX="77.0" layoutY="166.0" prefHeight="25.0" prefWidth="195.0" />
+                        <TextField fx:id="DisplayPassword" editable="false" layoutX="77.0" layoutY="243.0" prefHeight="25.0" prefWidth="195.0" />
+                        <TextArea fx:id="DisplayNotes" editable="false" layoutX="303.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" />
+                        <CheckBox fx:id="edit" layoutX="89.0" layoutY="361.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="81.0" text="Edit" />
+                        <Button fx:id="DisplaySave" layoutX="309.0" layoutY="370.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="69.0" text="Save" visible="false" />
               </children>
             </AnchorPane>
           </content>
