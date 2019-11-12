@@ -39,7 +39,7 @@ public class Authenticator {
 				stmt.setBytes(1, this.sha256(this.password));
 				stmt.execute();
 				
-				return stmt.getUpdateCount() > 0;
+				return stmt.executeUpdate() > 0;
 			}
 		}
 		catch (SQLException e) {
