@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+
 public class LoginController extends BaseController {
 	
 	private final static Logger Log = Util.getLogger(LoginController.class);
@@ -42,7 +43,5 @@ public class LoginController extends BaseController {
 		// only runs if login was successful
 		Log.info("Authenticated!");
 		loadScene("/layout/listview.fxml");
-		}
 	}
-	
 }

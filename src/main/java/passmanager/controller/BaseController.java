@@ -45,7 +45,7 @@ public abstract class BaseController {
 		FXMLLoader loader = new FXMLLoader(resource);
 
 		try {
-			Parent root2 = (Parent) loader.load();
+			Parent root2 = loader.load();
 	
 			Scene s = new Scene(root2, 970, 600);
 				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());

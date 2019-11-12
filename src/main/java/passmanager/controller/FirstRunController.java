@@ -15,6 +15,10 @@ public class FirstRunController extends BaseController {
 	@FXML Button save;
 	@FXML Label errorMsg;
 
+	/**
+	 * Runs when the save button is pressed
+	 * @param event
+	 */
 	@FXML
 	public void onSave(Event event) {
 		Log.fine("Saving new password.");
