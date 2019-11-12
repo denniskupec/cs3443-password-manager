@@ -24,7 +24,7 @@
       </menus>
     </MenuBar>
 
-    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.3040089086859688" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
           <children>
@@ -36,6 +36,8 @@
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
               </textFill>
             </Label>
+                  <TextArea layoutX="-11.0" layoutY="47.0" prefHeight="30.0" prefWidth="221.0" />
+                  <Button layoutX="207.0" layoutY="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Search" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
