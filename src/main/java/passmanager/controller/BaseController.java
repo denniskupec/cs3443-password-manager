@@ -3,18 +3,18 @@ package passmanager.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import passmanager.App;
 import passmanager.Util;
+import passmanager.interfaces.Initializable;
 
 /**
  * All other controllers extend this controller. This provides the methods to switch scenes.
  */
-public abstract class BaseController {
+public abstract class BaseController implements Initializable {
 
 	private final static Logger Log = Util.getLogger(BaseController.class);
 
