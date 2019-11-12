@@ -43,7 +43,7 @@
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TitledPane fx:id="newPassword" layoutX="4.0" layoutY="91.0" prefHeight="364.0" prefWidth="541.0" text="New Password">
+                        <TitledPane fx:id="newPassword" layoutX="4.0" layoutY="91.0" prefHeight="364.0" prefWidth="541.0" text="New Password" visible="false">
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
