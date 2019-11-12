@@ -49,10 +49,11 @@
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea layoutX="183.0" layoutY="45.0" prefHeight="25.0" prefWidth="200.0" promptText="Website" />
-                                    <TextArea layoutX="181.0" layoutY="111.0" prefHeight="25.0" prefWidth="200.0" promptText="Username" />
-                                    <TextArea layoutX="180.0" layoutY="174.0" prefHeight="25.0" prefWidth="200.0" promptText="Password" />
+                                    <TextArea fx:id="notes" layoutX="273.0" layoutY="52.0" prefHeight="144.0" prefWidth="200.0" promptText="Notes" />
                                     <Button fx:id="save" layoutX="237.0" layoutY="238.0" mnemonicParsing="false" onAction="#onNewEntry" prefHeight="48.0" prefWidth="86.0" text="Save" />
+                                    <TextField fx:id="website" layoutX="49.0" layoutY="56.0" onAction="#onNewEntry" promptText="Website" />
+                                    <TextField fx:id="username" layoutX="47.0" layoutY="111.0" onAction="#onNewEntry" promptText="Username" />
+                                    <TextField fx:id="password" layoutX="48.0" layoutY="172.0" onAction="#onNewEntry" promptText="Password" />
                                  </children>
                               </AnchorPane>
                            </content>

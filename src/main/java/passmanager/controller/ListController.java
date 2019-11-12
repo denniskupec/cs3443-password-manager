@@ -14,6 +14,7 @@ public class ListController extends BaseController {
 	@FXML TextField website;
 	@FXML TextField username;
 	@FXML TextField password;
+	@FXML TextArea notes;
 	@FXML TitledPane newPassword;
 	@FXML MenuItem choiceNew;
 	@FXML Button save;
