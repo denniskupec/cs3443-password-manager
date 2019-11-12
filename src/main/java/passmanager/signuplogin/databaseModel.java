@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 
 public class databaseModel {
-    private Connection connection;
+    public Connection connection;
     public databaseModel()
     {
         try {
@@ -50,17 +50,6 @@ public class databaseModel {
     public void addUser(String username, String password) throws Exception {
         String sql = "INSERT INTO user (username, password) VALUES ('"+username+"', '"+password+"')";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.executeUpdate();
-        ps.close();
-    }
-    public void addAccountToDatabase(String website, String url, String username, String password, String email) throws Exception {
-        String sql = "INSERT INTO accounts (website, url, username, password, email) VALUES (?,?,?,?,?)";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, website);
-        ps.setString(2, url);
-        ps.setString(3, username);
-        ps.setString(4, password);
-        ps.setString(5, email);
         ps.executeUpdate();
         ps.close();
     }

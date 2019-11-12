@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import passmanager.database.dbConnection;
@@ -18,6 +19,7 @@ import passmanager.database.dbConnection;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -49,7 +51,7 @@ public class accountController implements Initializable {
     }
 
     private String sql = "SELECT * FROM accounts";
-    private void loadAccountdata() throws SQLException {
+    public void loadAccountdata() throws SQLException {
         Connection connection = dbConnection.getConnection();
         data = FXCollections.observableArrayList();
         ResultSet rs = connection.createStatement().executeQuery(sql);
@@ -79,11 +81,11 @@ public class accountController implements Initializable {
             password.setText(accountDataTable.getSelectionModel().getSelectedItem().getPassword());
     }
     @FXML
-    private void addAccountButton(ActionEvent event) throws IOException {
+    private void addAccountButton(ActionEvent event) throws IOException{
         Stage update = new Stage();
         Parent root;
         String addAccount = "/layout/addAccount.fxml";
-        root = FXMLLoader.load(getClass().getResource(addAccount));
+        root = FXMLLoader.load(addAccountController.class.getResource(addAccount));
         update.setScene(new Scene(root));
         update.initModality(Modality.APPLICATION_MODAL);
         update.show();

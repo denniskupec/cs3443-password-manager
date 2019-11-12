@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="420.0" prefWidth="408.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.Account.testController">
+<AnchorPane prefHeight="420.0" prefWidth="408.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.Account.addAccountController">
    <children>
       <Label layoutX="39.0" layoutY="14.0" prefHeight="48.0" prefWidth="291.0" styleClass="label-signin-header" text="Add new account!" />
       <GridPane layoutX="39.0" layoutY="71.0" prefHeight="299.0" prefWidth="232.0">
@@ -35,8 +35,8 @@
             <Label styleClass="label-signin" text="Password" GridPane.rowIndex="6" />
             <Label styleClass="label-signin" text="Confirm passowrd" GridPane.rowIndex="8" />
             <Label styleClass="label-signin" text="Email used for account!" GridPane.rowIndex="10" />
-            <TextField fx:id="username" GridPane.rowIndex="5" />
-            <TextField fx:id="password" GridPane.rowIndex="7" />
+            <TextField fx:id="userName" GridPane.rowIndex="5" />
+            <TextField fx:id="passWord" GridPane.rowIndex="7" />
             <TextField fx:id="confirmPass" GridPane.rowIndex="9" />
             <TextField fx:id="email" prefHeight="12.0" prefWidth="243.0" GridPane.rowIndex="11" />
             <TextField fx:id="website" prefWidth="229.0" GridPane.rowIndex="1" />
@@ -44,7 +44,7 @@
             <TextField fx:id="url" prefWidth="229.0" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button layoutX="298.0" layoutY="302.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="33.0" prefWidth="91.0" text="Add" />
+      <Button fx:id="add" layoutX="298.0" layoutY="302.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="33.0" prefWidth="91.0" text="Add" />
       <Button layoutX="298.0" layoutY="343.0" mnemonicParsing="false" text="Cancel" />
       <Label fx:id="error" layoutX="39.0" layoutY="389.0" />
    </children>

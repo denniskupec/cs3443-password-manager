@@ -53,8 +53,6 @@ public class signupController {
                 String user = username.getText();
                 String pass = password.getText();
                 databaseModel.addUser(user, pass);
-                System.out.println(user);
-                System.out.println(pass);
                 Stage updateStage;
                 Parent updated;
                 if(event.getSource()==signup){

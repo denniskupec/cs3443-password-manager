@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
@@ -76,6 +77,11 @@ public class loginController implements Initializable {
             } else {
                 errorLabel.setTextFill(Color.web("#ff0000"));
                 errorLabel.setText("invalid username or password!");
+            }
+            try {
+                databaseModel.connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
