@@ -19,6 +19,7 @@ import passmanager.signuplogin.databaseModel;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class addAccountController {
     @FXML
@@ -37,6 +38,8 @@ public class addAccountController {
     private Label error;
     @FXML
     private Button add;
+    @FXML
+    private Button cancel;
     @FXML
     public void addAccount(ActionEvent event) throws Exception {
         if(!validateFields())
@@ -58,7 +61,6 @@ public class addAccountController {
             error.setTextFill(Color.web("#ff0000"));
             error.setText("one or more field is empty!");
         }
-
     }
     private boolean validateFields() {
         return (userName.getText() == null || userName.getText().length() == 0 ||
@@ -82,5 +84,11 @@ public class addAccountController {
         ps.setString(5, email);
         ps.executeUpdate();
         ps.close();
+    }
+    @FXML
+    public void cancel()
+    {
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
 }

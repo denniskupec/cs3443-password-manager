@@ -23,13 +23,12 @@ public class databaseModel {
     public boolean isConnected() {
         return this.connection != null;
     }
-    public boolean validatePassword(String user, String pass) throws Exception{
+    public boolean validatePassword(String pass) throws Exception{
             PreparedStatement pr = null;
             ResultSet rs = null;
-            String sql = "SELECT * FROM user where username = ? and password = ?";
+            String sql = "SELECT * FROM user where password = ?";
             pr = connection.prepareStatement(sql);
-            pr.setString(1, user);
-            pr.setString(2, pass);
+            pr.setString(1, pass);
             rs = pr.executeQuery();
             return rs.next();
     }
@@ -47,9 +46,10 @@ public class databaseModel {
         pr.close();
         return count;
     }
-    public void addUser(String username, String password) throws Exception {
-        String sql = "INSERT INTO user (username, password) VALUES ('"+username+"', '"+password+"')";
+    public void addUser(String password) throws Exception {
+        String sql = "INSERT INTO user (password) VALUES (?)";
         PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, password);
         ps.executeUpdate();
         ps.close();
     }

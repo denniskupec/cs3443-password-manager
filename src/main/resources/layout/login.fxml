@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="300.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.signuplogin.loginController">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.signuplogin.loginController">
    <children>
-      <Group layoutY="29.0" AnchorPane.leftAnchor="22.0">
+      <Label layoutX="68.0" layoutY="50.0" prefHeight="39.0" prefWidth="213.0" styleClass="label-signin-header" text="Welcome!" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="63.0" />
+      <GridPane layoutX="19.0" layoutY="166.0" prefHeight="93.0" prefWidth="277.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="14.0">
          <children>
-            <Label layoutX="14.0" layoutY="105.0" prefHeight="39.0" prefWidth="322.0" styleClass="label-signin" text="password to continue!" />
-            <Label layoutX="14.0" layoutY="66.0" prefHeight="39.0" prefWidth="298.0" styleClass="label-signin" text="Please enter a username and" />
-         </children>
-      </Group>
-      <Label layoutX="96.0" layoutY="36.0" prefHeight="39.0" prefWidth="213.0" styleClass="label-signin-header" text="Welcome!" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="35.0" />
-      <GridPane layoutX="22.0" layoutY="183.0" prefHeight="136.0" prefWidth="207.0" AnchorPane.bottomAnchor="131.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="115.0">
-         <children>
-            <Label text="Username">
+            <Label text="Password">
                <font>
                   <Font size="15.0" />
                </font></Label>
-            <Label text="Password" GridPane.rowIndex="2">
-               <font>
-                  <Font size="15.0" />
-               </font></Label>
-            <TextField fx:id="username" GridPane.rowIndex="1" />
-            <PasswordField fx:id="password" GridPane.rowIndex="3" />
+            <PasswordField fx:id="password" GridPane.rowIndex="1" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,13 +27,12 @@
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
       <Label fx:id="errorLabel" layoutX="22.0" layoutY="332.0" />
-      <Button fx:id="login" layoutX="145.0" layoutY="361.0" mnemonicParsing="false" onAction="#Login" text="Login" />
-      <Hyperlink fx:id="backtoSignup" layoutX="161.0" layoutY="403.0" onAction="#signup" text="Sign up!" />
-      <Label fx:id="status" layoutX="22.0" layoutY="14.0" prefHeight="25.0" prefWidth="239.0" text="Database Status" />
+      <Button fx:id="login" layoutX="205.0" layoutY="272.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <Hyperlink fx:id="backtoSignup" layoutX="221.0" layoutY="312.0" onAction="#signup" text="Sign up!" />
+      <Label fx:id="status" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="239.0" text="Database Status" />
+      <Label layoutX="7.0" layoutY="107.0" prefHeight="39.0" prefWidth="298.0" styleClass="label-signin" text="Please enter a password to continue!" />
    </children>
 </AnchorPane>

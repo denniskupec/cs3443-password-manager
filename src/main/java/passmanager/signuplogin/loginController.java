@@ -19,8 +19,6 @@ import java.util.ResourceBundle;
 public class loginController implements Initializable {
     databaseModel databaseModel = new databaseModel();
     @FXML
-    private TextField username;
-    @FXML
     private TextField password;
     @FXML
     private Label errorLabel;
@@ -54,16 +52,15 @@ public class loginController implements Initializable {
     }
     @FXML
     public void Login(ActionEvent event) throws Exception{
-        if(validateFields())
+        if(validateField())
         {
             errorLabel.setTextFill(Color.web("#ff0000"));
-            errorLabel.setText("one or more field is empty!");
+            errorLabel.setText("Please enter password to continue!");
         }
         else
         {
-            String user = username.getText();
             String pass = password.getText();
-            if (databaseModel.validatePassword(user, pass)) {
+            if (databaseModel.validatePassword(pass)) {
                 Stage updateStage;
                 Parent updated;
                 if(event.getSource()==login){
@@ -73,21 +70,20 @@ public class loginController implements Initializable {
                     Scene scene=new Scene(updated);
                     updateStage.setScene(scene);
                     updateStage.show();
+                    try {
+                        databaseModel.connection.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 errorLabel.setTextFill(Color.web("#ff0000"));
-                errorLabel.setText("invalid username or password!");
-            }
-            try {
-                databaseModel.connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                errorLabel.setText("invalid password!");
             }
         }
     }
-    private boolean validateFields() {
-        return (username.getText() == null || username.getText().length() == 0 ||
-                password.getText() == null || password.getText().length() == 0);
+    private boolean validateField() {
+        return (password.getText() == null || password.getText().length() == 0);
     }
     @FXML
     public void signup(ActionEvent event) throws Exception{

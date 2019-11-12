@@ -15,8 +15,6 @@ public class signupController {
     databaseModel databaseModel = new databaseModel();
     @FXML
 	private Button signup;
-	@FXML
-    private TextField username;
     @FXML
     private TextField password;
     @FXML
@@ -50,9 +48,8 @@ public class signupController {
         else {
             if(validatePassword(password.getText(), confirmpass.getText()))
             {
-                String user = username.getText();
                 String pass = password.getText();
-                databaseModel.addUser(user, pass);
+                databaseModel.addUser(pass);
                 Stage updateStage;
                 Parent updated;
                 if(event.getSource()==signup){
@@ -73,8 +70,7 @@ public class signupController {
 	}
 
     private boolean validateFields() {
-        return (username.getText() == null || username.getText().length() == 0 ||
-                password.getText() == null || password.getText().length() == 0 ||
+        return (password.getText() == null || password.getText().length() == 0 ||
                 confirmpass.getText() == null || confirmpass.getText().length() == 0);
     }
 

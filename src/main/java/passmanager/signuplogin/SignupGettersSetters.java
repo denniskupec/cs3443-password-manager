@@ -4,24 +4,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class SignupGettersSetters {
 
-    private String user;
     private String password;
 
     public SignupGettersSetters() {
-        this(null, null);
+        this( null);
     }
 
-    public SignupGettersSetters(String user, String password) {
-        this.user = user;
+    public SignupGettersSetters(String password) {
         this.password = password;
-    }
-
-    public String getUser() {
-        return this.user;
-    }
-
-    public void setUser(String login) {
-        this.user = login;
     }
 
     public String getPassword() {

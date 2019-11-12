@@ -45,7 +45,7 @@
          </children>
       </GridPane>
       <Button fx:id="add" layoutX="298.0" layoutY="302.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="33.0" prefWidth="91.0" text="Add" />
-      <Button layoutX="298.0" layoutY="343.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="cancel" layoutX="298.0" layoutY="343.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Label fx:id="error" layoutX="39.0" layoutY="389.0" />
    </children>
 </AnchorPane>

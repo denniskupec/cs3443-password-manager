@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,25 +15,19 @@
    <children>
       <Group layoutY="29.0" AnchorPane.leftAnchor="22.0">
          <children>
-            <Label layoutX="14.0" layoutY="105.0" prefHeight="39.0" prefWidth="322.0" styleClass="label-signin" text="password to continue!" />
-            <Label layoutX="14.0" layoutY="66.0" prefHeight="39.0" prefWidth="298.0" styleClass="label-signin" text="Please enter a username and" />
+            <Label layoutX="14.0" layoutY="66.0" prefHeight="39.0" prefWidth="298.0" styleClass="label-signin" text="Please create a password to continue" />
          </children>
       </Group>
-      <Label layoutX="96.0" layoutY="36.0" prefHeight="39.0" prefWidth="213.0" styleClass="label-signin-header" text="Welcome!" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="35.0" />
-      <GridPane layoutX="22.0" layoutY="168.0" prefHeight="188.0" prefWidth="333.0" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0">
+      <Label layoutX="92.0" layoutY="36.0" prefHeight="39.0" prefWidth="213.0" styleClass="label-signin-header" text="Welcome!" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="39.0" />
+      <GridPane layoutX="22.0" layoutY="147.0" prefHeight="188.0" prefWidth="333.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0">
          <children>
-            <Label text="Username">
+            <Label text="Password">
                <font>
                   <Font size="15.0" />
                </font></Label>
-            <Label text="Password" GridPane.rowIndex="2">
-               <font>
-                  <Font size="15.0" />
-               </font></Label>
-            <TextField fx:id="username" GridPane.rowIndex="1" />
-            <PasswordField fx:id="password" GridPane.rowIndex="3" />
-            <PasswordField fx:id="confirmpass" GridPane.rowIndex="5" />
-            <Label text="Confirm password" GridPane.rowIndex="4">
+            <PasswordField fx:id="password" GridPane.rowIndex="1" />
+            <PasswordField fx:id="confirmpass" GridPane.rowIndex="3" />
+            <Label text="Confirm password" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font></Label>
@@ -47,13 +40,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
       <Label fx:id="errorLabel" layoutX="22.0" layoutY="364.0" />
-      <Button fx:id="signup" layoutX="236.0" layoutY="382.0" mnemonicParsing="false" onAction="#Signup" text="Confirm" />
-      <Label layoutX="22.0" layoutY="381.0" text="Have account?" />
-      <Hyperlink fx:id="login" layoutX="19.0" layoutY="401.0" onAction="#Login" text="Login" />
+      <Button fx:id="signup" layoutX="217.0" layoutY="348.0" mnemonicParsing="false" onAction="#Signup" text="Confirm" />
+      <Label layoutX="17.0" layoutY="348.0" text="Have account?" />
+      <Hyperlink fx:id="login" layoutX="17.0" layoutY="370.0" onAction="#Login" text="Login" />
    </children>
 </AnchorPane>
