@@ -18,8 +18,15 @@ public class ListController extends BaseController {
 	@FXML MenuItem choiceNew;
 	@FXML Button save;
 	
+	/**
+	 * used to prompt user to create new password
+	 * 
+	 * @param event
+	 */
 	public void onNewEntry(Event event) {
 		
+		// i don't think this is strictly necessary, but i just copied
+		// what dennis did to be safe
 		newPassword.setVisible(false);
 		
 		if (event.getSource() == choiceNew) {
