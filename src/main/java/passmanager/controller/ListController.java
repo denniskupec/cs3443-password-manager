@@ -35,6 +35,10 @@ public class ListController extends BaseController {
 		
 	}
 	
+	/**
+	 * used to process the different choices in the menu bar
+	 * @param event
+	 */
 	public void onMenu(Event event) {
 		
 		// i don't think this is strictly necessary, but i just copied
