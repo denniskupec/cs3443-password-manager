@@ -11,14 +11,23 @@ import javafx.stage.Stage;
 import passmanager.App;
 import passmanager.Util;
 
+/**
+ * All other controllers extend this controller. This provides the methods to switch scenes.
+ */
 public abstract class BaseController {
 
 	private final static Logger Log = Util.getLogger(BaseController.class);
-	
+
 	protected static Stage stage;
 	protected Parent root;
 	protected Scene scene;
 	
+	/**
+	 * Only called when the application first launches!
+	 * Sets the application stage and a title for the window.
+	 * @param primaryStage
+	 * @param title
+	 */
 	public static void setup(Stage primaryStage, String title) {
 		stage = primaryStage;
 		stage.setTitle(title);
@@ -63,22 +72,43 @@ public abstract class BaseController {
 		BaseController.stage.setTitle(title);
 	}
 
+	/**
+	 * Determines if the application window is in front.
+	 * @return boolean
+	 */
 	public boolean isFocused() {
 		return stage.isFocused();
 	}
 
+	/**
+	 * Returns the application stage
+	 * @return Stage
+	 */
 	public static Stage getStage() {
 		return stage;
 	}
 	
+	/**
+	 * Do not call this function outside of initialization!
+	 * Sets the application stage.
+	 * @param newStage
+	 */
 	public void setStage(Stage newStage) {
 		stage = newStage;
 	}
 	
+	/**
+	 * Returns the currently displayed scene.
+	 * @return Scene
+	 */
 	public Scene getScene() {
 		return this.scene;
 	}
 	
+	/**
+	 * Sets a new scene for the application stage.
+	 * @param newScene
+	 */
 	public void setScene(Scene newScene) {
 		stage.setScene(newScene);
 	}
