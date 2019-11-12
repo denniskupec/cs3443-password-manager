@@ -3,18 +3,18 @@ package passmanager.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import passmanager.App;
 import passmanager.Util;
+import passmanager.interfaces.Initializable;
 
 /**
  * All other controllers extend this controller. This provides the methods to switch scenes.
  */
-public abstract class BaseController {
+public abstract class BaseController implements Initializable {
 
 	private final static Logger Log = Util.getLogger(BaseController.class);
 
@@ -55,6 +55,32 @@ public abstract class BaseController {
 				controller.root = root2;
 				controller.scene = s;
 				stage.setScene(s);
+				
+			Log.info("Controller loaded: " + controller.getClass().getName());
+			return controller;
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static <T extends BaseController> T loadNewEntry(String resourceName) {
+		URL resource = App.class.getResource(resourceName);
+		FXMLLoader loader = new FXMLLoader(resource);
+		Stage popStage = new Stage();
+
+		try {
+			Parent root2 = loader.load();
+	
+			Scene s = new Scene(root2, 500, 300);
+				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
+
+			T controller = loader.getController();
+
+				controller.root = root2;
+				controller.scene = s;
+				popStage.setScene(s);
+				popStage.show();
 				
 			Log.info("Controller loaded: " + controller.getClass().getName());
 			return controller;
