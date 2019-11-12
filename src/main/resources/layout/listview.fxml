@@ -14,11 +14,11 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem fx:id="choiceNew" mnemonicParsing="false" onAction="#onNewEntry" text="New" />
+            <MenuItem fx:id="choiceNew" mnemonicParsing="false" onAction="#onMenu" text="New" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <MenuItem fx:id="choicePreferences" mnemonicParsing="false" onAction="#onMenu" text="Preferences…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="choiceQuit" mnemonicParsing="false" onAction="#onMenu" text="Quit" />
           </items>
         </Menu>
       </menus>
