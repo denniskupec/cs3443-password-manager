@@ -29,7 +29,7 @@ public class addEntriesController extends BaseController {
     /**
      * used to prompt user to create entries
      *
-     * @param String website, String url, String username, String password, String note
+     * @param event handles addEntries
      */
     @FXML
     public void addEntries(ActionEvent event) throws Exception {
@@ -53,6 +53,11 @@ public class addEntriesController extends BaseController {
             error.setText("one or more field is empty!");
         }
     }
+    /**
+     * adds entries to the database
+     *
+     * @param String website, String url, String username, String password, String note
+     */
     public void addEntriesToDatabase(String website, String url, String username, String password, String note) throws Exception {
         Connection connection = Database.connect();
         String sql = "INSERT INTO entries (updated_at,title, username, password, url, note) VALUES (datetime(),?,?,?,?,?)";
@@ -65,12 +70,21 @@ public class addEntriesController extends BaseController {
         ps.executeUpdate();
         ps.close();
     }
+    /**
+     * handles cancel button
+     *
+     */
     @FXML
     public void cancel()
     {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
+    /**
+     * used to validate input fields
+     *
+     * @return true or false (i.e if one of the fields are empty it returns true)
+     */
     private boolean validateFields() {
         return (userName.getText() == null || userName.getText().length() == 0 ||
                 passWord.getText() == null || passWord.getText().length() == 0 ||
@@ -79,6 +93,11 @@ public class addEntriesController extends BaseController {
                 url.getText() == null || website.getText().length() == 0 ||
                 note.getText() == null || note.getText().length() == 0);
     }
+    /**
+     * used to validate if passwords match
+     *
+     * @return true or false (i.e if one of the fields are empty it returns true)
+     */
     private boolean validatePassword(String password, String confirmPass) {
         return password.equals(confirmPass);
     }
