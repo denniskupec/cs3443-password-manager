@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="New Password" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.ListController">
+   <content>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button layoutX="267.0" layoutY="247.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="65.0" text="Save" />
+            <TextField layoutX="85.0" layoutY="66.0" promptText="Website" />
+            <TextField layoutX="85.0" layoutY="127.0" promptText="Username" />
+            <TextField layoutX="85.0" layoutY="187.0" promptText="Password" />
+            <TextArea layoutX="320.0" layoutY="64.0" prefHeight="156.0" prefWidth="193.0" promptText="Notes" />
+         </children>
+      </AnchorPane>
+   </content>
+</TitledPane>

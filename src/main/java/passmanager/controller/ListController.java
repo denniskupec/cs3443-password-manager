@@ -47,9 +47,10 @@ public class ListController extends BaseController {
 		newPassword.setVisible(false);
 		
 		if (event.getSource() == choiceNew) {
-			newPassword.setVisible(true);
+//			newPassword.setVisible(true);
 			Log.info("New Selected, inputting new password");
-			onNewEntry(event);
+//			onNewEntry(event);
+			loadNewEntry("/layout/newentry.fxml");
 		}
 		
 		if (event.getSource() == choicePreferences) {

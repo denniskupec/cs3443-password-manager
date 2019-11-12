@@ -64,6 +64,32 @@ public abstract class BaseController implements Initializable {
 		}
 	}
 	
+	public static <T extends BaseController> T loadNewEntry(String resourceName) {
+		URL resource = App.class.getResource(resourceName);
+		FXMLLoader loader = new FXMLLoader(resource);
+		Stage popStage = new Stage();
+
+		try {
+			Parent root2 = loader.load();
+	
+			Scene s = new Scene(root2, 500, 300);
+				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
+
+			T controller = loader.getController();
+
+				controller.root = root2;
+				controller.scene = s;
+				popStage.setScene(s);
+				popStage.show();
+				
+			Log.info("Controller loaded: " + controller.getClass().getName());
+			return controller;
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	/**
 	 * Changes the main window title.
 	 * @param title		string to set the main window title
