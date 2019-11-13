@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import passmanager.App;
 import passmanager.Util;
@@ -72,14 +73,18 @@ public abstract class BaseController implements Initializable {
 		try {
 			Parent root2 = loader.load();
 	
+
 			Scene s = new Scene(root2, 500, 350);
-				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
+
+			s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 
 			T controller = loader.getController();
 
 				controller.root = root2;
 				controller.scene = s;
 				popStage.setScene(s);
+				popStage.initModality(Modality.APPLICATION_MODAL);
+				popStage.setResizable(false);
 				popStage.show();
 				
 			Log.info("Controller loaded: " + controller.getClass().getName());
