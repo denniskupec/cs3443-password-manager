@@ -40,6 +40,7 @@ public class addEntriesController extends BaseController {
                 addEntriesToDatabase(website.getText(),url.getText(), userName.getText(), passWord.getText(), note.getText());
                 Stage stage = (Stage) save.getScene().getWindow();
                 stage.close();
+                Log.info("New entry added to the database!");
             }
             else
             {
@@ -52,12 +53,11 @@ public class addEntriesController extends BaseController {
             error.setTextFill(Color.web("#ff0000"));
             error.setText("one or more field is empty!");
         }
-        Log.info("New entry added to the database!");
     }
     /**
      * adds entries to the database
      *
-     * @param String website, String url, String username, String password, String note
+     * @param  website,  url,  username,  password,  note
      */
     public void addEntriesToDatabase(String website, String url, String username, String password, String note) throws Exception {
         Connection connection = Database.connect();
