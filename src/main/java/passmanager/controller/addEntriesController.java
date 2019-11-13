@@ -62,7 +62,7 @@ public class addEntriesController extends BaseController {
      */
     public void addEntriesToDatabase(String website, String url, String username, String password, String note) throws Exception {
         Connection connection = Database.connect();
-        String sql = "INSERT INTO entries (updated_at,title, username, password, url, note) VALUES (datetime(),?,?,?,?,?)";
+        String sql = "INSERT INTO entries (updated_at,title, username, password, url, note, image) VALUES (datetime(),?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, website);
         ps.setString(2, username);
@@ -83,7 +83,10 @@ public class addEntriesController extends BaseController {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
-    
+    @FXML
+    public void addIcon() {
+
+    }
     /**
      * used to validate input fields
      *

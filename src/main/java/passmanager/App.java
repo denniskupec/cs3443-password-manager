@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import passmanager.controller.BaseController;
 
