@@ -1,5 +1,8 @@
 package passmanager.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Logger;
@@ -7,7 +10,10 @@ import java.util.logging.Logger;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import passmanager.Database;
 import passmanager.Util;
@@ -25,7 +31,11 @@ public class addEntriesController extends BaseController {
     @FXML private Button save;
     @FXML private Button cancel;
     @FXML private Label error;
+    @FXML private Label choose;
+    @FXML private ImageView img;
+    private String imageFile;
 
+    File file;
     /**
      * used to prompt user to create entries
      *
@@ -62,6 +72,7 @@ public class addEntriesController extends BaseController {
      */
     public void addEntriesToDatabase(String website, String url, String username, String password, String note) throws Exception {
         Connection connection = Database.connect();
+        FileInputStream fileInputStream = new FileInputStream(file);
         String sql = "INSERT INTO entries (updated_at,title, username, password, url, note, image) VALUES (datetime(),?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, website);
@@ -69,6 +80,7 @@ public class addEntriesController extends BaseController {
         ps.setString(3, password);
         ps.setString(4, url);
         ps.setString(5, note);
+        ps.setBinaryStream(6, fileInputStream, fileInputStream.available());
         ps.executeUpdate();
         ps.close();
     }
@@ -84,8 +96,24 @@ public class addEntriesController extends BaseController {
         stage.close();
     }
     @FXML
-    public void addIcon() {
-
+    public void addIcon() throws MalformedURLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files",
+                        "*.bmp", "*.png", "*.jpg", "*.gif"));
+        file = fileChooser.showOpenDialog(choose.getScene().getWindow());
+        if(file != null)
+        {
+            imageFile = file.toURI().toURL().toString();
+            Image image = new Image(imageFile);
+            img.setImage(image);
+            choose.setTextFill(Color.web("black"));
+            choose.setText("Choose Image");
+        }
+        else {
+            choose.setTextFill(Color.web("#ff0000"));
+            choose.setText("Please select a icon for your account website!");
+        }
     }
     /**
      * used to validate input fields

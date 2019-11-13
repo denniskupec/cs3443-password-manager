@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="420.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.addEntriesController">
+<AnchorPane prefHeight="498.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.addEntriesController">
     <children>
         <Label layoutX="39.0" layoutY="14.0" prefHeight="48.0" prefWidth="291.0" text="Add new account!" />
         <GridPane layoutX="39.0" layoutY="71.0" prefHeight="299.0" prefWidth="232.0">
@@ -48,5 +49,7 @@
         <Button fx:id="save" layoutX="298.0" layoutY="302.0" mnemonicParsing="false" onAction="#addEntries" prefHeight="33.0" prefWidth="91.0" text="Save" />
         <Button fx:id="cancel" layoutX="298.0" layoutY="343.0" mnemonicParsing="false" onAction="#cancel" prefHeight="33.0" prefWidth="91.0" text="Cancel" />
         <Label fx:id="error" layoutX="39.0" layoutY="389.0" />
+      <ImageView fx:id="img" fitHeight="96.0" fitWidth="122.0" layoutX="39.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="choose" layoutX="185.0" layoutY="461.0" onMouseClicked="#addIcon" style="-fx-border-color: black;" text="Choose Icon" />
     </children>
 </AnchorPane>
