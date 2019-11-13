@@ -54,6 +54,7 @@ public class addEntriesController extends BaseController {
             error.setText("one or more field is empty!");
         }
     }
+    
     /**
      * adds entries to the database
      *
@@ -71,6 +72,7 @@ public class addEntriesController extends BaseController {
         ps.executeUpdate();
         ps.close();
     }
+    
     /**
      * handles cancel button
      *
@@ -81,6 +83,7 @@ public class addEntriesController extends BaseController {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
+    
     /**
      * used to validate input fields
      *
@@ -94,6 +97,7 @@ public class addEntriesController extends BaseController {
                 url.getText() == null || website.getText().length() == 0 ||
                 note.getText() == null || note.getText().length() == 0);
     }
+    
     /**
      * used to validate if passwords match
      *

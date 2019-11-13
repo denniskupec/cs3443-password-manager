@@ -22,6 +22,7 @@ public abstract class BaseController implements Initializable {
 	protected static Stage stage;
 	protected Parent root;
 	protected Scene scene;
+	protected boolean hidePasswordsboolean;
 	
 	/**
 	 * Only called when the application first launches!

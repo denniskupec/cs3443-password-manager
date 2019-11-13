@@ -29,7 +29,12 @@ public class SettingsController extends BaseController {
 	@FXML
 	public void onChange(ActionEvent event) {
 		if (event.getSource().equals(hidePasswords)) {
-			
+			if (hidePasswords.isSelected()) {
+				hidePasswordsboolean = true;
+			}
+			else {
+				hidePasswordsboolean = false;
+			}
 		}
 		
 		if (event.getSource().equals(autolock)) {

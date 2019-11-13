@@ -21,6 +21,7 @@ public class ListController extends BaseController {
 	@FXML TextField website, displayWebsite;
 	@FXML TextField username, displayUsername;
 	@FXML TextField password, DisplayPassword;
+	@FXML PasswordField hiddenPassword;
 	@FXML TextArea notes, DisplayNotes;
 	@FXML TitledPane newPassword;
 	@FXML MenuItem choicePreferences;
@@ -41,14 +42,15 @@ public class ListController extends BaseController {
 		// what dennis did to be safe
 		if (event.getSource() == choiceNew) {
 			loadNewEntry("/layout/newEntries.fxml");
-		}
 			Log.info("New Selected, inputting new entry!");
-		
+		}
 		if (event.getSource() == choicePreferences) {
+			loadNewEntry("/layout/settings.fxml");
 			Log.info("Preferences selected");
 		}
 
 		if (event.getSource() == choiceQuit) {
+			Log.info("Program closed");
 			stage.close();
 		}
 	}
