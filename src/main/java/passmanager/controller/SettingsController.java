@@ -3,6 +3,10 @@ package passmanager.controller;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import passmanager.Util;
+
+import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -11,6 +15,7 @@ import javafx.fxml.FXML;
  */
 public class SettingsController extends BaseController {
 	
+	private final static Logger Log = Util.getLogger(ListController.class);
 	@FXML CheckBox hidePasswords;
 	@FXML CheckBox autolock;
 	@FXML HBox autolockMinsBox;
@@ -72,6 +77,7 @@ public class SettingsController extends BaseController {
 		hidePasswords.setSelected(hidePasswords.isSelected());
 		savePassword.setDisable(true);
 		cancel.setDisable(true);
+		Log.info("Settings updated");
 		stage.close();
 	}
 	

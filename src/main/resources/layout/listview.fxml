@@ -32,7 +32,7 @@
           <items>
             <MenuItem fx:id="choiceNew" mnemonicParsing="false" onAction="#onMenu" text="New" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="choicePreferences" mnemonicParsing="false" onAction="#onMenu" text="Preferences…" />
+            <MenuItem fx:id="choiceSettings" mnemonicParsing="false" onAction="#onMenu" text="Settings…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="choiceQuit" mnemonicParsing="false" onAction="#onMenu" text="Quit" />
           </items>

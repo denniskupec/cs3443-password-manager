@@ -17,12 +17,12 @@ public class ListController extends BaseController {
 
 	private final static Logger Log = Util.getLogger(ListController.class);
 	@FXML MenuItem choiceNew;
-	@FXML TextField displayWebsite;
-	@FXML TextField displayUsername;
+	@FXML TextField DisplayWebsite;
+	@FXML TextField DisplayUsername;
 	@FXML TextField DisplayPassword;
 	@FXML PasswordField hiddenPassword;
 	@FXML TextArea DisplayNotes;
-	@FXML MenuItem choicePreferences;
+	@FXML MenuItem choiceSettings;
 	@FXML MenuItem choiceQuit;
 	@FXML Button DisplaySave;
 	@FXML CheckBox edit;
@@ -40,11 +40,11 @@ public class ListController extends BaseController {
 		// what dennis did to be safe
 		if (event.getSource() == choiceNew) {
 			loadNewEntry("/layout/newEntries.fxml");
-			Log.info("New Selected, inputting new entry!");
+			Log.info("New Selected, inputting new entry");
 		}
-		if (event.getSource() == choicePreferences) {
+		if (event.getSource() == choiceSettings) {
 			loadNewEntry("/layout/settings.fxml");
-			Log.info("Preferences selected");
+			Log.info("Settings selected");
 		}
 
 		if (event.getSource() == choiceQuit) {
