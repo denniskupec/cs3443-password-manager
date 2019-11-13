@@ -17,13 +17,11 @@ public class ListController extends BaseController {
 
 	private final static Logger Log = Util.getLogger(ListController.class);
 	@FXML MenuItem choiceNew;
-	@FXML Button save;
-	@FXML TextField website, displayWebsite;
-	@FXML TextField username, displayUsername;
-	@FXML TextField password, DisplayPassword;
+	@FXML TextField displayWebsite;
+	@FXML TextField displayUsername;
+	@FXML TextField DisplayPassword;
 	@FXML PasswordField hiddenPassword;
-	@FXML TextArea notes, DisplayNotes;
-	@FXML TitledPane newPassword;
+	@FXML TextArea DisplayNotes;
 	@FXML MenuItem choicePreferences;
 	@FXML MenuItem choiceQuit;
 	@FXML Button DisplaySave;
