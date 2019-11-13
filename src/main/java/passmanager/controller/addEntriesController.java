@@ -52,6 +52,7 @@ public class addEntriesController extends BaseController {
             error.setTextFill(Color.web("#ff0000"));
             error.setText("one or more field is empty!");
         }
+        Log.info("New entry added to the database!");
     }
     /**
      * adds entries to the database

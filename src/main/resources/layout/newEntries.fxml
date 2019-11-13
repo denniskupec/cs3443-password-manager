@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="420.0" prefWidth="408.0" styleClass="background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.addEntriesController">
+<AnchorPane prefHeight="420.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.addEntriesController">
     <children>
-        <Label layoutX="39.0" layoutY="14.0" prefHeight="48.0" prefWidth="291.0" styleClass="label-signin-header" text="Add new account!" />
+        <Label layoutX="39.0" layoutY="14.0" prefHeight="48.0" prefWidth="291.0" text="Add new account!" />
         <GridPane layoutX="39.0" layoutY="71.0" prefHeight="299.0" prefWidth="232.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,16 +31,16 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label styleClass="label-signin" text="Website name" />
-                <Label styleClass="label-signin" text="Username" GridPane.rowIndex="4" />
-                <Label styleClass="label-signin" text="Password" GridPane.rowIndex="6" />
-                <Label styleClass="label-signin" text="Confirm passowrd" GridPane.rowIndex="8" />
-                <Label styleClass="label-signin" text="Note" GridPane.rowIndex="10" />
+                <Label text="Website name" />
+                <Label text="Username" GridPane.rowIndex="4" />
+                <Label text="Password" GridPane.rowIndex="6" />
+                <Label text="Confirm passowrd" GridPane.rowIndex="8" />
+                <Label text="Note" GridPane.rowIndex="10" />
                 <TextField fx:id="userName" GridPane.rowIndex="5" />
                 <TextField fx:id="passWord" GridPane.rowIndex="7" />
                 <TextField fx:id="confirmPass" GridPane.rowIndex="9" />
                 <TextField fx:id="website" prefWidth="229.0" GridPane.rowIndex="1" />
-                <Label styleClass="label-signin" text="URL" GridPane.rowIndex="2" />
+                <Label text="URL" GridPane.rowIndex="2" />
                 <TextField fx:id="url" prefWidth="229.0" GridPane.rowIndex="3" />
             <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="11" />
             </children>
