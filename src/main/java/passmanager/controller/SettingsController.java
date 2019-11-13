@@ -2,6 +2,7 @@ package passmanager.controller;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -31,10 +32,15 @@ public class SettingsController extends BaseController {
 		if (event.getSource().equals(hidePasswords)) {
 			if (hidePasswords.isSelected()) {
 				hidePasswordsboolean = true;
+				savePassword.setDisable(false);
+				cancel.setDisable(false);
 			}
 			else {
 				hidePasswordsboolean = false;
+				savePassword.setDisable(false);
+				cancel.setDisable(false);
 			}
+			
 		}
 		
 		if (event.getSource().equals(autolock)) {
@@ -62,7 +68,11 @@ public class SettingsController extends BaseController {
 	 */
 	@FXML
 	public void onPasswordSave(ActionEvent event) {
-		
+		Stage stage = (Stage) savePassword.getScene().getWindow();
+		hidePasswords.setSelected(hidePasswords.isSelected());
+		savePassword.setDisable(true);
+		cancel.setDisable(true);
+		stage.close();
 	}
 	
 	/**
