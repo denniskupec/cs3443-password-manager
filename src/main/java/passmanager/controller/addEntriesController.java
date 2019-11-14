@@ -73,7 +73,7 @@ public class addEntriesController extends BaseController {
     public void addEntriesToDatabase(String website, String url, String username, String password, String note) throws Exception {
         Connection connection = Database.connect();
         FileInputStream fileInputStream = new FileInputStream(file);
-        String sql = "INSERT INTO entries (updated_at,title, username, password, url, note, image) VALUES (datetime(),?,?,?,?,?,?)";
+        String sql = "INSERT INTO entries (updated_at,title, username, password, url, note, favicon) VALUES (datetime(),?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, website);
         ps.setString(2, username);
