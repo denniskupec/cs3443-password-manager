@@ -67,7 +67,12 @@ public class SettingsController extends BaseController {
 			
 		}
 	}
-	
+	/**
+	 * used to update the value of hide_passwords in the database
+	 * 
+	 * @param hide
+	 * @throws Exception
+	 */
 	public void updateHidePasswords(int hide) throws Exception{
 		Connection connection = Database.connect();
 		String sql = "UPDATE settings " + "SET hide_passwords = ?";
