@@ -3,8 +3,14 @@ package passmanager.controller;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import passmanager.Database;
 import passmanager.Util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -27,21 +33,26 @@ public class SettingsController extends BaseController {
 	@FXML Button cancel;
 	@FXML Label errorMsg;
 	
+	File file;
+	
 	/**
 	 * Runs when any checkbox or control, other than the password fields, are changed.
 	 * It saves the options in the background, without needing to have a seperate save button.
 	 * @param event
 	 */
 	@FXML
-	public void onChange(ActionEvent event) {
+	public void onChange(ActionEvent event) throws Exception{
+		
+		
+		
 		if (event.getSource().equals(hidePasswords)) {
 			if (hidePasswords.isSelected()) {
-				hidePasswordsboolean = true;
+				updateHidePasswords(1);
 				savePassword.setDisable(false);
 				cancel.setDisable(false);
 			}
 			else {
-				hidePasswordsboolean = false;
+				updateHidePasswords(0);
 				savePassword.setDisable(false);
 				cancel.setDisable(false);
 			}
@@ -55,6 +66,16 @@ public class SettingsController extends BaseController {
 		if (event.getSource().equals(autolockMins)) {
 			
 		}
+	}
+	
+	public void updateHidePasswords(int hide) throws Exception{
+		Connection connection = Database.connect();
+		String sql = "UPDATE settings " + "SET hide_passwords = ?";
+		
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setInt(1, hide);
+		ps.executeUpdate();
+		ps.close();
 	}
 	
 	/**
