@@ -48,7 +48,6 @@ public class ListController extends BaseController {
 		}
 
 		if (event.getSource() == choiceQuit) {
-			Log.info("Program closed");
 			stage.close();
 		}
 	}
