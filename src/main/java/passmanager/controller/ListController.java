@@ -26,11 +26,7 @@ public class ListController extends BaseController {
 	@FXML MenuItem choiceQuit;
 	@FXML Button DisplaySave;
 	@FXML CheckBox edit;
-	/**
-	 * used to prompt user to create new password
-	 * 
-	 * @param event
-	 */
+	
 	/**
 	 * used to process the different choices in the menu bar
 	 * @param event
@@ -49,6 +45,29 @@ public class ListController extends BaseController {
 
 		if (event.getSource() == choiceQuit) {
 			stage.close();
+		}
+	}
+	
+	public void onEditEntry(Event event) {
+		if(event.getSource() == edit) {
+			if(edit.isSelected()) {
+				DisplayWebsite.setEditable(true);
+				DisplayUsername.setEditable(true);
+				DisplayPassword.setEditable(true);
+				DisplayPassword.setVisible(true);
+				hiddenPassword.setVisible(false);
+				DisplayNotes.setEditable(true);
+				DisplaySave.setVisible(true);
+			}
+			else {
+				DisplayWebsite.setEditable(false);
+				DisplayUsername.setEditable(false);
+				DisplayPassword.setEditable(false);
+				DisplayPassword.setVisible(false);
+				hiddenPassword.setVisible(true);
+				DisplayNotes.setEditable(false);
+				DisplaySave.setVisible(false);
+			}
 		}
 	}
 }
