@@ -126,7 +126,8 @@ public class addEntriesController extends BaseController {
                 confirmPass.getText() == null || confirmPass.getText().length() == 0 ||
                 website.getText() == null || website.getText().length() == 0 ||
                 url.getText() == null || website.getText().length() == 0 ||
-                note.getText() == null || note.getText().length() == 0);
+                note.getText() == null || note.getText().length() == 0 ||
+                file == null);
     }
     
     /**
