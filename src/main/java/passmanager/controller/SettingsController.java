@@ -42,9 +42,6 @@ public class SettingsController extends BaseController {
 	 */
 	@FXML
 	public void onChange(ActionEvent event) throws Exception{
-		
-		
-		
 		if (event.getSource().equals(hidePasswords)) {
 			if (hidePasswords.isSelected()) {
 				updateHidePasswords(1);
@@ -56,7 +53,7 @@ public class SettingsController extends BaseController {
 				savePassword.setDisable(false);
 				cancel.setDisable(false);
 			}
-			
+
 		}
 		
 		if (event.getSource().equals(autolock)) {
@@ -101,6 +98,10 @@ public class SettingsController extends BaseController {
 	public void onPasswordSave(ActionEvent event) {
 		Stage stage = (Stage) savePassword.getScene().getWindow();
 		hidePasswords.setSelected(hidePasswords.isSelected());
+		if(hidePasswords.isSelected())
+		{
+			System.out.println("Selected!");
+		}
 		savePassword.setDisable(true);
 		cancel.setDisable(true);
 		Log.info("Settings updated");

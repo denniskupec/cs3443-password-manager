@@ -50,6 +50,6 @@
         <Button fx:id="cancel" layoutX="298.0" layoutY="343.0" mnemonicParsing="false" onAction="#cancel" prefHeight="33.0" prefWidth="91.0" text="Cancel" />
         <Label fx:id="error" layoutX="39.0" layoutY="389.0" />
       <ImageView fx:id="img" fitHeight="96.0" fitWidth="122.0" layoutX="39.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="choose" layoutX="185.0" layoutY="461.0" onMouseClicked="#addIcon" style="-fx-border-color: black;" text="Choose Icon" />
+      <Label fx:id="choose" layoutX="170.0" layoutY="465.0" onMouseClicked="#addIcon" style="-fx-border-color: black;" text="Choose Icon" />
     </children>
 </AnchorPane>
