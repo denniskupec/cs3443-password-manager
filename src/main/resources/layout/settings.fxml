@@ -27,7 +27,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox fx:id="hidePasswords" mnemonicParsing="false" onAction="#onChange" text="Hide all passwords automatically" GridPane.columnIndex="1" />
+            <CheckBox fx:id="hidePasswords" mnemonicParsing="false" onAction="#onChange" selected="true" text="Hide all passwords automatically" GridPane.columnIndex="1" />
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <CheckBox fx:id="autolock" mnemonicParsing="false" text="Auto Lock" />

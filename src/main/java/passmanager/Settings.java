@@ -1,5 +1,7 @@
 package passmanager;
 
+import javafx.beans.property.IntegerProperty;
+
 import java.util.logging.Logger;
 
 /**
@@ -7,8 +9,7 @@ import java.util.logging.Logger;
  */
 public class Settings {
 	private final static Logger Log = Util.getLogger(Settings.class);
-	
-	
+
 	public void setAutolock(boolean newValue) {
 		
 	}
@@ -34,9 +35,6 @@ public class Settings {
 	public String getPassword() {
 		return "";
 	}
-	
-	
-	
-	
+
 
 }
