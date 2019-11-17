@@ -45,6 +45,7 @@ public class SettingsController extends BaseController implements Initializable 
 		if (minutes > 0) {
 			autolockMinsBox.setVisible(true);
 			autolockMins.setText(String.valueOf(minutes));
+			autolock.setSelected(true);
 		}
 		 
 		hidePasswords.setSelected(settings.getHidePasswords());
