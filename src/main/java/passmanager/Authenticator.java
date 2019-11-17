@@ -8,8 +8,6 @@ import java.util.logging.Logger;
 import javafx.scene.control.TextInputControl;
 import java.util.logging.Level;
 import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class Authenticator {
 	
@@ -37,7 +35,7 @@ public class Authenticator {
 		try (Connection db = Database.connect()) {
 			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=datetime() WHERE password=?")) {
 				stmt.setBytes(1, Util.sha256(this.password));
-				stmt.execute();
+				// stmt.execute();
 				
 				return stmt.executeUpdate() > 0;
 			}

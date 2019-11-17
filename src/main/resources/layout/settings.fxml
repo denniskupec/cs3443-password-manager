@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -14,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.SettingsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.SettingsController">
    <children>
       <GridPane prefHeight="120.0" prefWidth="422.0">
         <columnConstraints>
@@ -27,7 +32,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox fx:id="hidePasswords" mnemonicParsing="false" onAction="#onChange" selected="true" text="Hide all passwords automatically" GridPane.columnIndex="1" />
+            <CheckBox fx:id="hidePasswords" mnemonicParsing="false" selected="true" text="Hide all passwords automatically" GridPane.columnIndex="1" />
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <CheckBox fx:id="autolock" mnemonicParsing="false" text="Auto Lock" />
@@ -38,6 +43,14 @@
                      <font>
                         <Font size="12.0" />
                      </font>
+                  </Label>
+                  <Label fx:id="errorMinutes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" layoutX="34.0" layoutY="27.0" prefHeight="17.0" prefWidth="227.0" text="Minutes must be an integer" textAlignment="RIGHT" textFill="#e42e2e" visible="false">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
                   </Label>
                </children>
             </VBox>
@@ -86,7 +99,7 @@
                               <Insets right="10.0" top="2.0" />
                            </HBox.margin>
                         </Label>
-                        <PasswordField fx:id="oldPassword" onInputMethodTextChanged="#onPasswordEntry" prefWidth="200.0" />
+                        <PasswordField fx:id="oldPassword" prefWidth="200.0" />
                      </children>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -133,12 +146,12 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="savePassword" disable="true" mnemonicParsing="false" onAction="#onPasswordSave" text="Save">
+                  <Button fx:id="savePassword" disable="true" mnemonicParsing="false" text="Save">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="cancel" disable="true" layoutX="320.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+                  <Button fx:id="cancel" disable="true" layoutX="320.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
                </children>
                <GridPane.margin>
                   <Insets bottom="5.0" top="10.0" />
