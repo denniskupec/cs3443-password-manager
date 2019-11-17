@@ -65,6 +65,8 @@ public class SettingsController extends BaseController implements Initializable 
 		});
 		
 		savePassword.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onSavePassword);
+		
+		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onCancel);
 	}
 
 	/**
@@ -90,12 +92,27 @@ public class SettingsController extends BaseController implements Initializable 
 	 * Runs when the save button is pressed.
 	 * @param event
 	 */
-	@FXML
-	public void onSavePassword(MouseEvent event) {
+	private void onSavePassword(MouseEvent event) {
+		byte[] hashed = Util.sha256(oldPassword.getText().getBytes());
+		if (!settings.getPassword().equals(hashed)) {
+			showErrorMessage("Old password doesn't match.");
+			newPassword.clear();
+			newPasswordConfirm.clear();
+			oldPassword.clear();
+			return;
+		}
+		
 		if (!newPassword.getText().equals(newPasswordConfirm.getText())) {
 			showErrorMessage("Both passwords must match.");
 			newPassword.clear();
 			newPasswordConfirm.clear();
+			oldPassword.clear();
+			return;
+		}
+		
+		if (!settings.setPassword(oldPassword.getText())) {
+			Log.warning("Failed to set new password!");
+			showErrorMessage("An error occured.");
 		}
 	}
 	
@@ -103,8 +120,7 @@ public class SettingsController extends BaseController implements Initializable 
 	 * Reverts any changes when the cancel button is pressed.
 	 * @param event
 	 */
-	@FXML
-	public void onCancel(ActionEvent event) {
+	private void onCancel(MouseEvent event) {
 		newPassword.clear();
 		newPasswordConfirm.clear();
 		oldPassword.clear();
