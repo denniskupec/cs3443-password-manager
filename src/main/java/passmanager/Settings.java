@@ -33,14 +33,16 @@ public class Settings {
 	}
 	
 	/**
-	 * Setter for 'hide_passwords'
-	 * @param newValue
+	 * A generic update method. Also probably a bad idea.
+	 * @param columnName		name of the column that needs updating
+	 * @param value				new value for that column
 	 * @return boolean
 	 */
-	public boolean setHidePasswords(boolean newValue) {
+	private <T> boolean update(String columnName, T value) {
 		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET hide_passwords=?")) {
-				stmt.setBoolean(1, newValue);
+			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET " + columnName + "=?")) {
+				stmt.setObject(1, value);
+				
 				return stmt.executeUpdate() > 0;
 			}
 		}
@@ -49,6 +51,15 @@ public class Settings {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Setter for 'hide_passwords'
+	 * @param newValue
+	 * @return boolean
+	 */
+	public boolean setHidePasswords(boolean newValue) {
+		return this.<Boolean>update("hide_passwords", newValue);
 	}
 	
 	/**
@@ -68,18 +79,8 @@ public class Settings {
 		if (minutes < 0) {
 			minutes = 0;
 		}
-		
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET autolock_minutes=?")) {
-				stmt.setInt(1, minutes);
-				return stmt.executeUpdate() > 0;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
+
+		return this.<Integer>update("autolock_minutes", minutes);
 	}
 	
 	/**
@@ -88,15 +89,7 @@ public class Settings {
 	 * @return int
 	 */
 	public int getAutolockMins() {
-		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT autolock_minutes FROM settings");
-			return rs.getInt(1);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return 0;
+		return this.<Integer>select("autolock_minutes");
 	}
 	
 	/**
@@ -104,17 +97,7 @@ public class Settings {
 	 * @return boolean
 	 */
 	public boolean setAutolock(boolean newValue) {
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET autolock=?")) {
-				stmt.setBoolean(1, newValue);
-				return stmt.executeUpdate() > 0;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
+		return this.<Boolean>update("autolock", newValue);
 	}
 	
 	/**
@@ -122,15 +105,7 @@ public class Settings {
 	 * @return boolean
 	 */
 	public boolean getAutolock() {
-		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT autolock FROM settings");
-			return rs.getBoolean(1);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
+		return this.<Integer>select("autolock") > 0;
 	}
 	
 	/**
@@ -140,17 +115,9 @@ public class Settings {
 	 * @return	boolean		
 	 */
 	public boolean setPassword(String newPassword) {
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET password=?, updated_at=datetime()")) {
-				stmt.setBytes(1, Util.sha256(newPassword.getBytes()));
-				return stmt.executeUpdate() > 0;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
+		byte[] newBytes = Util.sha256(newPassword.getBytes());
 		
-		return false;
+		return this.<byte[]>update("password", newBytes);
 	}
 	
 	/**
@@ -158,15 +125,7 @@ public class Settings {
 	 * @return byte[]		hashed password
 	 */
 	public byte[] getPassword() {
-		try (Connection db = Database.connect();) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT password FROM settings");
-			return rs.getBytes(1);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
+		return this.<byte[]>select("password");
 	}
 	
 	/**
@@ -175,21 +134,7 @@ public class Settings {
 	 * @return boolean
 	 */
 	public boolean setLastLogin(Date date) {
-		if (date == null) {
-			date = new Date();
-		}
-
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=?")) {
-				stmt.setDate(1, (java.sql.Date) date);
-				return stmt.executeUpdate() > 0;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
+		return this.<Date>update("last_login_at", date);
 	}
 
 	/**
@@ -197,15 +142,7 @@ public class Settings {
 	 * @return Date
 	 */
 	public Date getLastLogin() {
-		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT last_login_at FROM settings");
-			return (Date) rs.getDate(1);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
+		return (Date) this.<java.sql.Date>select("last_login_at");
 	}
 
 }
