@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+import java.util.Arrays;
 import javafx.scene.control.TextInputControl;
-import java.util.logging.Level;
 import java.nio.charset.Charset;
 
 public class Authenticator {
-	
 	private final static Logger Log = Util.getLogger(Authenticator.class);
 	
+	private Settings settings = new Settings();
 	private byte[] password;
 
 	public Authenticator(String password) {
@@ -28,20 +28,12 @@ public class Authenticator {
 	}
 	
 	/**
-	 * true = success, false = invalid credential
+	 * Attempts to login with the given credential. Returns a boolean value depending on if it's valid.
 	 * @return boolean
 	 */
 	public boolean login() {
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=datetime() WHERE password=?")) {
-				stmt.setBytes(1, Util.sha256(this.password));
-				// stmt.execute();
-				
-				return stmt.executeUpdate() > 0;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
+		if (Arrays.equals(Util.sha256(password), settings.getPassword())) {
+			return true;
 		}
 		
 		return false;
@@ -65,63 +57,17 @@ public class Authenticator {
 				}
 			}
 			
+			/* all of this could probably be moved into the Settings model */
 			try (PreparedStatement stmt = db.prepareStatement("INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, datetime(), datetime())")) {
 				stmt.setBytes(1, Util.sha256(this.password));
-				stmt.execute();
-				
-				if (stmt.getUpdateCount() != 1) {
-					return false;
-				}
+				return stmt.executeUpdate() > 0;
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
 		
-		return true;
+		return false;
 	}
-	
-	/**
-	 * @param newPassword
-	 */
-	public boolean setPassword(String newPassword) {
-		return this.setPassword(newPassword.getBytes());
-	}
-	
-	/**
-	 * @param newPassword
-	 */
-	public boolean setPassword(byte[] newPassword) {
-		this.password = newPassword;
-		
-		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("UPDATE settings SET password=?, updated_at=datetime() WHERE ");
-			
-			if (rs.next() && rs.getInt("rowcount") > 0) {
-				// TODO: better handling of this error
-				Log.warning("Tried to register a new user, but one already exists!");
-				return false;
-			}
-			
-			PreparedStatement stmt = db.prepareStatement("INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, datetime(), datetime())");
-				stmt.setBytes(1,  Util.sha256(this.password));
-				stmt.execute();
-				
-			if (stmt.getUpdateCount() != 1) {
-				Log.log(Level.SEVERE, "Failed to update credentials.");
-				return false;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		
-		return true;
-		
-		
-	}
-
 	
 }
