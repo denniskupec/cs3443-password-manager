@@ -33,5 +33,20 @@ public class Util {
 		
 		return null;
 	}
+	
+	/**
+	 * Useful for testing.
+	 * Converts a byte array to a string of hexadecimal digits.
+	 * @param bytes
+	 * @return String
+	 */
+	public static String byte2hex(byte[] bytes) {
+		StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+			sb.append(String.format("%x", b));
+		}
+		
+		return sb.toString();
+	}
 
 }

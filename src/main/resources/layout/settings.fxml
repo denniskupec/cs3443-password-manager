@@ -46,7 +46,7 @@
                   </Label>
                   <Label fx:id="errorMinutes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" layoutX="34.0" layoutY="27.0" prefHeight="17.0" prefWidth="227.0" text="Minutes must be an integer" textAlignment="RIGHT" textFill="#e42e2e" visible="false">
                      <font>
-                        <Font size="12.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="24.0" />

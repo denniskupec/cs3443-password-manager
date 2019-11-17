@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 public class Settings {
 	private final static Logger Log = Util.getLogger(Settings.class);
 	
-	
 	/**
 	 * Setter for 'hide_passwords'
 	 * @param newValue
@@ -40,9 +39,7 @@ public class Settings {
 	public boolean getHidePasswords() {
 		try (Connection db = Database.connect()) {
 			ResultSet rs = db.createStatement().executeQuery("SELECT hide_passwords FROM settings");
-			if (rs.next()) {
-				return rs.getBoolean(1);
-			}
+			return rs.getBoolean(1);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -83,9 +80,7 @@ public class Settings {
 	public int getAutolockMins() {
 		try (Connection db = Database.connect()) {
 			ResultSet rs = db.createStatement().executeQuery("SELECT autolock_minutes FROM settings");
-			//if (rs.next()) {
-				return rs.getInt(1);
-			//}
+			return rs.getInt(1);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -155,9 +150,7 @@ public class Settings {
 	public byte[] getPassword() {
 		try (Connection db = Database.connect();) {
 			ResultSet rs = db.createStatement().executeQuery("SELECT password FROM settings");
-			if (rs.next()) {
-				return rs.getBytes("password");
-			}
+			return rs.getBytes(1);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -196,9 +189,7 @@ public class Settings {
 	public Date getLastLogin() {
 		try (Connection db = Database.connect()) {
 			ResultSet rs = db.createStatement().executeQuery("SELECT last_login_at FROM settings");
-			if (rs.next()) {
-				return (Date) rs.getDate("last_login_at");
-			}
+			return (Date) rs.getDate(1);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
