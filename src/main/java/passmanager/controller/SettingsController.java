@@ -65,8 +65,12 @@ public class SettingsController extends BaseController implements Initializable 
 		});
 		
 		savePassword.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onSavePassword);
-		
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onCancel);
+		
+		oldPassword.textProperty().addListener((observable, oldValue, newValue) -> {
+			savePassword.setDisable(false);
+			cancel.setDisable(false);
+		});
 	}
 
 	/**
