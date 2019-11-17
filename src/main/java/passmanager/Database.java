@@ -58,7 +58,7 @@ public class Database {
 					"autolock_minutes INTEGER DEFAULT 0," + 
 					"hide_passwords   INTEGER DEFAULT 1)");
 			
-			stmt.addBatch("CREATE TABLE IF NOT EXISTS records (" + 
+			stmt.addBatch("CREATE TABLE IF NOT EXISTS entries (" + 
 					"id         INTEGER PRIMARY KEY," + 
 					"salt       BLOB NOT_NULL," +
 					"updated_at TEXT NOT NULL," + 
