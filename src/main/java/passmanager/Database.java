@@ -55,7 +55,8 @@ public class Database {
 					"password         BLOB NOT NULL," + 
 					"updated_at       DATETIME NOT NULL," + 
 					"last_login_at    DATETIME NOT NULL," + 
-					"autolock_minutes INTEGER DEFAULT 0," + 
+					"autolock         INTEGER DEFAULT 1" +
+					"autolock_minutes INTEGER DEFAULT 15," + 
 					"hide_passwords   INTEGER DEFAULT 1)");
 			
 			stmt.addBatch("CREATE TABLE IF NOT EXISTS entries (" + 

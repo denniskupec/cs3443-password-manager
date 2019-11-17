@@ -95,6 +95,40 @@ public class Settings {
 	}
 	
 	/**
+	 * Setter for 'autolock'
+	 * @return boolean
+	 */
+	public boolean setAutolock(boolean newValue) {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET autolock=?")) {
+				stmt.setBoolean(1, newValue);
+				return stmt.executeUpdate() > 0;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Getter for 'autolock'
+	 * @return boolean
+	 */
+	public boolean getAutolock() {
+		try (Connection db = Database.connect()) {
+			ResultSet rs = db.createStatement().executeQuery("SELECT autolock FROM settings");
+			return rs.getBoolean(1);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Setter for 'password'
 	 * Returns true or false, depending on the update result.
 	 * @param newPassword
