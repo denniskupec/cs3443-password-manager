@@ -36,7 +36,7 @@ public class Authenticator {
 	public boolean login() {
 		try (Connection db = Database.connect()) {
 			try (PreparedStatement stmt = db.prepareStatement("UPDATE settings SET last_login_at=datetime() WHERE password=?")) {
-				stmt.setBytes(1, this.sha256(this.password));
+				stmt.setBytes(1, Util.sha256(this.password));
 				stmt.execute();
 				
 				return stmt.executeUpdate() > 0;
@@ -68,7 +68,7 @@ public class Authenticator {
 			}
 			
 			try (PreparedStatement stmt = db.prepareStatement("INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, datetime(), datetime())")) {
-				stmt.setBytes(1, this.sha256(this.password));
+				stmt.setBytes(1, Util.sha256(this.password));
 				stmt.execute();
 				
 				if (stmt.getUpdateCount() != 1) {
@@ -107,7 +107,7 @@ public class Authenticator {
 			}
 			
 			PreparedStatement stmt = db.prepareStatement("INSERT INTO settings (password, updated_at, last_login_at) VALUES (?, datetime(), datetime())");
-				stmt.setBytes(1,  this.sha256(this.password));
+				stmt.setBytes(1,  Util.sha256(this.password));
 				stmt.execute();
 				
 			if (stmt.getUpdateCount() != 1) {
@@ -124,26 +124,6 @@ public class Authenticator {
 		
 		
 	}
-	
-	/**
-	 * Calculates the SHA256 sum to obfuscate the password in the database.
-	 * @param input			array of bytes
-	 * @return byte[]
-	 */
-	private byte[] sha256(byte[] input) {
-		byte[] result = null;
-		
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-				md.update(input);
-			
-			result = md.digest();
-		}
-		catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
+
 	
 }
