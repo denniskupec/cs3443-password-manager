@@ -14,6 +14,25 @@ public class Settings {
 	private final static Logger Log = Util.getLogger(Settings.class);
 	
 	/**
+	 * A generic select method. Not type safe and is probably a bad idea.
+	 * Works for this use case.
+	 * @param columnName	name of the column to fetch
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T select(String columnName) {
+		try (Connection db = Database.connect()) {
+			ResultSet rs = db.createStatement().executeQuery("SELECT " + columnName + " FROM settings");
+			return (T) rs.getObject(1);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Setter for 'hide_passwords'
 	 * @param newValue
 	 * @return boolean
@@ -37,16 +56,7 @@ public class Settings {
 	 * @return boolean
 	 */
 	public boolean getHidePasswords() {
-		try (Connection db = Database.connect()) {
-			ResultSet rs = db.createStatement().executeQuery("SELECT hide_passwords FROM settings");
-			return rs.getBoolean(1);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		//TODO: better error handling for these things
-		return false;
+		return this.<Integer>select("hide_passwords") > 0;
 	}
 
 	/**
