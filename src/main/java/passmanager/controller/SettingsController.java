@@ -87,9 +87,8 @@ public class SettingsController extends BaseController implements Initializable 
 			errorMinutes.setVisible(false);
 		}
 		catch (NumberFormatException e) {
-			/* the input isn't an integer, so clear it and show a message */
+			/* the input isn't an integer, so show an error message */
 			errorMinutes.setVisible(true);
-			autolockMins.clear();
 		}
 	}
 	
