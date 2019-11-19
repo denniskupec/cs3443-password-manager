@@ -16,7 +16,7 @@ import javafx.fxml.FXML;
  * Handles the settings window.
  */
 public class SettingsController extends BaseController implements Initializable {
-	private final static Logger Log = Util.getLogger(ListController.class);
+	private final static Logger Log = Util.getLogger(SettingsController.class);
 	
 	@FXML CheckBox hidePasswords;
 	@FXML CheckBox autolock;
