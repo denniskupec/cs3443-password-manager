@@ -8,11 +8,15 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 /**
- * Reflects the 'entries' table
+ * Reflects the 'entries' table.
+ * All setter methods return true on success or false on failure.
  */
 public class PasswordEntry {
 	private final static Logger Log = Util.getLogger(PasswordEntry.class);
 	
+	/**
+	 * Row ID this instance represents.
+	 */
 	private int id;
 	
 	/**
@@ -21,6 +25,65 @@ public class PasswordEntry {
 	 */
 	public PasswordEntry(int id) {
 		this.id = id;
+	}
+	
+	/**
+	 * Gets the first entry in the database, or returns null on error
+	 * @return PasswordEntry
+	 */
+	public static PasswordEntry first() {
+		try (Connection db = Database.connect()) {
+			try (ResultSet rs = db.createStatement().executeQuery("SELECT id FROM entries ORDER BY ASC id LIMIT 1")) {
+				return new PasswordEntry(rs.getInt(1));
+			}
+		}
+		catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Gets then next entry ID, and returns a new PasswordEntry object. If it doesn't exist, null is returned.
+	 * @return PasswordEntry
+	 */
+	public PasswordEntry next() {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("SELECT id FROM entries WHERE id>? ORDER BY ASC id LIMIT 1")) {
+				stmt.setInt(1, id);
+				
+				if (!stmt.execute()) {
+					return null;
+				}
+				
+				ResultSet rs = stmt.getResultSet();
+				return new PasswordEntry(rs.getInt(1));
+			}
+		}
+		catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Gets the previous entry ID, and returns a new PasswordEntry object. If it doesn't exist, null is returned.
+	 * @return PasswordEntry
+	 */
+	public PasswordEntry previous() {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("SELECT id FROM entries WHERE id<? ORDER BY id DESC LIMIT 1")) {
+				stmt.setInt(1, id);
+				
+				if (!stmt.execute()) {
+					return null;
+				}
+				
+				ResultSet rs = stmt.getResultSet();
+				return new PasswordEntry(rs.getInt(1));
+			}
+		}
+		catch (SQLException e) {
+			return null;
+		}
 	}
 	
 	/**
@@ -84,26 +147,53 @@ public class PasswordEntry {
 	}
 	
 	
+	/**
+	 * Getter for 'password'
+	 * @return Byte[]
+	 */
 	public Byte[] getPassword() {
 		return this.<Byte[]>select("password");
 	}
 	
+	/**
+	 * Setter for 'password'
+	 * @param newPassword
+	 * @return boolean - True on success, false on failure.
+	 */
 	public boolean setPassword(Byte[] newPassword) {
 		return this.<Byte[]>update("password", newPassword);
 	}
 	
+	/**
+	 * Getter for 'url'
+	 * @return String
+	 */
 	public String getUrl() {
 		return this.<String>select("url");
 	}
 	
+	/**
+	 * Setter for 'url'
+	 * @param newUrl
+	 * @return Boolean - True on success, false on failure.
+	 */
 	public boolean setUrl(String newUrl) {
 		return this.<String>update("url", newUrl);
 	}
 	
+	/**
+	 * Getter for 'note'
+	 * @return String
+	 */
 	public String getNote() {
 		return this.<String>select("note");
 	}
 	
+	/**
+	 * Setter for 'note
+	 * @param newNote
+	 * @return boolean - True on success, false on failure.
+	 */
 	public boolean setNote(String newNote) {
 		return this.<String>update("note", newNote);
 	}
@@ -112,8 +202,8 @@ public class PasswordEntry {
 	/**
 	 * A generic select method. Not type safe and is probably a bad idea.
 	 * Works for this use case.
-	 * @param columnName	name of the column to fetch
-	 * @return T
+	 * @param columnName - name of the column to fetch
+	 * @return T - Type depends on the database column type
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T select(String columnName) {
@@ -133,8 +223,8 @@ public class PasswordEntry {
 	}
 	
 	/**
-	 * A generic update method. Also probably a bad idea.
-	 * @return boolean
+	 * A generic update method. Also probably a bad idea, but this is type checked.
+	 * @return boolean - True on success, false on failure.
 	 */
 	private <T> boolean update(String columnName, T value) {
 		try (Connection db = Database.connect()) {

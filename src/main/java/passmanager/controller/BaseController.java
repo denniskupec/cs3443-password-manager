@@ -8,15 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import passmanager.App;
-import passmanager.Util;
-import passmanager.interfaces.Initializable;
+import passmanager.*;
+import passmanager.interfaces.*;
 
 /**
  * All other controllers extend this controller. This provides the methods to switch scenes.
  */
 public abstract class BaseController implements Initializable {
-
 	private final static Logger Log = Util.getLogger(BaseController.class);
 
 	protected static Stage stage;
@@ -97,7 +95,7 @@ public abstract class BaseController implements Initializable {
 	
 	/**
 	 * Changes the main window title.
-	 * @param title		string to set the main window title
+	 * @param title - string to set the main window title
 	 */
 	public void setTitle(String title) {
 		BaseController.stage.setTitle(title);
@@ -105,7 +103,7 @@ public abstract class BaseController implements Initializable {
 
 	/**
 	 * Determines if the application window is in front.
-	 * @return boolean
+	 * @return boolean - True if the window is in front, false otherwise.
 	 */
 	public boolean isFocused() {
 		return stage.isFocused();

@@ -6,9 +6,10 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-
+/**
+ * Handles the login process
+ */
 public class LoginController extends BaseController {
-	
 	private final static Logger Log = Util.getLogger(LoginController.class);
 	
 	@FXML private Button unlock;

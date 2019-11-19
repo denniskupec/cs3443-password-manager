@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * Mostly a helper class to simplify database actions. Also handles initial creation.
+ */
 public class Database {
 
 	private final static Logger Log = Util.getLogger(Database.class);
