@@ -42,6 +42,7 @@ public class ListController extends BaseController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			loadData();
+			hiddenPassword.setEditable(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +99,8 @@ public class ListController extends BaseController implements Initializable {
 			DisplayUsername.setText(tableView.getSelectionModel().getSelectedItem().getUsername());
 			DisplayNotes.setText(tableView.getSelectionModel().getSelectedItem().getNote());
 //			DisplayUrl.setText(tableView.getSelectionModel().getSelectedItem().getUrl());
-			DisplayPassword.setText("********");
+			DisplayPassword.setText(tableView.getSelectionModel().getSelectedItem().getPassword());
+			hiddenPassword.setText(tableView.getSelectionModel().getSelectedItem().getPassword());
 		}
 	}
 	public void onEditEntry(Event event) {
@@ -118,6 +120,7 @@ public class ListController extends BaseController implements Initializable {
 				DisplayPassword.setEditable(false);
 				DisplayPassword.setVisible(false);
 				hiddenPassword.setVisible(true);
+				hiddenPassword.setEditable(false);
 				DisplayNotes.setEditable(false);
 				DisplaySave.setVisible(false);
 			}
