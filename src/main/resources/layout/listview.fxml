@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -21,78 +29,117 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.ListController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem fx:id="choiceNew" mnemonicParsing="false" onAction="#onMenu" text="New" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="choiceSettings" mnemonicParsing="false" onAction="#onMenu" text="Settings…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="choiceQuit" mnemonicParsing="false" onAction="#onMenu" text="Quit" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-
-    <SplitPane dividerPositions="0.3040089086859688" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <items>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
-              </textFill>
-            </Label>
-                  <TextArea layoutX="7.0" layoutY="45.0" prefHeight="30.0" prefWidth="221.0" />
-                  <Button layoutX="239.0" layoutY="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="61.0" text="Search" />
-                  <Button layoutX="239.0" layoutY="90.0" mnemonicParsing="false" onAction="#reload" prefHeight="30.0" prefWidth="61.0" text="Reload" />
-                  <TableView fx:id="tableView" layoutX="7.0" layoutY="90.0" prefHeight="438.0" prefWidth="221.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Icon" />
-                      <TableColumn fx:id="account" prefWidth="145.0" text="Account" />
-                    </columns>
-                  </TableView>
-          </children>
-        </AnchorPane>
-        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-          <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
-              <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TextField fx:id="DisplayWebsite" editable="false" layoutX="77.0" layoutY="95.0" prefHeight="25.0" prefWidth="195.0" />
-                        <TextField fx:id="DisplayUsername" editable="false" layoutX="77.0" layoutY="166.0" prefHeight="25.0" prefWidth="195.0" />
-                        <TextField fx:id="DisplayPassword" editable="false" layoutX="77.0" layoutY="243.0" prefHeight="25.0" prefWidth="195.0" visible="false" />
-                        <TextArea fx:id="DisplayNotes" editable="false" layoutX="303.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" />
-                        <CheckBox fx:id="edit" layoutX="89.0" layoutY="361.0" mnemonicParsing="false" onAction="#onEditEntry" prefHeight="61.0" prefWidth="81.0" text="Edit" />
-                        <Button fx:id="DisplaySave" layoutX="309.0" layoutY="370.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="69.0" text="Save" visible="false" />
-                        <PasswordField fx:id="hiddenPassword" layoutX="77.0" layoutY="243.0" prefHeight="25.0" prefWidth="195.0" />
-              </children>
-            </AnchorPane>
-          </content>
-        </ScrollPane>
-      </items>
-    </SplitPane>
-
-    <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0" VBox.vgrow="NEVER">
-	<children>
-        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
-          <font>
-            <Font size="11.0" fx:id="x3" />
-          </font>
-          <textFill>
-            <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
-          </textFill>
-        </Label>
-	</children>
-      <padding>
-        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-      </padding>
-    </HBox>
-  </children>
-</VBox>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.ListController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="NEVER" />
+    <RowConstraints maxHeight="562.0" minHeight="10.0" prefHeight="556.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="17.0" minHeight="-Infinity" prefHeight="17.0" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <MenuBar focusTraversable="false" GridPane.valignment="TOP">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="New Entry" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Preferences" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label fx:id="statusMessage" focusTraversable="false" text="OK" textAlignment="RIGHT" textFill="#9f9f9f" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="1.0" left="1.0" right="5.0" top="1.0" />
+         </GridPane.margin>
+      </Label>
+      <SplitPane dividerPositions="0.35" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <items>
+            <GridPane SplitPane.resizableWithParent="false">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="527.0" minHeight="10.0" prefHeight="502.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox>
+                     <children>
+                        <ToolBar prefHeight="40.0" prefWidth="398.0">
+                           <items>
+                              <TextField fx:id="textfieldSearch" prefHeight="25.0" prefWidth="208.0" styleClass="search" />
+                              <Button fx:id="btnSearch" mnemonicParsing="false" styleClass="search" text="Search" />
+                           </items>
+                        </ToolBar>
+                     </children>
+                  </HBox>
+                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.valignment="TOP">
+                     <items>
+                        <GridPane prefWidth="504.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" percentWidth="50.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" percentWidth="50.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="btnEdit" mnemonicParsing="false" text="Edit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                           </children>
+                        </GridPane>
+                     </items>
+                  </ToolBar>
+                  <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="167.0" minHeight="1.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="410.0" minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER_LEFT">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="486.0" spacing="15.0">
+                                 <children>
+                                    <ImageView fx:id="favicon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" text="Entry Title - Email/Password/Login">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+        </items>
+      </SplitPane>
+   </children>
+</GridPane>

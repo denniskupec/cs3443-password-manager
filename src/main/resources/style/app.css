@@ -3,3 +3,17 @@
 .newuser-hbox {
 	-fx-background-color: orange;
 }
+
+
+.search, .button {
+	-fx-background-radius: 0;
+}
+
+
+.menu-bar, .tool-bar {
+	-fx-background-insets: 0, 0;
+}
+
+.tool-bar {
+	-fx-background-insets: 0, 0 0 1px 0;
+}
