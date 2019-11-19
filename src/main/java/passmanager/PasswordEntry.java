@@ -24,6 +24,65 @@ public class PasswordEntry {
 	}
 	
 	/**
+	 * Gets the first entry in the database, or returns null on error
+	 * @return PasswordEntry
+	 */
+	public static PasswordEntry first() {
+		try (Connection db = Database.connect()) {
+			try (ResultSet rs = db.createStatement().executeQuery("SELECT id FROM entries ORDER BY ASC id LIMIT 1")) {
+				return new PasswordEntry(rs.getInt(1));
+			}
+		}
+		catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Gets then next entry ID, and returns a new PasswordEntry object. If it doesn't exist, null is returned.
+	 * @return PasswordEntry
+	 */
+	public PasswordEntry next() {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("SELECT id FROM entries WHERE id>? ORDER BY ASC id LIMIT 1")) {
+				stmt.setInt(1, id);
+				
+				if (!stmt.execute()) {
+					return null;
+				}
+				
+				ResultSet rs = stmt.getResultSet();
+				return new PasswordEntry(rs.getInt(1));
+			}
+		}
+		catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Gets the previous entry ID, and returns a new PasswordEntry object. If it doesn't exist, null is returned.
+	 * @return PasswordEntry
+	 */
+	public PasswordEntry previous() {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("SELECT id FROM entries WHERE id<? ORDER BY id DESC LIMIT 1")) {
+				stmt.setInt(1, id);
+				
+				if (!stmt.execute()) {
+					return null;
+				}
+				
+				ResultSet rs = stmt.getResultSet();
+				return new PasswordEntry(rs.getInt(1));
+			}
+		}
+		catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	/**
 	 * Getter for 'id'
 	 * There is no setter for this field.
 	 * @return int
