@@ -9,15 +9,16 @@ import java.util.logging.Logger;
 
 /**
  * Reflects the 'settings' table
+ * All setter functions return true or false, depending on success or failure.
  */
 public class Settings {
 	private final static Logger Log = Util.getLogger(Settings.class);
 	
 	/**
 	 * A generic select method. Not type safe and is probably a bad idea.
-	 * Works for this use case.
+	 * Works for this use case. 
 	 * @param columnName	name of the column to fetch
-	 * @return T
+	 * @return T - Type depends on the database column type
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T select(String columnName) {
@@ -33,10 +34,10 @@ public class Settings {
 	}
 	
 	/**
-	 * A generic update method. Also probably a bad idea.
-	 * @param columnName		name of the column that needs updating
-	 * @param value				new value for that column
-	 * @return boolean
+	 * A generic update method. Also probably a bad idea, but types are checked.
+	 * @param columnName - name of the database column that needs updating
+	 * @param value - new value for that column, type depends on the database column type
+	 * @return boolean - True on success, false on failure
 	 */
 	private <T> boolean update(String columnName, T value) {
 		try (Connection db = Database.connect()) {
@@ -112,7 +113,7 @@ public class Settings {
 	 * Setter for 'password'
 	 * Returns true or false, depending on the update result.
 	 * @param newPassword
-	 * @return	boolean		
+	 * @return boolean		
 	 */
 	public boolean setPassword(String newPassword) {
 		byte[] newBytes = Util.sha256(newPassword.getBytes());
