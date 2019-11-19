@@ -47,7 +47,7 @@ public class addEntriesController extends BaseController {
         {
             if(validatePassword(passWord.getText(), confirmPass.getText()))
             {
-                addEntriesToDatabase(website.getText(),url.getText(), userName.getText(), passWord.getText(), note.getText());
+                addEntriesToDatabase(website.getText(),url.getText(), userName.getText(), passWord.getText().getBytes(), note.getText());
                 Stage stage = (Stage) save.getScene().getWindow();
                 stage.close();
                 Log.info("New entry added to the database!");
@@ -70,14 +70,14 @@ public class addEntriesController extends BaseController {
      *
      * @param  website,  url,  username,  password,  note
      */
-    public void addEntriesToDatabase(String website, String url, String username, String password, String note) throws Exception {
+    public void addEntriesToDatabase(String website, String url, String username, byte[] password, String note) throws Exception {
         Connection connection = Database.connect();
         FileInputStream fileInputStream = new FileInputStream(file);
         String sql = "INSERT INTO entries (updated_at,title, username, password, url, note, favicon) VALUES (datetime(),?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, website);
         ps.setString(2, username);
-        ps.setString(3, password);
+        ps.setBytes(3, Util.sha256(password));
         ps.setString(4, url);
         ps.setString(5, note);
         ps.setBinaryStream(6, fileInputStream, fileInputStream.available());
