@@ -41,7 +41,7 @@ public abstract class BaseController implements Initializable {
 	 * @param resourceName		name of the scene to load
 	 * @return T 				instance of the controller for the scene
 	 */
-	public static <T extends BaseController> T loadScene(String resourceName) {
+	public static final <T extends BaseController> T loadScene(String resourceName) {
 		URL resource = App.class.getResource(resourceName);
 		FXMLLoader loader = new FXMLLoader(resource);
 
@@ -65,7 +65,7 @@ public abstract class BaseController implements Initializable {
 		}
 	}
 	
-	public static <T extends BaseController> T loadNewEntry(String resourceName) {
+	public static final <T extends BaseController> T loadNewEntry(String resourceName) {
 		URL resource = App.class.getResource(resourceName);
 		FXMLLoader loader = new FXMLLoader(resource);
 		Stage popStage = new Stage();
