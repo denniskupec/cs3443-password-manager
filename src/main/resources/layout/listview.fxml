@@ -59,7 +59,7 @@
             <Insets bottom="1.0" left="1.0" right="5.0" top="1.0" />
          </GridPane.margin>
       </Label>
-      <SplitPane dividerPositions="0.35" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <SplitPane dividerPositions="0.36" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" GridPane.rowIndex="1">
         <items>
             <GridPane SplitPane.resizableWithParent="false">
               <columnConstraints>
@@ -72,7 +72,7 @@
                <children>
                   <HBox>
                      <children>
-                        <ToolBar prefHeight="40.0" prefWidth="398.0">
+                        <ToolBar prefWidth="398.0">
                            <items>
                               <TextField fx:id="textfieldSearch" prefHeight="25.0" prefWidth="208.0" styleClass="search" />
                               <Button fx:id="btnSearch" mnemonicParsing="false" styleClass="search" text="Search" />
@@ -80,10 +80,10 @@
                         </ToolBar>
                      </children>
                   </HBox>
-                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <ListView GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <GridPane>
+            <GridPane SplitPane.resizableWithParent="false">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -92,23 +92,12 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.valignment="TOP">
+                  <ToolBar focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <items>
-                        <GridPane prefWidth="504.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" percentWidth="50.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" percentWidth="50.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button fx:id="btnEdit" mnemonicParsing="false" text="Edit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                           </children>
-                        </GridPane>
+                        <Button fx:id="btnEdit" mnemonicParsing="false" text="Edit" />
                      </items>
                   </ToolBar>
-                  <GridPane GridPane.rowIndex="1">
+                  <GridPane styleClass="gridpane-detail" GridPane.rowIndex="1">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -118,15 +107,18 @@
                       <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
                         <VBox alignment="CENTER_LEFT">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="486.0" spacing="15.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="486.0">
                                  <children>
-                                    <ImageView fx:id="favicon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" text="Entry Title - Email/Password/Login">
+                                    <ImageView fx:id="favicon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin></ImageView>
+                                    <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" text="Entry Title">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -135,7 +127,28 @@
                               </HBox>
                            </children>
                         </VBox>
+                        <Pane styleClass="pane" GridPane.rowIndex="1" />
+                        <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <children>
+                              <Label styleClass="label-dark" text="Never" textFill="#5b5b5b">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label styleClass="label-dark" text="Last Updated:" textAlignment="RIGHT" textFill="#5b5b5b">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
                      </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                   </GridPane>
                </children>
             </GridPane>

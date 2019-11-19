@@ -17,3 +17,19 @@
 .tool-bar {
 	-fx-background-insets: 0, 0 0 1px 0;
 }
+
+/* darker background for the detail view */
+.gridpane-detail {
+	-fx-background-color: rgb(170, 170, 170);
+}
+
+.gridpane-detail > .pane {
+	-fx-background-color: rgb(220, 220, 220);
+	-fx-background-radius: 10px;
+}
+
+
+/* labels that appear in the detail view background */
+.label-dark {
+	-fx-text-fill: rgb(80, 80, 80);
+}
