@@ -10,7 +10,7 @@ public class accountGettersSetters {
     private final StringProperty password;
     private final StringProperty note;
 
-    public accountGettersSetters(String title, String url, String username, String password, String note) {
+    public accountGettersSetters(String title, String username, String password, String url, String note) {
         this.title = new SimpleStringProperty(title);
         this.url = new SimpleStringProperty(url);
         this.username = new SimpleStringProperty(username);

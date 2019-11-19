@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.Util;
 import passmanager.accountGettersSetters;
@@ -88,7 +89,18 @@ public class ListController extends BaseController implements Initializable {
 			stage.close();
 		}
 	}
-	
+	@FXML
+	public void click(MouseEvent event)
+	{
+		if(event.getClickCount() == 1)
+		{
+			DisplayWebsite.setText(tableView.getSelectionModel().getSelectedItem().getTitle());
+			DisplayUsername.setText(tableView.getSelectionModel().getSelectedItem().getUsername());
+			DisplayNotes.setText(tableView.getSelectionModel().getSelectedItem().getNote());
+//			DisplayUrl.setText(tableView.getSelectionModel().getSelectedItem().getUrl());
+			DisplayPassword.setText("********");
+		}
+	}
 	public void onEditEntry(Event event) {
 		if(event.getSource() == edit) {
 			if(edit.isSelected()) {
