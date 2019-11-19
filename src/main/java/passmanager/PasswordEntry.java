@@ -8,11 +8,15 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 /**
- * Reflects the 'entries' table
+ * Reflects the 'entries' table.
+ * All setter methods return true on success or false on failure.
  */
 public class PasswordEntry {
 	private final static Logger Log = Util.getLogger(PasswordEntry.class);
 	
+	/**
+	 * Row ID this instance represents.
+	 */
 	private int id;
 	
 	/**
@@ -145,7 +149,7 @@ public class PasswordEntry {
 	
 	/**
 	 * Getter for 'password'
-	 * @return byte[]
+	 * @return Byte[]
 	 */
 	public Byte[] getPassword() {
 		return this.<Byte[]>select("password");
@@ -198,8 +202,8 @@ public class PasswordEntry {
 	/**
 	 * A generic select method. Not type safe and is probably a bad idea.
 	 * Works for this use case.
-	 * @param columnName	name of the column to fetch
-	 * @return T
+	 * @param columnName - name of the column to fetch
+	 * @return T - Type depends on the database column type
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T select(String columnName) {
@@ -219,8 +223,8 @@ public class PasswordEntry {
 	}
 	
 	/**
-	 * A generic update method. Also probably a bad idea.
-	 * @return boolean
+	 * A generic update method. Also probably a bad idea, but this is type checked.
+	 * @return boolean - True on success, false on failure.
 	 */
 	private <T> boolean update(String columnName, T value) {
 		try (Connection db = Database.connect()) {

@@ -6,8 +6,10 @@ import javafx.scene.control.*;
 import javafx.fxml.*;
 import passmanager.*;
 
+/**
+ * Handles the first launch of the application, and in cases where the database doesnt exist.
+ */
 public class FirstRunController extends BaseController {
-	
 	private final static Logger Log = Util.getLogger(FirstRunController.class);
 	
 	@FXML PasswordField password;
