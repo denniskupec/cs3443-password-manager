@@ -137,6 +137,24 @@ public class Settings {
 	public boolean setLastLogin(Date date) {
 		return this.<Date>update("last_login_at", date);
 	}
+	
+	/**
+	 * Getter for 'updated_at'
+	 * This is the last time the master password was updated.
+	 * @return Date
+	 */
+	public Date getUpdatedAt() {
+		return (Date) this.<java.sql.Date>select("updated_at");
+	}
+	
+	/**
+	 * Setter for 'updated_at'
+	 * @param date
+	 * @return boolean
+	 */
+	public boolean setUpdatedAt(Date date) {
+		return this.<Date>update("updated_at", date);
+	}
 
 	/**
 	 * Getter for 'last_login_at'
