@@ -143,26 +143,53 @@ public class PasswordEntry {
 	}
 	
 	
+	/**
+	 * Getter for 'password'
+	 * @return byte[]
+	 */
 	public Byte[] getPassword() {
 		return this.<Byte[]>select("password");
 	}
 	
+	/**
+	 * Setter for 'password'
+	 * @param newPassword
+	 * @return boolean - True on success, false on failure.
+	 */
 	public boolean setPassword(Byte[] newPassword) {
 		return this.<Byte[]>update("password", newPassword);
 	}
 	
+	/**
+	 * Getter for 'url'
+	 * @return String
+	 */
 	public String getUrl() {
 		return this.<String>select("url");
 	}
 	
+	/**
+	 * Setter for 'url'
+	 * @param newUrl
+	 * @return Boolean - True on success, false on failure.
+	 */
 	public boolean setUrl(String newUrl) {
 		return this.<String>update("url", newUrl);
 	}
 	
+	/**
+	 * Getter for 'note'
+	 * @return String
+	 */
 	public String getNote() {
 		return this.<String>select("note");
 	}
 	
+	/**
+	 * Setter for 'note
+	 * @param newNote
+	 * @return boolean - True on success, false on failure.
+	 */
 	public boolean setNote(String newNote) {
 		return this.<String>update("note", newNote);
 	}
