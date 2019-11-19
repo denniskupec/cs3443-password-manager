@@ -1,11 +1,18 @@
 package passmanager;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 
 /**
  * Reflects the 'entries' table.
@@ -179,6 +186,67 @@ public class PasswordEntry {
 	 */
 	public boolean setUrl(String newUrl) {
 		return this.<String>update("url", newUrl);
+	}
+	
+	/**
+	 * Gets the favicon image from the database. Returns null on failure.
+	 * @return Image
+	 */
+	public Image getFavicon() {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("SELECT favicon FROM entries WHERE id=? LIMIT 1")) {
+				stmt.setInt(1, id);
+				
+				if (!stmt.execute()) {
+					return null;
+				}
+				
+				ResultSet rs = stmt.getResultSet();
+				
+				InputStream is = rs.getBinaryStream(1);
+				if (rs.wasNull()) {
+					//TODO: use a default "question mark" image for an empty favicon
+					return null;
+				}
+				
+				return new Image(is);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Fetches a good favicon from the internet, and saves it in the database.
+	 * @return boolean - True on success, false on failure.
+	 */
+	public boolean setFavicon(URL url) {
+		try {
+			URL web = new URL("https://icon.ptmx.dev/icon?url=" + url.getHost() + "&size=50");
+			try (
+				InputStream is = web.openStream();
+				Connection db = Database.connect();
+				PreparedStatement stmt = db.prepareStatement("UPDATE entries SET favicon=? WHERE id=?");
+				) {
+				
+				stmt.setBinaryStream(1, is);
+				stmt.setInt(2, id);
+				
+				if (!stmt.execute()) {
+					return false;
+				}
+				
+				return true;
+			}
+		}
+		catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 	/**
