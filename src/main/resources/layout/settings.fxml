@@ -80,19 +80,33 @@
          <children>
             <VBox prefHeight="113.0" prefWidth="365.0" GridPane.columnIndex="1">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label text="Change Unlock Password">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="TOP_LEFT" focusTraversable="false" text="Last Updated: " textFill="#7c7c7c">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelLastUpdated" text="Never" textFill="#7c7c7c">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label contentDisplay="RIGHT" text="Old Password" textAlignment="RIGHT">
                            <HBox.margin>
@@ -105,7 +119,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="38.0" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="38.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label contentDisplay="RIGHT" text="New Password" textAlignment="RIGHT">
                            <HBox.margin>
@@ -118,7 +132,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="64.0" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="64.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label contentDisplay="RIGHT" text="Confirm" textAlignment="RIGHT">
                            <HBox.margin>

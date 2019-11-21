@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
+import java.util.Date;
 import java.util.Random;
 import java.io.File;
 import java.io.IOException;
@@ -108,6 +111,22 @@ public class Database {
 	 */
 	public static boolean deleteFromDisk() {
 		return App.getStoragePath("storage.sqlite3").toFile().delete();
+	}
+	
+	/**
+	 * Parses datetime columns to Date objects
+	 * @return Date
+	 */
+	public static Date parseDate(String d) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return sdf.parse(d);
+		} 
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

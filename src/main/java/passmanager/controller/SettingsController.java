@@ -8,7 +8,10 @@ import passmanager.Settings;
 import passmanager.Util;
 import passmanager.interfaces.Initializable;
 import java.util.logging.Logger;
+import java.text.DateFormat;
 import java.util.Arrays;
+import java.util.Date;
+
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 
@@ -29,6 +32,7 @@ public class SettingsController extends BaseController implements Initializable 
 	@FXML Button cancel;
 	@FXML Label errorMsg;
 	@FXML Label errorMinutes;
+	@FXML Label labelLastUpdated;
 	
 	private Settings settings = new Settings();
 	
@@ -45,6 +49,9 @@ public class SettingsController extends BaseController implements Initializable 
 		}
 		 
 		hidePasswords.setSelected(settings.getHidePasswords());
+		
+		Date updatedAt = settings.getUpdatedAt();
+		labelLastUpdated.setText(updatedAt == null ? "Never" : DateFormat.getInstance().format(updatedAt));
 		 
 		/* register value change listeners and event handlers for inputs */
 		autolockMins.textProperty().addListener(this::minutesChangeListener);

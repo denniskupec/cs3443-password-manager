@@ -15,8 +15,9 @@ import javafx.scene.image.Image;
  * Reflects the 'entries' table.
  * All setter methods return true on success or false on failure.
  */
-public class PasswordEntry {
+public class PasswordEntry extends BaseModel {
 	private final static Logger Log = Util.getLogger(PasswordEntry.class);
+	private final String tableName = "entries";
 	
 	/**
 	 * Row ID this instance represents.
@@ -29,6 +30,34 @@ public class PasswordEntry {
 	 */
 	public PasswordEntry(int id) {
 		this.id = id;
+	}
+	
+	/**
+	 * Constructor to create a new entry.
+	 * @param title
+	 * @param username
+	 * @param password
+	 * @param url
+	 * @param note
+	 */
+	public PasswordEntry(String title, String username, byte[] password, String url, String note) {
+		try (Connection db = Database.connect()) {
+			try (PreparedStatement stmt = db.prepareStatement("INSERT INTO entries (title, username, password, url, note) VALUES (?, ?, ?, ?, ?)")) {
+				stmt.setString(1, title);
+				stmt.setString(2, username);
+				stmt.setBytes(3, Util.sha256(password));
+				stmt.setString(4, url);
+				stmt.setString(5, note);
+				
+				//TODO: what happens when this fails? exception or error message?
+				if (stmt.executeUpdate() == 0) {
+					Log.warning("DB entry returned 0");
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -113,7 +142,7 @@ public class PasswordEntry {
 	 * @return Date
 	 */
 	public Date getUpdatedAt() {
-		return (Date) this.<java.sql.Date>select("updated_at");
+		return Database.parseDate( this.<String>select("updated_at") );
 	}
 	
 	/**
@@ -263,47 +292,4 @@ public class PasswordEntry {
 		return this.<String>update("note", newNote);
 	}
 	
-	
-	/**
-	 * A generic select method. Not type safe and is probably a bad idea.
-	 * Works for this use case.
-	 * @param columnName - name of the column to fetch
-	 * @return T - Type depends on the database column type
-	 */
-	@SuppressWarnings("unchecked")
-	private <T> T select(String columnName) {
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("SELECT " + columnName + " FROM entries WHERE id=?")) {
-				stmt.setInt(1, id);
-				
-				ResultSet rs = stmt.getResultSet();
-				return (T) rs.getObject(1);
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * A generic update method. Also probably a bad idea, but this is type checked.
-	 * @return boolean - True on success, false on failure.
-	 */
-	private <T> boolean update(String columnName, T value) {
-		try (Connection db = Database.connect()) {
-			try (PreparedStatement stmt = db.prepareStatement("UPDATE entries SET " + columnName + "=? WHERE id=?")) {
-				stmt.setObject(1, value);
-				stmt.setInt(2, id);
-				
-				return stmt.executeUpdate() > 0;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
 }
