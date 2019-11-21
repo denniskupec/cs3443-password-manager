@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.addEntriesController">
    <children>
       <AnchorPane prefHeight="498.0" prefWidth="363.0" stylesheets="@../style/app.css">
@@ -52,7 +51,7 @@
               <Button fx:id="cancel" layoutX="263.0" layoutY="343.0" mnemonicParsing="false" onAction="#cancel" prefHeight="33.0" prefWidth="91.0" text="Cancel" />
               <Label fx:id="error" layoutX="133.0" layoutY="406.0" />
             <ImageView fx:id="img" fitHeight="66.0" fitWidth="80.0" layoutX="39.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="choose" layoutX="136.0" layoutY="453.0" onMouseClicked="#addIcon" style="-fx-border-color: black;" text="Choose Icon" />
+            <Label fx:id="choose" layoutX="119.0" layoutY="453.0" onMouseClicked="#addIcon" style="-fx-border-color: black;" text="Choose Icon" />
             <TextArea fx:id="note" layoutX="39.0" layoutY="357.0" prefHeight="33.0" prefWidth="206.0" />
           </children>
       </AnchorPane>
