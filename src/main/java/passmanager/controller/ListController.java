@@ -2,9 +2,12 @@ package passmanager.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -98,7 +101,9 @@ public class ListController extends BaseController implements Initializable {
 			DisplayUsername.setText(tableView.getSelectionModel().getSelectedItem().getUsername());
 			DisplayNotes.setText(tableView.getSelectionModel().getSelectedItem().getNote());
 //			DisplayUrl.setText(tableView.getSelectionModel().getSelectedItem().getUrl());
-			DisplayPassword.setText("********");
+			String pass = new String(tableView.getSelectionModel().getSelectedItem().getPassword().getBytes(StandardCharsets.UTF_8));
+			//DisplayPassword.setText(pass);
+			DisplayPassword.setText("******");
 		}
 	}
 	public void onEditEntry(Event event) {
