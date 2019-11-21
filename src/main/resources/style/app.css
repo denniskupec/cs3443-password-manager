@@ -1,5 +1,44 @@
+/* intentionally left blank */
+.button {
+	-fx-padding: 5 22 5 22;
+	-fx-border-width: 2;
+	-fx-border-radius: 20px;
+	-fx-border-color: #1d1d1d;
+	-fx-background-radius: 20px;
+	-fx-background-color: #1d1d1d;
+	-fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+	-fx-font-size: 11pt;
+	-fx-text-fill: #d8d8d8;
+	-fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button:hover {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: #1d1d1d;
+}
+.label-signin-header {
+	-fx-font-size: 25pt;
+	-fx-font-family: "Segoe UI Light";
+	-fx-text-fill: black;
+}
+.label-signin {
+	-fx-font-size: 13pt;
+	-fx-font-family: "Segoe UI Light";
+	-fx-text-fill: black;
+}
+.background {
+	-fx-background-color: #ffffff;
+}
+.label {
+	-fx-font-family: "Segoe UI Semibold";
+	-fx-text-fill: black;
+	-fx-opacity: 1.2;
+}
+.text-field {
+	-fx-background-color: #a9a9a9 , white , white;
+	-fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
 
-/* newUser -> HBox */
-.newuser-hbox {
-	-fx-background-color: orange;
+.text-field:focused {
+	-fx-background-color: #a9a9a9 , white , white;
+	-fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
