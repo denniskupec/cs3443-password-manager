@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import passmanager.controller.BaseController;
 
@@ -30,6 +31,7 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		BaseController.setup(primaryStage, "Password Manager");
 		BaseController.loadScene(Database.exists() ? "/layout/login.fxml" : "/layout/firstrun.fxml");
+		primaryStage.getIcons().add(new Image("/icon/password.png"));
 		primaryStage.show();
 		
 		Log.info("Data path: " + App.getStoragePath());

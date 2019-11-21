@@ -34,7 +34,7 @@
 	-fx-opacity: 1.2;
 }
 .text-field {
-	-fx-background-color: #a9a9a9 , white , white;
+	-fx-background-color: #ffffff , #ffffff , #ffffff;
 	-fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
 

@@ -84,13 +84,13 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label prefHeight="51.0" prefWidth="100.0" text="Website" />
+                              <Label prefHeight="51.0" prefWidth="100.0" styleClass="label-signin" text="Website" />
                               <TextField fx:id="DisplayWebsite" editable="false" prefHeight="25.0" prefWidth="195.0" GridPane.rowIndex="1" />
-                              <Label prefHeight="51.0" prefWidth="100.0" text="Username" GridPane.rowIndex="2" />
+                              <Label prefHeight="51.0" prefWidth="100.0" styleClass="label-signin" text="Username" GridPane.rowIndex="2" />
                               <TextField fx:id="DisplayUsername" editable="false" prefHeight="25.0" prefWidth="195.0" GridPane.rowIndex="3" />
-                              <Label prefHeight="51.0" prefWidth="100.0" text="Password" GridPane.rowIndex="4" />
-                              <PasswordField fx:id="hiddenPassword" editable="false" prefHeight="25.0" prefWidth="195.0" GridPane.rowIndex="5" />
+                              <Label prefHeight="51.0" prefWidth="100.0" styleClass="label-signin" text="Password" GridPane.rowIndex="4" />
                               <TextField fx:id="DisplayPassword" editable="false" prefHeight="76.0" prefWidth="191.0" GridPane.rowIndex="5" />
+                              <PasswordField fx:id="hiddenPassword" editable="false" prefHeight="43.0" prefWidth="172.0" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
               </children>

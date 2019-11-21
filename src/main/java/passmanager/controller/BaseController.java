@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import passmanager.*;
@@ -80,6 +81,7 @@ public abstract class BaseController implements Initializable {
 
 				controller.root = root2;
 				controller.scene = s;
+				popStage.getIcons().add(new Image("/icon/lock.png"));
 				popStage.setScene(s);
 				popStage.initModality(Modality.APPLICATION_MODAL);
 				popStage.setResizable(false);
