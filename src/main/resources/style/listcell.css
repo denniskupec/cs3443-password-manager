@@ -1,0 +1,8 @@
+/* stylesheet for a single list cell */
+
+/* adds a border around the favicon image */
+.image-pane {
+	-fx-border-style: solid;
+	-fx-border-color: rgb(0, 0, 0);
+	-fx-border-radius: 5px;
+}
