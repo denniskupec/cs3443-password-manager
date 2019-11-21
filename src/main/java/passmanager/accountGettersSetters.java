@@ -2,6 +2,7 @@ package passmanager;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.ImageView;
 
 public class accountGettersSetters {
     private final StringProperty title;
@@ -9,13 +10,15 @@ public class accountGettersSetters {
     private final StringProperty username;
     private final StringProperty password;
     private final StringProperty note;
+    private ImageView img;
 
-    public accountGettersSetters(String title, String username, String password, String url, String note) {
+    public accountGettersSetters(String title, String username, String password, String url, String note, ImageView imageView) {
         this.title = new SimpleStringProperty(title);
         this.url = new SimpleStringProperty(url);
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
         this.note = new SimpleStringProperty(note);
+        this.img = imageView;
     }
 
     public String getTitle() {
@@ -76,5 +79,13 @@ public class accountGettersSetters {
 
     public void setNote(String note) {
         this.note.set(note);
+    }
+
+    public ImageView getImg() {
+        return img;
+    }
+
+    public void setImg(ImageView img) {
+        this.img = img;
     }
 }

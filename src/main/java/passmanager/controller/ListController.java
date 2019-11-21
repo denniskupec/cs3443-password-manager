@@ -1,6 +1,7 @@
 package passmanager.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -20,6 +21,8 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.Util;
@@ -52,6 +55,8 @@ public class ListController extends BaseController implements Initializable {
 	private TableView<accountGettersSetters> tableView;
 	@FXML
 	private TableColumn<accountGettersSetters, String> account;
+	@FXML
+	private TableColumn<accountGettersSetters, ImageView> icon;
 	private ObservableList<accountGettersSetters> data;
 
 	@Override
@@ -70,10 +75,17 @@ public class ListController extends BaseController implements Initializable {
 		data = FXCollections.observableArrayList();
 		ResultSet rs = conn.createStatement().executeQuery(sql);
 		while (rs.next()) {
+			InputStream binaryImg = rs.getBinaryStream("favicon");
+			Image image = new Image(binaryImg);
+			ImageView imageView = new ImageView(image);
+			imageView.setFitHeight(30);
+			imageView.setFitWidth(30);
 			data.add(new accountGettersSetters(rs.getString("title"), rs.getString("username"),
-					rs.getString("password"), rs.getString("url"), rs.getString("note")));
+					rs.getString("password"), rs.getString("url"), rs.getString("note"),imageView));
 		}
 		account.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, String>("title"));
+		icon.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, ImageView>("img"));
+		icon.setResizable(false);
 		tableView.setItems(data);
 		rs.close();
 		conn.close();
