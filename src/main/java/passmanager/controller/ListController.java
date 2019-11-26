@@ -29,34 +29,10 @@ import passmanager.model.PasswordEntry;
 
 public class ListController extends BaseController implements Initializable {
 	private final static Logger Log = Util.getLogger(ListController.class);
-	@FXML
-	MenuItem choiceNew;
-	@FXML
-	TextField DisplayWebsite;
-	@FXML
-	TextField DisplayUsername;
-	@FXML
-	TextField DisplayPassword;
-	@FXML
-	PasswordField hiddenPassword;
-	@FXML
-	TextArea DisplayNotes;
-	@FXML
-	MenuItem choiceSettings;
-	@FXML
-	MenuItem choiceQuit;
-	@FXML
-	Button DisplaySave;
-	@FXML
-	CheckBox edit;
-	@FXML
-	private TableView<accountGettersSetters> tableView;
-	@FXML
-	private TableColumn<accountGettersSetters, String> account;
-	@FXML
-	private TableColumn<accountGettersSetters, ImageView> icon;
-	private ObservableList<accountGettersSetters> data;
 
+	@FXML TableView<accountGettersSetters> tableView;
+	@FXML TableColumn<accountGettersSetters, String> account;
+	@FXML TableColumn<accountGettersSetters, ImageView> icon;
 	@FXML MenuItem choiceNew;
 	@FXML TextField DisplayWebsite;
 	@FXML TextField DisplayUsername;
@@ -67,8 +43,14 @@ public class ListController extends BaseController implements Initializable {
 	@FXML MenuItem choiceQuit;
 	@FXML Button DisplaySave;
 	@FXML CheckBox edit;
+	
+	ObservableList<accountGettersSetters> data;
+	
+	/**
+	 * Called by FXMLLoader
+	 */
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize() {
 		try {
 			loadData();
 			hiddenPassword.setEditable(false);

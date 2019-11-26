@@ -31,9 +31,8 @@ public class App extends Application {
 		Database.setup();
 		
 		BaseController.setup(primaryStage, "Password Manager");
-		
-		Settings settings = Database.getDao(Settings.class).queryForId(1);
-		if (settings.getPassword() == null) {
+
+		if (Database.getDao(Settings.class).countOf() == 0) {
 			BaseController.loadScene("/layout/firstrun.fxml");
 		}
 		else {
