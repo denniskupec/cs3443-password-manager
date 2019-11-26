@@ -1,108 +1,60 @@
 package passmanager;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Logger;
-import java.util.Date;
-import java.util.Random;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.sql.SQLException;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+import passmanager.model.*;
 
 /**
  * Mostly a helper class to simplify database actions. Also handles initial creation.
  */
 public class Database {
 
-	private final static Logger Log = Util.getLogger(Database.class);
+	static ConnectionSource connectionSource;
 
 	/**
-	 * @return Connection
-	 * @throws SQLException
+	 * @return ConnectionSource
 	 */
-	public static Connection connect() throws SQLException {
-		File dbFile = App.getStoragePath("storage.sqlite3").toFile();
-
-		/* First time running the application, database deleted, etc. 
-		 * This copies the database template file. */
-		if (!dbFile.exists()) {
-			Log.info("Initializing database.");
-			
-			try {
-				// TODO: probably a good idea to encrypt the database, since it contains passwords and other secrets. leaving it alone until everything else works.
-				Files.createDirectories(dbFile.toPath().getParent());
-				Files.createFile(dbFile.toPath());
-				Database.setup(dbFile);
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return DriverManager.getConnection("jdbc:sqlite:" + dbFile.getPath());
+	public static ConnectionSource getSource() {
+		return connectionSource;
 	}
 	
-	/**
-	 * Used to initialize the sqlite database with the proper schema.
-	 * @param dbFile		file to setup
+	/*
+	 * Helper method which returns a new DAO.
 	 */
-	private static void setup(File dbFile) {	
-		try (	
-			Connection db = Database.connect();
-			Statement stmt = db.createStatement();
-		) {
-			stmt.addBatch("PRAGMA encoding = 'UTF-8'");
-			stmt.addBatch("CREATE TABLE IF NOT EXISTS settings (" + 
-					"id               INTEGER PRIMARY KEY," + 
-					"password         BLOB NOT NULL," + 
-					"updated_at       DATETIME NOT NULL," + 
-					"last_login_at    DATETIME NOT NULL," + 
-					"autolock         INTEGER DEFAULT 0," +
-					"autolock_minutes INTEGER DEFAULT 15," + 
-					"hide_passwords   INTEGER DEFAULT 1)");
-			
-			stmt.addBatch("CREATE TABLE IF NOT EXISTS entries (" + 
-					"id         INTEGER PRIMARY KEY," + 
-					"salt       BLOB NOT_NULL," +
-					"updated_at DATETIME NOT NULL," + 
-					"title      TEXT NOT NULL," + 
-					"username   TEXT," + 
-					"password   BLOB NOT NULL," + 
-					"url        TEXT," + 
-					"favicon    BLOB," + 
-					"note       TEXT)");
-			
-			stmt.executeBatch();
+	public static <T,ID> Dao<T,ID> getDao(Class<T> clazz) {
+		try {
+			return DaoManager.createDao(connectionSource, clazz);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return null;
 	}
 	
 	/**
-	 * Generates 8 random bytes for record salting. 
-	 * @return byte[8]
+	 * Used to initialize the sqlite database with the proper schema.
+	 * @throws SQLException 
 	 */
-	public static byte[] newSalt() {
-		byte[] s = new byte[8];
-		
-		Random rand = new Random();
-		rand.nextBytes(s);
-		
-		return s;
+	public static void setup() throws SQLException {
+		connectionSource = new JdbcConnectionSource("jdbc:sqlite:" + Util.getStoragePath("storage.sqlite3"));
+
+		TableUtils.createTableIfNotExists(connectionSource, Settings.class);
+		TableUtils.createTableIfNotExists(connectionSource, PasswordEntry.class);
 	}
-	
+
 	/**
 	 * Only checks if the database was copied already. 
 	 * true = exists, false = doesn't exist
 	 * @return boolean
 	 */
 	public static boolean exists() {
-		return App.getStoragePath("storage.sqlite3").toFile().exists();
+		return Util.getStoragePath("storage.sqlite3").toFile().exists();
 	}
 	
 	/**
@@ -110,23 +62,22 @@ public class Database {
 	 * @return boolean		true = success
 	 */
 	public static boolean deleteFromDisk() {
-		return App.getStoragePath("storage.sqlite3").toFile().delete();
+		return Util.getStoragePath("storage.sqlite3").toFile().delete();
 	}
-	
+
 	/**
-	 * Parses datetime columns to Date objects
-	 * @return Date
+	 * Closes the connection.
 	 */
-	public static Date parseDate(String d) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static void close() {
 		try {
-			return sdf.parse(d);
+			connectionSource.close();
 		} 
-		catch (ParseException e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return null;
+		catch (NullPointerException e) {
+			return;
+		}
 	}
 
 }

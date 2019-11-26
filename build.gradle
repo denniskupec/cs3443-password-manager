@@ -13,6 +13,8 @@ repositories {
 }
 
 dependencies {
+	implementation "com.j256.ormlite:ormlite-jdbc:5.1"
+	implementation "com.j256.ormlite:ormlite-core:5.1"
 	implementation "org.xerial:sqlite-jdbc:3.28.0"
 	testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
 }

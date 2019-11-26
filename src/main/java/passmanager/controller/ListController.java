@@ -1,66 +1,47 @@
 package passmanager.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.ResourceBundle;
+import java.util.List;
 import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.FXML;
-
-import javafx.fxml.Initializable;
-
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.Util;
 import passmanager.accountGettersSetters;
+import passmanager.interfaces.Initializable;
+import passmanager.model.PasswordEntry;
 
 public class ListController extends BaseController implements Initializable {
-
 	private final static Logger Log = Util.getLogger(ListController.class);
-	@FXML
-	MenuItem choiceNew;
-	@FXML
-	TextField DisplayWebsite;
-	@FXML
-	TextField DisplayUsername;
-	@FXML
-	TextField DisplayPassword;
-	@FXML
-	PasswordField hiddenPassword;
-	@FXML
-	TextArea DisplayNotes;
-	@FXML
-	MenuItem choiceSettings;
-	@FXML
-	MenuItem choiceQuit;
-	@FXML
-	Button DisplaySave;
-	@FXML
-	CheckBox edit;
-	@FXML
-	private TableView<accountGettersSetters> tableView;
-	@FXML
-	private TableColumn<accountGettersSetters, String> account;
-	@FXML
-	private TableColumn<accountGettersSetters, ImageView> icon;
-	private ObservableList<accountGettersSetters> data;
 
+	@FXML TableView<accountGettersSetters> tableView;
+	@FXML TableColumn<accountGettersSetters, String> account;
+	@FXML TableColumn<accountGettersSetters, ImageView> icon;
+	@FXML MenuItem choiceNew;
+	@FXML TextField DisplayWebsite;
+	@FXML TextField DisplayUsername;
+	@FXML TextField DisplayPassword;
+	@FXML PasswordField hiddenPassword;
+	@FXML TextArea DisplayNotes;
+	@FXML MenuItem choiceSettings;
+	@FXML MenuItem choiceQuit;
+	@FXML Button DisplaySave;
+	@FXML CheckBox edit;
+	
+	ObservableList<accountGettersSetters> data = FXCollections.observableArrayList();
+	
+	/**
+	 * Called by FXMLLoader
+	 */
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize() {
 		try {
 			loadData();
 			hiddenPassword.setEditable(false);
@@ -70,25 +51,13 @@ public class ListController extends BaseController implements Initializable {
 	}
 
 	public void loadData() throws SQLException {
-		String sql = "SELECT * FROM entries";
-		Connection conn = Database.connect();
-		data = FXCollections.observableArrayList();
-		ResultSet rs = conn.createStatement().executeQuery(sql);
-		while (rs.next()) {
-			InputStream binaryImg = rs.getBinaryStream("favicon");
-			Image image = new Image(binaryImg);
-			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(30);
-			imageView.setFitWidth(30);
-			data.add(new accountGettersSetters(rs.getString("title"), rs.getString("username"),
-					rs.getString("password"), rs.getString("url"), rs.getString("note"),imageView));
-		}
+		/* returns all entries in a list. probably not efficient for large databases */
+		List<PasswordEntry> entries = Database.getDao(PasswordEntry.class).queryForAll();
+		
 		account.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, String>("title"));
 		icon.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, ImageView>("img"));
 		icon.setResizable(false);
 		tableView.setItems(data);
-		rs.close();
-		conn.close();
 	}
 
 	@FXML
