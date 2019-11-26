@@ -8,7 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import com.j256.ormlite.dao.Dao;
@@ -44,7 +46,7 @@ public class ListController extends BaseController implements Initializable {
 	@FXML Button DisplaySave;
 	@FXML CheckBox edit;
 	
-	ObservableList<accountGettersSetters> data;
+	ObservableList<accountGettersSetters> data = FXCollections.observableArrayList();
 	
 	/**
 	 * Called by FXMLLoader
@@ -60,25 +62,13 @@ public class ListController extends BaseController implements Initializable {
 	}
 
 	public void loadData() throws SQLException {
-		String sql = "SELECT * FROM entries";
-		Connection conn = Database.connect();
-		data = FXCollections.observableArrayList();
-		ResultSet rs = conn.createStatement().executeQuery(sql);
-		while (rs.next()) {
-			InputStream binaryImg = rs.getBinaryStream("favicon");
-			Image image = new Image(binaryImg);
-			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(30);
-			imageView.setFitWidth(30);
-			data.add(new accountGettersSetters(rs.getString("title"), rs.getString("username"),
-					rs.getString("password"), rs.getString("url"), rs.getString("note"),imageView));
-		}
+		/* returns all entries in a list. probably not efficient for large databases */
+		List<PasswordEntry> entries = Database.getDao(PasswordEntry.class).queryForAll();
+		
 		account.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, String>("title"));
 		icon.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, ImageView>("img"));
 		icon.setResizable(false);
 		tableView.setItems(data);
-		rs.close();
-		conn.close();
 	}
 
 	@FXML
