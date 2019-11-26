@@ -4,10 +4,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import passmanager.Settings;
+import passmanager.Database;
 import passmanager.Util;
 import passmanager.interfaces.Initializable;
-import java.util.logging.Logger;
+import passmanager.model.Settings;
+
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -19,8 +23,7 @@ import javafx.fxml.FXML;
  * Handles the settings window.
  */
 public class SettingsController extends BaseController implements Initializable {
-	private final static Logger Log = Util.getLogger(SettingsController.class);
-	
+
 	@FXML CheckBox hidePasswords;
 	@FXML CheckBox autolock;
 	@FXML HBox autolockMinsBox;
@@ -34,21 +37,29 @@ public class SettingsController extends BaseController implements Initializable 
 	@FXML Label errorMinutes;
 	@FXML Label labelLastUpdated;
 	
-	private Settings settings = new Settings();
+	Settings settings = null;
+	Dao<Settings, Integer> settingsDao = Database.getDao(Settings.class);
 	
 	/**
 	 * Automatically called by FXMLLoader
 	 */
 	@Override
 	public void initialize() {
+		try {
+			settings = settingsDao.queryForId(1);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		/* load previously set values and reflect them in the view */
-		if (settings.getAutolock()) {
-			autolockMins.setText(String.valueOf(settings.getAutolockMins()));
+		if (settings.isAutolock()) {
+			autolockMins.setText(String.valueOf(settings.getAutolockMinutes()));
 			autolockMinsBox.setVisible(true);
 			autolock.setSelected(true);
 		}
 		 
-		hidePasswords.setSelected(settings.getHidePasswords());
+		hidePasswords.setSelected(settings.isHidePasswords());
 		
 		Date updatedAt = settings.getUpdatedAt();
 		labelLastUpdated.setText(updatedAt == null ? "Never" : DateFormat.getInstance().format(updatedAt));
@@ -56,18 +67,17 @@ public class SettingsController extends BaseController implements Initializable 
 		/* register value change listeners and event handlers for inputs */
 		autolockMins.textProperty().addListener(this::minutesChangeListener);
 		 
-		hidePasswords.selectedProperty().addListener((observable, oldValue, newValue) -> {
-			if (!settings.setHidePasswords(newValue)) {
-				Log.warning("Failed to update hide_passwords setting");
-				showErrorMessage("An error occured.");
-			}
-		});
+		hidePasswords.selectedProperty().addListener((observable, oldValue, newValue) -> settings.setHidePasswords(newValue));
 		 
 		autolock.selectedProperty().addListener((observable, oldValue, newValue) -> {
-			autolockMinsBox.setVisible(newValue ? true : false);
-			if (!settings.setAutolock(newValue)) {
-				Log.warning("Failed to update autolock setting");
-				showErrorMessage("An error occured.");
+			autolockMinsBox.setVisible(!autolockMinsBox.isVisible());
+			settings.setAutolock(newValue);
+			
+			try {
+				settingsDao.update(settings);
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
 			}
 		});
 		
@@ -87,14 +97,14 @@ public class SettingsController extends BaseController implements Initializable 
 	private void minutesChangeListener(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		try {
 			int minutes = Integer.parseInt(newValue);
-			if (!settings.setAutolockMins(minutes)) {
-				Log.warning("Failed to update autolock_minutes setting");
-				showErrorMessage("An error occured.");
-			}
+			settings.setAutolockMinutes(minutes);
 			errorMinutes.setVisible(false);
+			
+			settingsDao.update(settings);
 		}
-		catch (NumberFormatException e) {
+		catch (SQLException | NumberFormatException e) {
 			/* the input isn't an integer, so show an error message */
+			showErrorMessage("An error occured.");
 			errorMinutes.setVisible(true);
 		}
 	}
@@ -120,14 +130,15 @@ public class SettingsController extends BaseController implements Initializable 
 		}
 		
 		/* commit */
-		if (!settings.setPassword(newPassword.getText())) {
-			Log.warning("Failed to set new password!");
-			showErrorMessage("An error occured.");
+		settings.setPassword(newPassword.getText().getBytes());
+		try {
+			settingsDao.update(settings);
 		}
-		else {
-			showSuccessMessage("Password changed!");
-			onCancel(null);
+		catch (SQLException e) {
+			e.printStackTrace();
 		}
+		showSuccessMessage("Password changed!");
+		onCancel(null);
 	}
 	
 	/**

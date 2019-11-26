@@ -11,14 +11,11 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-
+import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.FXML;
-
-import javafx.fxml.Initializable;
-
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -27,9 +24,10 @@ import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.Util;
 import passmanager.accountGettersSetters;
+import passmanager.interfaces.Initializable;
+import passmanager.model.PasswordEntry;
 
 public class ListController extends BaseController implements Initializable {
-
 	private final static Logger Log = Util.getLogger(ListController.class);
 	@FXML
 	MenuItem choiceNew;
@@ -59,6 +57,16 @@ public class ListController extends BaseController implements Initializable {
 	private TableColumn<accountGettersSetters, ImageView> icon;
 	private ObservableList<accountGettersSetters> data;
 
+	@FXML MenuItem choiceNew;
+	@FXML TextField DisplayWebsite;
+	@FXML TextField DisplayUsername;
+	@FXML TextField DisplayPassword;
+	@FXML PasswordField hiddenPassword;
+	@FXML TextArea DisplayNotes;
+	@FXML MenuItem choiceSettings;
+	@FXML MenuItem choiceQuit;
+	@FXML Button DisplaySave;
+	@FXML CheckBox edit;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {

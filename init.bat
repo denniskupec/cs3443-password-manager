@@ -1,2 +1,2 @@
 @echo off
-gradlew.bat eclipse
+gradlew.bat clean cleanEclipse cleanIdea eclipse idea --refresh-dependencies
