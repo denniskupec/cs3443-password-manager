@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class Util {
@@ -85,6 +87,16 @@ public class Util {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Formats a Date object into a readable string.
+	 * @param Date date
+	 * @return String
+	 */
+	public static String formatDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		return sdf.format(date);
 	}
 
 }

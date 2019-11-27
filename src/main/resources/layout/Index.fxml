@@ -61,7 +61,7 @@
             <Insets bottom="1.0" left="1.0" right="5.0" top="1.0" />
          </GridPane.margin>
       </Label>
-      <SplitPane dividerPositions="0.5" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" stylesheets="@../style/index.css" GridPane.rowIndex="1">
+      <SplitPane fx:id="splitPane" dividerPositions="0.5" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" stylesheets="@../style/index.css" GridPane.rowIndex="1">
         <items>
             <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="277.0" SplitPane.resizableWithParent="false">
               <columnConstraints>
@@ -85,41 +85,6 @@
                   <ListView fx:id="entryListView" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="275.0" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <VBox>
-               <children>
-                  <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="517.0" SplitPane.resizableWithParent="false">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="ALWAYS" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="517.0" vgrow="ALWAYS" />
-                      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
-                    </rowConstraints>
-                     <children>
-                        <ToolBar focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                           <items>
-                              <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="505.0">
-                                <columnConstraints>
-                                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Button fx:id="editButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="1" />
-                                    <Button fx:id="addNewButton" layoutX="473.0" layoutY="10.0" mnemonicParsing="false" text="Add New" />
-                                 </children>
-                              </GridPane>
-                           </items>
-                        </ToolBar>
-                        <!-- EntryDetail component -->
-                        <fx:include fx:id="entryDetailView" source="../component/EntryDetail.fxml" GridPane.rowIndex="1" />
-                     </children>
-                  </GridPane>
-               </children>
-            </VBox>
         </items>
       </SplitPane>
    </children>

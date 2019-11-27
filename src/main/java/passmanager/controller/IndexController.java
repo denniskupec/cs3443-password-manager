@@ -1,52 +1,61 @@
 package passmanager.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Logger;
 import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import passmanager.Database;
-import passmanager.Util;
+import passmanager.component.EntryDetailController;
 import passmanager.component.EntryListCell;
 import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
 
+/**
+ * Controller manages the 'index' view. 
+ */
 public class IndexController extends BaseController implements Initializable {
-	private final static Logger Log = Util.getLogger(IndexController.class);
-	
+
 	@FXML MenuBar menu;
 	@FXML TextField searchText;
 	@FXML Button searchButton;
-	@FXML Button editButton;
-	@FXML Button addNewButton;
 	@FXML ListView<PasswordEntry> entryListView;
 	@FXML Label statusMessage;
+	@FXML SplitPane splitPane;
+	
+	EntryDetailController entryDetail;
 	
 	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
-	
-	
+
 	/**
 	 * Called by FXMLLoader
 	 */
 	@Override
 	public void initialize() {
-		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
+		entryDetail = new EntryDetailController();
+		splitPane.getItems().add( entryDetail.getBox() );
 		
+		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
 		for (PasswordEntry entry : pdao) {
 			entryCollection.add(entry);
 		}
 
 		entryListView.setItems( entryCollection );
 		entryListView.setCellFactory(listview -> new EntryListCell() );
+		entryListView.setOnMouseClicked(this::onListClicked);
+		
+		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
 
+	protected void onListClicked(MouseEvent event) {
+		PasswordEntry data = entryListView.getSelectionModel().getSelectedItem();
+		
+		if (data != null) {
+			entryDetail.setData(data);
+		}
+	}
 	
 	/**
 	 * used to process the different choices in the menu bar
@@ -78,35 +87,10 @@ public class IndexController extends BaseController implements Initializable {
 			getStage().close();
 
 		default:
-			Log.info("Unexpected MenuItem ActionEvent recieved.");
+			/* Shouldn't normally be able to get here. */
+			break;
 		}
 	}
-
-
-	
-	public void onEditEntry(ActionEvent event) {
-		if (event.getSource() == edit) {
-			if (edit.isSelected()) {
-				DisplayWebsite.setEditable(true);
-				DisplayUsername.setEditable(true);
-				DisplayPassword.setEditable(true);
-				DisplayPassword.setVisible(true);
-				hiddenPassword.setVisible(false);
-				DisplayNotes.setEditable(true);
-				DisplaySave.setVisible(true);
-			} else {
-				DisplayWebsite.setEditable(false);
-				DisplayUsername.setEditable(false);
-				DisplayPassword.setEditable(false);
-				DisplayPassword.setVisible(false);
-				hiddenPassword.setVisible(true);
-				hiddenPassword.setEditable(false);
-				DisplayNotes.setEditable(false);
-				DisplaySave.setVisible(false);
-			}
-		}
-	}
-	
 	
 	public void setStatusMessage(String msg) {
 		statusMessage.setText(msg);

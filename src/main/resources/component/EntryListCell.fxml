@@ -8,14 +8,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox fx:id="hbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" spacing="3.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="hbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="245.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<ImageView fx:id="favicon" fitHeight="20.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../icon/default-favicon.png" />
 			</image>
 		</ImageView>
-		<Label fx:id="title" focusTraversable="false" graphicTextGap="0.0" prefHeight="22.0" prefWidth="128.0" text="Placeholder Title" />
+		<Label fx:id="title" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="215.0" text="Placeholder Title" />
 	</children>
 	<padding>
 		<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

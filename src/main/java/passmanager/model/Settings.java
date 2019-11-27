@@ -18,110 +18,123 @@ public class Settings {
 	@DatabaseField(columnName = "password", dataType = DataType.BYTE_ARRAY)
 	byte[] password;
 	
-	@DatabaseField(columnName = "updated_at")
+	@DatabaseField(columnName = "updated_at", dataType = DataType.DATE_STRING, format = "yyyy-MM-dd'T'HH:mm:ss")
 	Date updated_at;
 	
-	@DatabaseField(columnName = "last_login_at")
+	@DatabaseField(columnName = "last_login_at", dataType = DataType.DATE_STRING, format = "yyyy-MM-dd'T'HH:mm:ss")
 	Date last_login_at;
 	
 	@DatabaseField(columnName = "autolock", dataType = DataType.BOOLEAN)
 	boolean autolock;
 	
-	@DatabaseField(columnName = "autolock_minutes")
+	@DatabaseField(columnName = "autolock_minutes", defaultValue = "0")
 	int autolock_minutes;
 	
 	@DatabaseField(columnName = "hide_passwords", dataType = DataType.BOOLEAN)
 	boolean hide_passwords;
 	
 	public Settings() {
-		// intentionally left blank
+		/* Intentionally left blank */
 	}
 	
 	/**
-	 * @return the id
+	 * Getter for 'id'
+	 * @return int
 	 */
 	public int getId() {
 		return id;
 	}
 	
 	/**
-	 * @param id - the id to set
+	 * Setter for 'id'
+	 * @param int id
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
 	/**
-	 * @return the password
+	 * Getter for 'password'
+	 * @return byte[]
 	 */
 	public byte[] getPassword() {
 		return password;
 	}
 	
 	/**
-	 * @param password the password to set
+	 * Setter for 'password'
+	 * @param byte[] password
 	 */
 	public void setPassword(byte[] password) {
 		this.password = password;
 	}
 	
 	/**
-	 * @return the updated_at
+	 * Getter for 'updated_at'
+	 * @return Date 
 	 */
 	public Date getUpdatedAt() {
 		return updated_at;
 	}
 	
 	/**
-	 * @param updated_at the updated_at to set
+	 * Setter for 'updated_at'
+	 * @param Date updated_at
 	 */
 	public void setUpdatedAt(Date updated_at) {
 		this.updated_at = (updated_at == null) ? new Date() : updated_at;
 	}
 	
 	/**
-	 * @return the last_login_at
+	 * Getter for 'last_login_at'
+	 * @return Date
 	 */
 	public Date getLastLoginAt() {
 		return last_login_at;
 	}
 	
 	/**
-	 * @param last_login_at the last_login_at to set
+	 * Setter for 'last_login_at'
+	 * @param Date last_login_at
 	 */
 	public void setLastLoginAt(Date last_login_at) {
 		this.last_login_at = (last_login_at == null) ? new Date() : last_login_at;
 	}
 	
 	/**
-	 * @return the autolock
+	 * Getter for 'autolock'
+	 * @return boolean
 	 */
 	public boolean isAutolock() {
 		return autolock;
 	}
 	
 	/**
-	 * @param autolock the autolock to set
+	 * Setter for 'autolock'
+	 * @param boolean autolock
 	 */
 	public void setAutolock(boolean autolock) {
 		this.autolock = autolock;
 	}
 	
 	/**
-	 * @return the autolock_minutes
+	 * Getter for 'autolock_minutes'
+	 * @return int 
 	 */
 	public int getAutolockMinutes() {
 		return autolock_minutes;
 	}
 	
 	/**
-	 * @param autolock_minutes the autolock_minutes to set
+	 * Setter for 'autolock_minutes'
+	 * @param int autolock_minutes
 	 */
 	public void setAutolockMinutes(int autolock_minutes) {
 		this.autolock_minutes = autolock_minutes;
 	}
 	
 	/**
+	 * Getter for 'hide_passwords'
 	 * @return the hide_passwords
 	 */
 	public boolean isHidePasswords() {
@@ -129,7 +142,8 @@ public class Settings {
 	}
 	
 	/**
-	 * @param hide_passwords the hide_passwords to set
+	 * Setter for 'hide_passwords'
+	 * @param boolean hide_passwords
 	 */
 	public void setHidePasswords(boolean hide_passwords) {
 		this.hide_passwords = hide_passwords;

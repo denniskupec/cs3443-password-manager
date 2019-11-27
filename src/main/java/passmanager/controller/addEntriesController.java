@@ -6,12 +6,10 @@ import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Logger;
-
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,9 +17,7 @@ import passmanager.Database;
 import passmanager.Util;
 
 public class addEntriesController extends BaseController {
-
-    private final static Logger Log = Util.getLogger(addEntriesController.class);
-
+	
     @FXML private TextField website;
     @FXML private TextField userName;
     @FXML private TextField passWord;
@@ -50,7 +46,6 @@ public class addEntriesController extends BaseController {
                 addEntriesToDatabase(website.getText(),url.getText(), userName.getText(), passWord.getText().getBytes(), note.getText());
                 Stage stage = (Stage) save.getScene().getWindow();
                 stage.close();
-                Log.info("New entry added to the database!");
             }
             else
             {

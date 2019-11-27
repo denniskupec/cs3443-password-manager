@@ -40,7 +40,7 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Pane>
-            <Button fx:id="unlock" alignment="CENTER" mnemonicParsing="false" onAction="#doLogin" prefWidth="100.0" text="Unlock">
+            <Button fx:id="unlock" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#doLogin" prefWidth="100.0" text="Unlock">
                <opaqueInsets>
                   <Insets top="30.0" />
                </opaqueInsets>
