@@ -4,26 +4,26 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.j256.ormlite.dao.Dao;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.Util;
-import passmanager.accountGettersSetters;
+import passmanager.component.EntryListCell;
+import passmanager.component.EntryListCellController;
 import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
 
-public class ListController extends BaseController implements Initializable {
-	private final static Logger Log = Util.getLogger(ListController.class);
-
-	@FXML TableView<accountGettersSetters> tableView;
-	@FXML TableColumn<accountGettersSetters, String> account;
-	@FXML TableColumn<accountGettersSetters, ImageView> icon;
+public class IndexController extends BaseController implements Initializable {
+	private final static Logger Log = Util.getLogger(IndexController.class);
+	
 	@FXML MenuItem choiceNew;
 	@FXML TextField DisplayWebsite;
 	@FXML TextField DisplayUsername;
@@ -35,40 +35,43 @@ public class ListController extends BaseController implements Initializable {
 	@FXML Button DisplaySave;
 	@FXML CheckBox edit;
 	
-	ObservableList<accountGettersSetters> data = FXCollections.observableArrayList();
+	@FXML ListView<PasswordEntry> entryListView;
+	
+	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
+	
 	
 	/**
 	 * Called by FXMLLoader
 	 */
 	@Override
 	public void initialize() {
-		try {
-			loadData();
-			hiddenPassword.setEditable(false);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void loadData() throws SQLException {
-		/* returns all entries in a list. probably not efficient for large databases */
-		List<PasswordEntry> entries = Database.getDao(PasswordEntry.class).queryForAll();
+		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
 		
-		account.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, String>("title"));
-		icon.setCellValueFactory(new PropertyValueFactory<accountGettersSetters, ImageView>("img"));
-		icon.setResizable(false);
-		tableView.setItems(data);
-	}
-
-	@FXML
-	public void reload() {
-		try {
-			loadData();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		for (PasswordEntry entry : pdao) {
+			entryCollection.add(entry);
 		}
+
+		entryListView.setItems( entryCollection );
+		/*
+		entryListView.setCellFactory( listview -> {
+			EntryListCellController cellController = new EntryListCellController();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/component/EntryListCell.fxml"));
+			loader.setController(cellController);
+			loader.setRoot(cellController);
+			
+			try {
+				return loader.load();
+			} 
+			catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		});
+		*/
+		
+		entryListView.setCellFactory(listview -> new EntryListCell() );
 	}
 
+	
 	/**
 	 * used to process the different choices in the menu bar
 	 * 
@@ -91,18 +94,13 @@ public class ListController extends BaseController implements Initializable {
 		}
 	}
 
+	
 	@FXML
 	public void click(MouseEvent event) {
-		if (event.getClickCount() == 1) {
-			DisplayWebsite.setText(tableView.getSelectionModel().getSelectedItem().getTitle());
-			DisplayUsername.setText(tableView.getSelectionModel().getSelectedItem().getUsername());
-			DisplayNotes.setText(tableView.getSelectionModel().getSelectedItem().getNote());
-			// DisplayUrl.setText(tableView.getSelectionModel().getSelectedItem().getUrl());
-			DisplayPassword.setText(tableView.getSelectionModel().getSelectedItem().getPassword());
-			hiddenPassword.setText(tableView.getSelectionModel().getSelectedItem().getPassword());
-		}
+		Log.info("Selected: " + entryListView.getSelectionModel().getSelectedItem().getTitle());
 	}
 
+	
 	public void onEditEntry(Event event) {
 		if (event.getSource() == edit) {
 			if (edit.isSelected()) {
