@@ -1,10 +1,16 @@
 package passmanager.model;
 
+import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import javafx.scene.image.Image;
 import passmanager.Util;
 
 /**
@@ -17,7 +23,7 @@ public class PasswordEntry {
 	@DatabaseField(generatedId = true)
 	int id;
 	
-	@DatabaseField(columnName = "salt", dataType=DataType.BYTE_ARRAY)
+	@DatabaseField(columnName = "salt", dataType = DataType.BYTE_ARRAY)
 	byte[] salt;
 	
 	@DatabaseField(columnName = "updated_at")
@@ -29,22 +35,33 @@ public class PasswordEntry {
 	@DatabaseField(columnName = "username")
 	String username;
 	
-	@DatabaseField(columnName = "password", dataType=DataType.BYTE_ARRAY)
+	@DatabaseField(columnName = "password", dataType = DataType.BYTE_ARRAY)
 	byte[] password;
 	
 	@DatabaseField(columnName = "url")
 	String url;
 	
-	@DatabaseField(columnName = "favicon", dataType=DataType.BYTE_ARRAY)
+	@DatabaseField(columnName = "favicon", dataType = DataType.BYTE_ARRAY, canBeNull = true)
 	byte[] favicon;
 	
-	@DatabaseField(columnName = "note")
+	@DatabaseField(columnName = "note", dataType = DataType.LONG_STRING, canBeNull = true)
 	String note;
 	
+	/**
+	 * Default constructor. Required for ORM. Intentionally does nothing.
+	 */
 	public PasswordEntry() {
 		// intentionally left blank
 	}
 	
+	/**
+	 * Constructor to conveniently add a new entry. 
+	 * @param title
+	 * @param username
+	 * @param password
+	 * @param url
+	 * @param note
+	 */
 	public PasswordEntry(String title, String username, byte[] password, String url, String note) {
 		this.title = title;
 		this.username = username;
@@ -71,8 +88,12 @@ public class PasswordEntry {
 	}
 	
 	public void setSalt(byte[] salt) {
-		Random rand = new Random();
-		rand.nextBytes(this.salt);
+		if (salt == null) {
+			new Random().nextBytes(this.salt);
+		}
+		else {
+			this.salt = salt;
+		}
 	}
 	
 	public Date getUpdatedAt() {
@@ -115,8 +136,12 @@ public class PasswordEntry {
 		this.url = url;
 	}
 	
-	public byte[] getFavicon() {
-		return favicon;
+	public Image getFavicon() {
+		if (favicon == null) {
+			return null;
+		}
+		
+		return new Image(new ByteArrayInputStream(favicon));
 	}
 	
 	public void setFavicon(byte[] favicon) {
@@ -129,5 +154,20 @@ public class PasswordEntry {
 	
 	public void setNote(String note) {
 		this.note = note;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return title.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null || other.getClass() != getClass()) {
+			return false;
+		}
+		
+		return id == ((PasswordEntry) other).getId();
 	}
 }

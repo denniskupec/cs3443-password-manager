@@ -3,19 +3,19 @@ package passmanager.model;
 import java.util.Date;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-
-import passmanager.Util;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Reflects the 'settings' table
  * All setter functions return true or false, depending on success or failure.
  */
+@DatabaseTable(tableName = "settings")
 public class Settings {
 
 	@DatabaseField(generatedId = true)
 	int id;
 	
-	@DatabaseField(columnName = "password", dataType=DataType.BYTE_ARRAY)
+	@DatabaseField(columnName = "password", dataType = DataType.BYTE_ARRAY)
 	byte[] password;
 	
 	@DatabaseField(columnName = "updated_at")
@@ -24,13 +24,13 @@ public class Settings {
 	@DatabaseField(columnName = "last_login_at")
 	Date last_login_at;
 	
-	@DatabaseField(columnName = "autolock")
+	@DatabaseField(columnName = "autolock", dataType = DataType.BOOLEAN)
 	boolean autolock;
 	
 	@DatabaseField(columnName = "autolock_minutes")
 	int autolock_minutes;
 	
-	@DatabaseField(columnName = "hide_passwords")
+	@DatabaseField(columnName = "hide_passwords", dataType = DataType.BOOLEAN)
 	boolean hide_passwords;
 	
 	public Settings() {

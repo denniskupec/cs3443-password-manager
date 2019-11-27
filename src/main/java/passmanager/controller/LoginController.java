@@ -3,12 +3,13 @@ package passmanager.controller;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import com.j256.ormlite.dao.Dao;
-import passmanager.*;
-import passmanager.interfaces.Initializable;
-import passmanager.model.Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import passmanager.*;
+import passmanager.interfaces.Initializable;
+import passmanager.model.Settings;
 
 /**
  * Handles the login process
@@ -16,9 +17,9 @@ import javafx.scene.control.*;
 public class LoginController extends BaseController implements Initializable {
 	private final static Logger Log = Util.getLogger(LoginController.class);
 	
-	@FXML private Button unlock;
-	@FXML private PasswordField password;
-	@FXML private Label errorMsg;
+	@FXML Button unlock;
+	@FXML PasswordField password;
+	@FXML Label errorMsg;
 	
 	Dao<Settings, Integer> settingsDao = Database.getDao(Settings.class);
 	Settings settings;
@@ -51,10 +52,7 @@ public class LoginController extends BaseController implements Initializable {
 			errorMsg.setVisible(true);
 			return;
 		}
-		
-		Log.info(Util.byte2hex(settings.getPassword()));
-		Log.info(Util.byte2hex(password.getText().getBytes()));
-		
+
 		// attempt to login, or show an error on failure
 		Authenticator auth = new Authenticator(password.getText());
 		if (!auth.login()) {
@@ -66,6 +64,6 @@ public class LoginController extends BaseController implements Initializable {
 		
 		// only runs if login was successful
 		Log.info("Authenticated!");
-		loadScene("/layout/listview.fxml");
+		loadScene("/layout/Index.fxml");
 	}
 }

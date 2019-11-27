@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import com.j256.ormlite.logger.LocalLog;
 import passmanager.controller.BaseController;
 import passmanager.model.Settings;
 
@@ -19,6 +20,9 @@ public class App extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args) throws IOException {
+		
+		System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "INFO");
+		
 		launch(args);
 		Database.close();
 	}

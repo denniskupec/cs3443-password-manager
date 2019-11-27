@@ -43,7 +43,7 @@ public abstract class BaseController implements Initializable {
 	public static final <T extends BaseController> T loadScene(String resourceName) {
 		URL resource = App.class.getResource(resourceName);
 		FXMLLoader loader = new FXMLLoader(resource);
-
+ 
 		try {
 			Parent root2 = loader.load();
 	
@@ -142,5 +142,21 @@ public abstract class BaseController implements Initializable {
 	 */
 	public void setScene(Scene newScene) {
 		stage.setScene(newScene);
+	}
+	
+	/**
+	 * Returns the root node.
+	 * @return Parent
+	 */
+	public Parent getRoot() {
+		return root;
+	}
+	
+	/**
+	 * Sets the root node. 
+	 * @return Parent
+	 */
+	public void setRoot(Parent root) {
+		this.root = root;
 	}
 }
