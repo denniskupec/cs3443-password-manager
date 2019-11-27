@@ -2,7 +2,6 @@ package passmanager.component;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

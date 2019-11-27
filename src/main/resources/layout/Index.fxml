@@ -85,124 +85,41 @@
                   <ListView fx:id="entryListView" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="275.0" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="517.0" SplitPane.resizableWithParent="false">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
-              </rowConstraints>
+            <VBox>
                <children>
-                  <ToolBar focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <items>
-                        <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
-                     </items>
-                  </ToolBar>
-                  <GridPane styleClass="gridpane-detail" GridPane.rowIndex="1">
+                  <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="517.0" SplitPane.resizableWithParent="false">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="167.0" minHeight="1.0" prefHeight="54.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="410.0" minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="517.0" vgrow="ALWAYS" />
+                      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
                     </rowConstraints>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
                      <children>
-                        <VBox alignment="CENTER_LEFT">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="486.0">
+                        <ToolBar focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                           <items>
+                              <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="505.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <ImageView fx:id="entryFavicon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin></ImageView>
-                                    <Label fx:id="entryTitle" alignment="CENTER" contentDisplay="CENTER" text="Entry Title">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
+                                    <Button fx:id="editButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="1" />
+                                    <Button fx:id="addNewButton" layoutX="473.0" layoutY="10.0" mnemonicParsing="false" text="Add New" />
                                  </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <Pane styleClass="pane-light" GridPane.rowIndex="1">
-                           <children>
-                              <VBox layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="449.0" spacing="15.0">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
-                                       <children>
-                                          <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Website" textAlignment="RIGHT" />
-                                          <TextField editable="false" prefHeight="25.0" prefWidth="200.0" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="15.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="449.0" spacing="10.0" VBox.vgrow="NEVER">
-                                       <children>
-                                          <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Username" textAlignment="RIGHT" />
-                                          <TextField editable="false" prefHeight="25.0" prefWidth="200.0" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
-                                       <children>
-                                          <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Password" textAlignment="RIGHT" />
-                                          <HBox>
-                                             <children>
-                                                <StackPane alignment="TOP_LEFT">
-                                                   <children>
-                                                      <TextField fx:id="password1" disable="true" style="-fx-background-radius: 3px 0 0 3px;" visible="false" />
-                                                      <PasswordField fx:id="passwordMasked1" editable="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-radius: 3px 0 0 3px;" />
-                                                   </children>
-                                                </StackPane>
-                                                <Button fx:id="toggle1" mnemonicParsing="false" prefWidth="45.0" style="-fx-background-radius: 0 3px 3px 0;" text="Show" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="15.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
-                                       <children>
-                                          <Label alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="75.0" text="Note" textAlignment="RIGHT" />
-                                          <TextArea fx:id="entryNote" editable="false" prefHeight="179.0" prefWidth="364.0" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding></Pane>
-                        <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <children>
-                              <Label styleClass="label-light" text="Never" textFill="#5b5b5b">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label styleClass="label-light" text="Last Updated:" textAlignment="RIGHT" textFill="#5b5b5b">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </HBox>
+                              </GridPane>
+                           </items>
+                        </ToolBar>
+                        <!-- EntryDetail component -->
+                        <fx:include fx:id="entryDetailView" source="../component/EntryDetail.fxml" GridPane.rowIndex="1" />
                      </children>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
                   </GridPane>
                </children>
-            </GridPane>
+            </VBox>
         </items>
       </SplitPane>
    </children>

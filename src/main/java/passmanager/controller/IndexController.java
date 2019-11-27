@@ -25,13 +25,9 @@ public class IndexController extends BaseController implements Initializable {
 	@FXML TextField searchText;
 	@FXML Button searchButton;
 	@FXML Button editButton;
+	@FXML Button addNewButton;
 	@FXML ListView<PasswordEntry> entryListView;
 	@FXML Label statusMessage;
-	
-	@FXML Label entryTitle;
-	@FXML ImageView entryFavicon;
-	
-	@FXML ScrollPane entryDetail;
 	
 	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
 	
@@ -71,6 +67,11 @@ public class IndexController extends BaseController implements Initializable {
 			
 		case "Export":
 			// TODO: Export functionality
+			break;
+			
+		case "Preferences":
+			// TODO: Refactor into a proper "modal" loader...
+			loadNewEntry("/layout/settings.fxml");
 			break;
 			
 		case "Close":

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="1.7976931348623157E308" minWidth="490.0" styleClass="gridpane-detail" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.component.EntryDetailController">
+   <children>
+      <VBox alignment="CENTER_LEFT">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="486.0">
+               <children>
+                  <ImageView fx:id="favicon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" text="Entry Title">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Pane styleClass="pane-light" GridPane.rowIndex="1">
+         <children>
+            <VBox layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="449.0" spacing="15.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Website" textAlignment="RIGHT" />
+                        <TextField fx:id="website" editable="false" prefHeight="25.0" prefWidth="200.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="449.0" spacing="10.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Username" textAlignment="RIGHT" />
+                        <TextField fx:id="username" editable="false" prefHeight="25.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Password" textAlignment="RIGHT" />
+                        <HBox>
+                           <children>
+                              <StackPane alignment="TOP_LEFT">
+                                 <children>
+                                    <TextField fx:id="passwordPlain" disable="true" editable="false" style="-fx-background-radius: 3px 0 0 3px;" visible="false" />
+                                    <PasswordField fx:id="passwordMasked" editable="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-radius: 3px 0 0 3px;" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="toggleHide" mnemonicParsing="false" prefWidth="45.0" style="-fx-background-radius: 0 3px 3px 0;" text="Show" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
+                     <children>
+                        <Label alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="75.0" text="Note" textAlignment="RIGHT" />
+                        <TextArea fx:id="notes" editable="false" prefHeight="179.0" prefWidth="364.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Pane>
+      <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <children>
+            <Label fx:id="lastUpdateLabel" styleClass="label-light" text="Never" textFill="#5b5b5b">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label styleClass="label-light" text="Last Updated:" textAlignment="RIGHT" textFill="#5b5b5b">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </HBox>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <rowConstraints>
+      <RowConstraints maxHeight="167.0" minHeight="1.0" prefHeight="54.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="410.0" minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>
