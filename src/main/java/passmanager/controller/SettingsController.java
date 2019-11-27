@@ -49,7 +49,7 @@ public class SettingsController extends BaseController implements Initializable 
 			settings = settingsDao.queryForId(1);
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		
 		/* load previously set values and reflect them in the view */
@@ -77,7 +77,7 @@ public class SettingsController extends BaseController implements Initializable 
 				settingsDao.update(settings);
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		});
 		
@@ -135,8 +135,9 @@ public class SettingsController extends BaseController implements Initializable 
 			settingsDao.update(settings);
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
+		
 		showSuccessMessage("Password changed!");
 		onCancel(null);
 	}

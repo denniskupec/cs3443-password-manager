@@ -1,8 +1,6 @@
 package passmanager.controller;
 
 import java.sql.SQLException;
-import java.util.logging.Logger;
-import com.j256.ormlite.dao.Dao;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,13 +13,11 @@ import passmanager.model.Settings;
  * Handles the login process
  */
 public class LoginController extends BaseController implements Initializable {
-	private final static Logger Log = Util.getLogger(LoginController.class);
-	
+
 	@FXML Button unlock;
 	@FXML PasswordField password;
 	@FXML Label errorMsg;
 	
-	Dao<Settings, Integer> settingsDao = Database.getDao(Settings.class);
 	Settings settings;
 	
 	/**
@@ -30,7 +26,7 @@ public class LoginController extends BaseController implements Initializable {
 	@Override
 	public void initialize() {
 		try {
-			settings = settingsDao.queryForId(1);
+			settings = Database.getDao(Settings.class).queryForId(1);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +59,6 @@ public class LoginController extends BaseController implements Initializable {
 		}
 		
 		// only runs if login was successful
-		Log.info("Authenticated!");
 		loadScene("/layout/Index.fxml");
 	}
 }

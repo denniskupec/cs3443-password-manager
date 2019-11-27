@@ -47,7 +47,7 @@ public abstract class BaseController implements Initializable {
 		try {
 			Parent root2 = loader.load();
 	
-			Scene s = new Scene(root2, 970, 600);
+			Scene s = new Scene(root2, 800, 600);
 				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 
 			T controller = loader.getController();

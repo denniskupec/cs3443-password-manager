@@ -3,13 +3,9 @@ package passmanager.model;
 import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
 import javafx.scene.image.Image;
 import passmanager.Util;
 

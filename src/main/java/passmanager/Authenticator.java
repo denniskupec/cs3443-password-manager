@@ -21,7 +21,7 @@ public class Authenticator {
 			settings = Database.getDao(Settings.class).queryForId(1);
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -31,12 +31,6 @@ public class Authenticator {
 	 */
 	public boolean login() {	
 		return Arrays.equals(password, settings.getPassword());
-	}
-	
-	public void logout() {
-		/* TODO: Need to cleanup and switch views back to the login screen. 
-		 *	If not that, then just close the application when the user logs off. ¯\_(ツ)_/¯
-		 */
 	}
 	
 	/**
@@ -52,7 +46,7 @@ public class Authenticator {
 			Database.getDao(Settings.class).create(settings);
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 	
