@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.addEntriesController">
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.NewEntryController">
    <children>
       <AnchorPane prefHeight="498.0" prefWidth="363.0" stylesheets="@../style/app.css">
           <children>
