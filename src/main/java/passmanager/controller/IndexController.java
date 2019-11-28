@@ -1,12 +1,12 @@
 package passmanager.controller;
 
+import java.sql.SQLException;
 import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.component.EntryDetailController;
 import passmanager.component.EntryListCell;
@@ -26,7 +26,6 @@ public class IndexController extends BaseController implements Initializable {
 	@FXML SplitPane splitPane;
 	
 	EntryDetailController entryDetail;
-	
 	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
 
 	/**
@@ -35,28 +34,64 @@ public class IndexController extends BaseController implements Initializable {
 	@Override
 	public void initialize() {
 		entryDetail = new EntryDetailController();
+		
 		splitPane.getItems().add( entryDetail.getBox() );
 		
+		/* fill our collection of entries */
 		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
 		for (PasswordEntry entry : pdao) {
 			entryCollection.add(entry);
 		}
-
 		entryListView.setItems( entryCollection );
-		entryListView.setCellFactory(listview -> new EntryListCell() );
-		entryListView.setOnMouseClicked(this::onListClicked);
+
+		/* this updates the detail pane with the correct model when a list item is selected/clicked */
+		entryListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				entryDetail.setData(newValue);
+			}
+		});
+		
+		entryListView.setCellFactory(listview -> new EntryListCell());
+		entryListView.getSelectionModel().selectFirst();
+
+		/* register any callbacks */
+		entryDetail.setDeleteCallback(this::doDeleteCallback);
+		
+		entryDetail.setCancelCallback(() -> {
+			entryListView.setDisable(false);
+			entryDetail.setData(entryListView.getSelectionModel().getSelectedItem());
+		});
+		
+		entryDetail.setEditCallback(() ->{
+			entryListView.setDisable(true);
+		});
 		
 		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
-
-	protected void onListClicked(MouseEvent event) {
-		PasswordEntry data = entryListView.getSelectionModel().getSelectedItem();
-		
-		if (data != null) {
-			entryDetail.setData(data);
-		}
-	}
 	
+	protected void doDeleteCallback() {
+		PasswordEntry item = entryListView.getSelectionModel().getSelectedItem();
+		
+		try {
+			Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
+			pdao.delete(item);
+		}
+		catch (SQLException e) {
+			setStatusMessage("Failed to delete entry!");
+			return;
+		}
+		finally {
+			entryListView.setDisable(false);
+		}
+		
+		setStatusMessage("Entry deleted.");
+		
+		entryListView.getSelectionModel().clearSelection();
+		entryListView.getSelectionModel().selectNext();
+		entryCollection.remove(item);
+	}
+
+
 	/**
 	 * used to process the different choices in the menu bar
 	 * 
@@ -67,7 +102,7 @@ public class IndexController extends BaseController implements Initializable {
 
 		switch (menuItem.getText()) {
 		case "Add New Entry":
-			loadNewEntry("/layout/newEntries.fxml");
+			// addNewEntry(event);
 			break;
 			
 		case "Logout":
@@ -88,11 +123,23 @@ public class IndexController extends BaseController implements Initializable {
 
 		default:
 			/* Shouldn't normally be able to get here. */
-			break;
 		}
 	}
 	
+	/**
+	 * Called when 'Add New' button or 'Add New Entry' menu item is activated.
+	 * @param ActionEvent event
+	 */
+	protected void addNewEntry(ActionEvent event) {
+		
+	}
+
+	/**
+	 * Sets the status message on the bottom right of the window.
+	 * @param String msg
+	 */
 	public void setStatusMessage(String msg) {
 		statusMessage.setText(msg);
 	}
+
 }

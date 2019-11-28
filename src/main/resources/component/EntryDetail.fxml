@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="517.0" SplitPane.resizableWithParent="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="gridpane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="517.0" SplitPane.resizableWithParent="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -16,7 +16,7 @@
                       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <ToolBar focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                        <ToolBar focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                            <items>
                               <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="505.0">
                                 <columnConstraints>
@@ -27,10 +27,25 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="addNewButton" layoutX="473.0" layoutY="10.0" mnemonicParsing="false" text="Add New" />
+                  <StackPane alignment="CENTER_LEFT">
+                     <children>
+                                          <Button fx:id="addNewButton" layoutX="473.0" layoutY="10.0" mnemonicParsing="false" text="Add New" />
+                        <Button fx:id="deleteButton" layoutX="104.0" layoutY="10.0" mnemonicParsing="false" text="Delete" textFill="#e12121" visible="false" />
+                     </children>
+                  </StackPane>
                                     <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
+                        <StackPane alignment="CENTER_RIGHT" pickOnBounds="false">
+                           <children>
+                                                <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
+                              <HBox fx:id="editControls" alignment="CENTER_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" spacing="5.0" visible="false">
+                                 <children>
+                                    <Button fx:id="saveButton" mnemonicParsing="false" text="Save" textFill="#03ab14" />
+                                    <Button fx:id="cancelEdit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </StackPane>
                                           <HBox fx:id="editConfirmBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" visible="false">
                                              <children>
                                                 <Button fx:id="saveEdit" mnemonicParsing="false" text="Save" />
@@ -47,73 +62,109 @@
    <children>
       <VBox alignment="CENTER_LEFT">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="486.0">
+            <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="70.0" prefWidth="486.0">
                <children>
-                  <ImageView fx:id="favicon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="favicon" cache="true" cacheHint="QUALITY" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" text="Entry Title">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                        <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" text="Entry Title">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                              <TextField fx:id="editTitle" prefWidth="500.0" promptText="Enter a Title" visible="false">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </StackPane>
                </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
             </HBox>
          </children>
       </VBox>
-      <Pane styleClass="pane-light" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
-         <children>
-            <VBox layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0">
+            <StackPane GridPane.rowIndex="1">
                <children>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
+            <Pane fx:id="details" styleClass="pane-light" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+               <children>
+                  <VBox layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Website" textAlignment="RIGHT" />
-                        <TextField fx:id="website" editable="false" prefHeight="25.0" prefWidth="200.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="449.0" spacing="10.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Username" textAlignment="RIGHT" />
-                        <TextField fx:id="username" editable="false" prefHeight="25.0" prefWidth="200.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Password" textAlignment="RIGHT" />
-                        <HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
                            <children>
-                              <StackPane alignment="TOP_LEFT">
+                              <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Website" textAlignment="RIGHT" />
+                              <TextField fx:id="website" editable="false" prefHeight="25.0" prefWidth="200.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="449.0" spacing="10.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Username" textAlignment="RIGHT" />
+                              <TextField fx:id="username" editable="false" prefHeight="25.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" text="Password" textAlignment="RIGHT" />
+                              <HBox>
                                  <children>
-                                    <TextField fx:id="passwordPlain" disable="true" editable="false" style="-fx-background-radius: 3px 0 0 3px;" visible="false" />
-                                    <PasswordField fx:id="passwordMasked" editable="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-radius: 3px 0 0 3px;" />
+                                    <StackPane alignment="TOP_LEFT">
+                                       <children>
+                                          <TextField fx:id="passwordPlain" disable="true" editable="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-radius: 3px 0 0 3px;" visible="false">
+                                                   <font>
+                                                      <Font name="Courier New" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                          <PasswordField fx:id="passwordMasked" editable="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-radius: 3px 0 0 3px;">
+                                                   <font>
+                                                      <Font name="Courier New" size="12.0" />
+                                                   </font>
+                                                </PasswordField>
+                                       </children>
+                                    </StackPane>
+                                    <Button fx:id="toggleHide" mnemonicParsing="false" prefWidth="45.0" style="-fx-background-radius: 0 3px 3px 0;" text="Show" />
                                  </children>
-                              </StackPane>
-                              <Button fx:id="toggleHide" mnemonicParsing="false" prefWidth="45.0" style="-fx-background-radius: 0 3px 3px 0;" text="Show" />
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="75.0" text="Note" textAlignment="RIGHT" />
+                              <TextArea fx:id="notes" editable="false" prefHeight="179.0" prefWidth="364.0" wrapText="true" />
                            </children>
                         </HBox>
                      </children>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" prefHeight="26.0" prefWidth="449.0" spacing="10.0">
-                     <children>
-                        <Label alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="75.0" text="Note" textAlignment="RIGHT" />
-                        <TextArea fx:id="notes" editable="false" prefHeight="179.0" prefWidth="364.0" wrapText="true" />
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </Pane>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Pane>
+                  <VBox fx:id="noSelection" cache="true" prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Text fill="#a4a4a4" strokeType="OUTSIDE" strokeWidth="0.0" text="Select or Add New">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font></Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
       <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Label fx:id="lastUpdateLabel" styleClass="label-light" text="Never" textFill="#5b5b5b">
