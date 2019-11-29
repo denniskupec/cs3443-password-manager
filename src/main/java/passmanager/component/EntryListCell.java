@@ -8,7 +8,7 @@ public class EntryListCell extends ListCell<PasswordEntry> {
 	@Override
 	protected void updateItem(PasswordEntry item, boolean empty) {
 		super.updateItem(item, empty);
-
+		
 		if (item == null || empty) {
 			setGraphic(null);
 			setText(null);

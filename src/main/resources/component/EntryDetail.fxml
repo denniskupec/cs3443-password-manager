@@ -165,7 +165,7 @@
                   </VBox>
                </children>
             </StackPane>
-      <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <HBox fx:id="updatedBox" alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Label fx:id="lastUpdateLabel" styleClass="label-light" text="Never" textFill="#5b5b5b">
                <font>

@@ -3,9 +3,7 @@ package passmanager.component;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
-
+import com.j256.ormlite.dao.Dao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -30,6 +28,7 @@ public class EntryDetailController implements Initializable {
 	@FXML GridPane gridpane;
 	@FXML VBox noSelection;
 	@FXML Pane details;
+	
 	@FXML ImageView favicon;
 	@FXML Label title;
 	@FXML TextField website;
@@ -41,13 +40,15 @@ public class EntryDetailController implements Initializable {
 	@FXML Label lastUpdateLabel;
 	@FXML Button addNewButton;
 	@FXML Button editButton;
+	@FXML HBox updatedBox;
 	
 	@FXML HBox editControls;
+	@FXML TextField editTitle;
 	@FXML Button deleteButton;
 	@FXML Button cancelEdit;
 	@FXML Button saveButton;
 	
-	PasswordEntry item;
+	PasswordEntry item = null;
 	Runnable callCancel, callDelete, callEdit, callSave;
 
 	public EntryDetailController() {
@@ -74,6 +75,9 @@ public class EntryDetailController implements Initializable {
 		this.callEdit = callback;
 	}
 	
+	public void setSaveCallback(Runnable callback) {
+		this.callSave = callback;
+	}
 	
 	/**
 	 * Called by FXMLLoader
@@ -109,6 +113,15 @@ public class EntryDetailController implements Initializable {
 				callDelete.run();
 			}
 		});
+		
+		addNewButton.setOnMouseClicked(event -> {
+			deleteButton.setDisable(true);
+			noSelection.setVisible(false);
+			details.setVisible(true);
+			
+			item = new PasswordEntry();
+			setEditMode(true);			
+		});
 	}
 	
 	
@@ -126,18 +139,21 @@ public class EntryDetailController implements Initializable {
 	 * @param PasswordEntry data
 	 */
 	public void setData(PasswordEntry data) {
-		boolean nullData = (data == null);
+		item = data;
 		
+		boolean nullData = (data == null || data == null);
+		
+		favicon.setVisible(!nullData);
+		title.setVisible(!nullData);
 		noSelection.setVisible(nullData);
 		editButton.setDisable(nullData);
 		details.setVisible(!nullData);
-		title.setVisible(!nullData);
+		updatedBox.setVisible(!nullData);
 		
 		if (nullData) {
 			return;
 		}
 		
-		item = data;
 		title.setText( data.getTitle() );
 		website.setText( data.getUrl() );
 		username.setText( data.getUsername() );
@@ -221,17 +237,22 @@ public class EntryDetailController implements Initializable {
 			toggleHide.setDisable(true);
 			setReadOnly(false);
 			setMasked(false);
-			
+		
+			title.setVisible(false);
+			editTitle.setVisible(true);
 			addNewButton.setVisible(false);
 			editButton.setVisible(false);
 			editControls.setVisible(true);
 			deleteButton.setVisible(true);
+			deleteButton.setDisable(false);
 		}
 		else {
 			toggleHide.setDisable(false);
 			setReadOnly(true);
 			setMasked(true);
 			
+			title.setVisible(true);
+			editTitle.setVisible(false);
 			addNewButton.setVisible(true);
 			editButton.setVisible(true);
 			editControls.setVisible(false);
@@ -247,7 +268,7 @@ public class EntryDetailController implements Initializable {
 	protected void onSaveEdit(MouseEvent event) {
 		setEditMode(false);
 
-		item.setTitle(title.getText());
+		item.setTitle(editTitle.getText());
 		item.setUsername(username.getText());
 		item.setPassword(passwordPlain.getText().getBytes());
 		item.setNote(notes.getText());
@@ -255,12 +276,16 @@ public class EntryDetailController implements Initializable {
 		item.setUpdatedAt(null);
 		
 		try {
-			CreateOrUpdateStatus status = Database.getDao(PasswordEntry.class).createOrUpdate(item);
-			if (!status.isUpdated()) {
-				System.out.println("Failed to update item entry.");
-				throw new SQLException();
-			}
+			Dao<PasswordEntry, Integer> temp = Database.getDao(PasswordEntry.class);
 			
+			if (item.getId() == -1) {
+				temp.create(item);
+			}
+			else {
+				if (temp.update(item) != 1) {
+					throw new SQLException();
+				}
+			}
 		}
 		catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -269,8 +294,11 @@ public class EntryDetailController implements Initializable {
 			if (callCancel != null) {
 				callCancel.run();
 			}
+			
+			if (callSave != null) {
+				callSave.run();
+			}
 		}
 	}
-
 
 }

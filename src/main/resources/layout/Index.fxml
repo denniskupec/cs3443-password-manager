@@ -43,7 +43,6 @@
         <menus>
           <Menu mnemonicParsing="false" onAction="#onMenuClick" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Add New Entry" />
                   <MenuItem mnemonicParsing="false" text="Export" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Logout" />
@@ -61,7 +60,7 @@
             <Insets bottom="1.0" left="1.0" right="5.0" top="1.0" />
          </GridPane.margin>
       </Label>
-      <SplitPane fx:id="splitPane" dividerPositions="0.5" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" stylesheets="@../style/index.css" GridPane.rowIndex="1">
+      <SplitPane fx:id="splitPane" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" stylesheets="@../style/index.css" GridPane.rowIndex="1">
         <items>
             <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="277.0" SplitPane.resizableWithParent="false">
               <columnConstraints>

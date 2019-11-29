@@ -45,11 +45,7 @@ public class IndexController extends BaseController implements Initializable {
 		entryListView.setItems( entryCollection );
 
 		/* this updates the detail pane with the correct model when a list item is selected/clicked */
-		entryListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null) {
-				entryDetail.setData(newValue);
-			}
-		});
+		entryListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> entryDetail.setData(newValue));
 		
 		entryListView.setCellFactory(listview -> new EntryListCell());
 		entryListView.getSelectionModel().selectFirst();
@@ -57,18 +53,22 @@ public class IndexController extends BaseController implements Initializable {
 		/* register any callbacks */
 		entryDetail.setDeleteCallback(this::doDeleteCallback);
 		
+		entryDetail.setEditCallback(() -> entryListView.setDisable(true));
+		
 		entryDetail.setCancelCallback(() -> {
 			entryListView.setDisable(false);
 			entryDetail.setData(entryListView.getSelectionModel().getSelectedItem());
 		});
 		
-		entryDetail.setEditCallback(() ->{
-			entryListView.setDisable(true);
-		});
+		entryDetail.setSaveCallback(this::reload);
 		
 		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
 	
+	/**
+	 * Called when the 'delete' button is pressed when editing an entry.
+	 * This probably should be moved to EntryDetailController.
+	 */
 	protected void doDeleteCallback() {
 		PasswordEntry item = entryListView.getSelectionModel().getSelectedItem();
 		
@@ -91,6 +91,15 @@ public class IndexController extends BaseController implements Initializable {
 		entryCollection.remove(item);
 	}
 
+	public void reload() {
+		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
+		entryCollection.clear();
+		
+		for (PasswordEntry entry : pdao) {
+			entryCollection.add(entry);
+		}
+		entryListView.setItems( entryCollection );
+	}
 
 	/**
 	 * used to process the different choices in the menu bar
@@ -101,10 +110,6 @@ public class IndexController extends BaseController implements Initializable {
 		MenuItem menuItem = (MenuItem) event.getTarget();
 
 		switch (menuItem.getText()) {
-		case "Add New Entry":
-			// addNewEntry(event);
-			break;
-			
 		case "Logout":
 			loadScene("/layout/login.fxml");
 			break;
@@ -124,14 +129,6 @@ public class IndexController extends BaseController implements Initializable {
 		default:
 			/* Shouldn't normally be able to get here. */
 		}
-	}
-	
-	/**
-	 * Called when 'Add New' button or 'Add New Entry' menu item is activated.
-	 * @param ActionEvent event
-	 */
-	protected void addNewEntry(ActionEvent event) {
-		
 	}
 
 	/**

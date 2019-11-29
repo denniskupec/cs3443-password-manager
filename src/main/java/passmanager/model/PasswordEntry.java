@@ -20,7 +20,7 @@ import javafx.scene.image.Image;
 public class PasswordEntry {
 
 	@DatabaseField(generatedId = true)
-	int id;
+	int id = -1;
 	
 	@DatabaseField(columnName = "salt", dataType = DataType.BYTE_ARRAY)
 	byte[] salt;
