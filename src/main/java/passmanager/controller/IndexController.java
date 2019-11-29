@@ -123,6 +123,10 @@ public class IndexController extends BaseController implements Initializable {
 			loadNewEntry("/layout/settings.fxml");
 			break;
 			
+		case "Reload":
+			reload();
+			break;
+			
 		case "Close":
 			getStage().close();
 
