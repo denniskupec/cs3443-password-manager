@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="601.0" styleClass="login-hbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.LoginController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="login-hbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.LoginController">
    <children>
-      <VBox alignment="CENTER" prefHeight="377.0" prefWidth="391.0">
+      <VBox alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="35.0" prefWidth="180.0" text="Login">
                <font>
@@ -40,7 +40,7 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Pane>
-            <Button fx:id="unlock" alignment="CENTER" mnemonicParsing="false" onAction="#doLogin" prefWidth="100.0" text="Unlock">
+            <Button fx:id="unlock" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#doLogin" prefWidth="100.0" text="Unlock">
                <opaqueInsets>
                   <Insets top="30.0" />
                </opaqueInsets>

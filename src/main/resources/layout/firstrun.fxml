@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="601.0" styleClass="newuser-hbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.FirstRunController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="newuser-hbox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passmanager.controller.FirstRunController">
    <children>
-      <VBox alignment="CENTER" prefHeight="377.0" prefWidth="391.0">
+      <VBox alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="35.0" prefWidth="180.0" text="New User Setup">
                <font>
@@ -33,7 +33,7 @@
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <Pane prefHeight="26.0">
+            <Pane>
                <children>
                   <Label fx:id="errorMsg" focusTraversable="false" prefHeight="26.0" prefWidth="391.0" text="example error message" textAlignment="CENTER" textFill="#d70b0b" visible="false">
                      <font>
@@ -48,7 +48,7 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Pane>
-            <Button fx:id="save" alignment="CENTER" mnemonicParsing="false" onAction="#onSave" prefWidth="100.0" text="Save">
+            <Button fx:id="save" alignment="CENTER" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#onSave" prefWidth="100.0" text="Save">
                <opaqueInsets>
                   <Insets top="30.0" />
                </opaqueInsets>
