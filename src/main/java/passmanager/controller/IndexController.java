@@ -7,6 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import passmanager.Database;
 import passmanager.component.EntryDetailController;
 import passmanager.component.EntryListCell;
@@ -62,6 +65,20 @@ public class IndexController extends BaseController implements Initializable {
 		
 		entryDetail.setSaveCallback(this::reload);
 		
+		searchButton.setOnMouseClicked(this::doSearch);
+		searchText.setOnKeyPressed(event -> {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				searchText.clear();
+				reload();
+			}
+		});
+		
+		searchText.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!oldValue.isEmpty() && newValue.isEmpty()) {
+				reload();
+			}
+		});
+		
 		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
 	
@@ -91,6 +108,9 @@ public class IndexController extends BaseController implements Initializable {
 		entryCollection.remove(item);
 	}
 
+	/**
+	 * Reloads the list of items from the database. Does not change selected item.
+	 */
 	public void reload() {
 		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
 		entryCollection.clear();
@@ -141,6 +161,23 @@ public class IndexController extends BaseController implements Initializable {
 	 */
 	public void setStatusMessage(String msg) {
 		statusMessage.setText(msg);
+	}
+	
+	protected void doSearch(MouseEvent event) {
+		String searchString = searchText.getText();
+		if (searchString.isEmpty()) {
+			return;
+		}
+		
+		ObservableList<PasswordEntry> temp = FXCollections.observableArrayList();
+
+		for (PasswordEntry p : entryCollection) {
+			if (p.getTitle().contains(searchString)) {
+				temp.add(p);
+			}
+		}
+		
+		entryListView.setItems(temp);
 	}
 
 }
