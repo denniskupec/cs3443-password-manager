@@ -34,6 +34,7 @@ public class IndexController extends BaseController implements Initializable {
 	@FXML SplitPane splitPane;
 	
 	Date lastActive;
+	Settings settings;
 	EntryDetailController entryDetail;
 	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
 
@@ -42,8 +43,14 @@ public class IndexController extends BaseController implements Initializable {
 	 */
 	@Override
 	public void initialize() {
-		entryDetail = new EntryDetailController();
+		try {
+			settings = Database.getDao(Settings.class).queryForId(1);
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 		
+		entryDetail = new EntryDetailController();
 		splitPane.getItems().add( entryDetail.getBox() );
 		
 		/* fill our collection of entries */
@@ -67,10 +74,16 @@ public class IndexController extends BaseController implements Initializable {
 		/* register any callbacks */
 		entryDetail.setDeleteCallback(this::doDeleteCallback);
 		
-		entryDetail.setEditCallback(() -> entryListView.setDisable(true));
+		entryDetail.setEditCallback(() -> {
+			searchButton.setDisable(true);
+			searchText.setDisable(true);
+			entryListView.setDisable(true);
+		});
 		
 		entryDetail.setCancelCallback(() -> {
 			entryListView.setDisable(false);
+			searchButton.setDisable(false);
+			searchText.setDisable(false);
 			entryDetail.setData(entryListView.getSelectionModel().getSelectedItem());
 		});
 		

@@ -14,4 +14,7 @@
 - Edit or delete existing entries.
 - CSV Export
 
-Encryption was planned, but never implemented. 
+### Features Not Implemented
+- Automatic password hiding/showing
+- Inactivity logout
+

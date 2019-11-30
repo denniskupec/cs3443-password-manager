@@ -228,6 +228,9 @@ public class PasswordEntry {
 			URL url = new URL("http://icon.ptmx.dev/icon?size=50&url=" + this.url);
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
+			conn.setConnectTimeout(5000);
+			conn.setReadTimeout(15000);
+			conn.setDoInput(true);
 			
 			try (BufferedInputStream bin = new BufferedInputStream(conn.getInputStream())) {
 				int n = 0;

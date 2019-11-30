@@ -32,7 +32,7 @@ public class App extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Database.setup();
+		Database.setupDemo();
 		
 		BaseController.setup(primaryStage, "Password Manager");
 

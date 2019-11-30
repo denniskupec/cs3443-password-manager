@@ -2,7 +2,6 @@ package passmanager.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,7 +46,7 @@ public abstract class BaseController implements Initializable {
 			Parent root2 = loader.load();
 	
 			Scene s = new Scene(root2, 800, 600);
-				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
+			s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 
 			T controller = loader.getController();
 			controller.root = root2;

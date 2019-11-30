@@ -129,6 +129,10 @@ public class EntryDetailController implements Initializable {
 			item = new PasswordEntry();
 			setEditMode(true);
 			clearAllFields();
+			
+			if (callEdit != null) {
+				callEdit.run();
+			}
 		});
 		
 		/* generates a random password for convenience */
@@ -258,6 +262,7 @@ public class EntryDetailController implements Initializable {
 
 			title.setVisible(false);
 			editTitle.setVisible(true);
+			editTitle.setText(title.getText());
 			addNewButton.setVisible(false);
 			editButton.setVisible(false);
 			editControls.setVisible(true);

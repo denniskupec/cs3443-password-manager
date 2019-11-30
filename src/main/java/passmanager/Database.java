@@ -1,6 +1,9 @@
 package passmanager;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -77,6 +80,19 @@ public class Database {
 		}
 		catch (NullPointerException e) {
 			return;
+		}
+	}
+	
+	/**
+	 * Copies a premade demo database, instead of creating tables.
+	 */
+	public static void setupDemo() {
+		try (InputStream resource = App.class.getResourceAsStream("/storage.sqlite3"))  {
+			Files.copy(resource, Util.getStoragePath("storage.sqlite3"));
+			Database.setup();
+		}
+		catch (SQLException | IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
