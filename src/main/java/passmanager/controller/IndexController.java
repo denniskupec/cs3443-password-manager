@@ -1,20 +1,25 @@
 package passmanager.controller;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+
 import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import passmanager.Database;
 import passmanager.component.EntryDetailController;
 import passmanager.component.EntryListCell;
 import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
+import passmanager.model.Settings;
 
 /**
  * Controller manages the 'index' view. 
@@ -28,6 +33,7 @@ public class IndexController extends BaseController implements Initializable {
 	@FXML Label statusMessage;
 	@FXML SplitPane splitPane;
 	
+	Date lastActive;
 	EntryDetailController entryDetail;
 	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
 
@@ -144,7 +150,7 @@ public class IndexController extends BaseController implements Initializable {
 			break;
 			
 		case "Export":
-			// TODO: Export functionality
+			doExport();
 			break;
 			
 		case "Preferences":
@@ -191,6 +197,35 @@ public class IndexController extends BaseController implements Initializable {
 		}
 		
 		entryListView.setItems(temp);
+	}
+	
+	/**
+	 * Exports all entries to a CSV file specified by the user.
+	 */
+	protected void doExport() {
+		FileChooser chooser = new FileChooser();
+		
+		File output = chooser.showSaveDialog(getStage());
+		if (output == null) {
+			return;
+		}
+		
+		if (!output.getName().endsWith(".csv")) {
+			output = new File(output.getAbsolutePath() + ".csv");
+		}
+		
+		try (FileWriter writer = new FileWriter(output)) {
+			
+			for (PasswordEntry p : entryCollection) {
+				writer.write(p.toString());
+				writer.write(System.lineSeparator());
+			}
+			
+			setStatusMessage("Exported to: " + output.getAbsolutePath());
+		}
+		catch (IOException e) {
+			setStatusMessage("Export Failed!");
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
@@ -13,6 +14,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import javafx.scene.image.Image;
+import passmanager.Util;
 
 /**
  * Reflects the 'entries' table.
@@ -299,4 +301,18 @@ public class PasswordEntry {
 		return id == ((PasswordEntry) other).getId();
 	}
 
+	/**
+	 * Converts this object to a CSV string. Only certain fields are included.
+	 * @return String
+	 */
+	public String toString() {
+		try {
+			String[] data = { Util.formatDate(updated_at), "\"" + url + "\"", username, "\"" + new String(password, "UTF-8") + "\"", "\"" + note + "\"" };
+			return String.join(",", data);
+		}
+		catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 }
