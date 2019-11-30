@@ -67,9 +67,18 @@ public class IndexController extends BaseController implements Initializable {
 		
 		searchButton.setOnMouseClicked(this::doSearch);
 		searchText.setOnKeyPressed(event -> {
-			if (event.getCode() == KeyCode.ESCAPE) {
+			switch (event.getCode()) {
+			case ESCAPE:
 				searchText.clear();
 				reload();
+				break;
+				
+			case ENTER:
+				doSearch(null);
+				break;
+				
+			default:
+				break;
 			}
 		});
 		
@@ -163,6 +172,10 @@ public class IndexController extends BaseController implements Initializable {
 		statusMessage.setText(msg);
 	}
 	
+	/**
+	 * Searches the current entry list collection for a title containing a keyword, and sets the entry list to display only the found items.
+	 * @param MouseEvent event
+	 */
 	protected void doSearch(MouseEvent event) {
 		String searchString = searchText.getText();
 		if (searchString.isEmpty()) {

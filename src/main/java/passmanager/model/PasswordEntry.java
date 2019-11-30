@@ -1,10 +1,12 @@
 package passmanager.model;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Date;
 import java.util.Random;
 import com.j256.ormlite.field.DataType;
@@ -217,31 +219,43 @@ public class PasswordEntry {
 			return;
 		}
 		
-		int n = 0;
-		byte[] tmpBuffer = new byte[2048];
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		
+
 		/* fetching a favicon image */
 		try {
-			URL imgUrl = new URL("https://icon.ptmx.dev/icon?size=50&url=" + url);
+			URL url = new URL("http://icon.ptmx.dev/icon?size=50&url=" + this.url);
+			URLConnection conn = url.openConnection();
+			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
 			
-			try (InputStream is = imgUrl.openStream()) {
-			
-				while ( (n = is.read(tmpBuffer)) > 0 ) {
+			try (BufferedInputStream bin = new BufferedInputStream(conn.getInputStream())) {
+				int n = 0;
+				byte[] tmpBuffer = new byte[4096];
+				
+				while ( (n = bin.read(tmpBuffer)) > 0 ) {
 					output.write(tmpBuffer, 0, n);
 				}
 				
 				output.flush();
 			}
-			
-			this.favicon = output.toByteArray();
 		}
 		catch (IOException e) {
 			/* favicon wasn't found, not connected to the internet, etc. 
 			 * We don't store the default one in the database, since it would just be wasted space. 
 			 * A null value also makes it easy to retry later. */
-			this.favicon = null;
+			try (InputStream in = getClass().getResourceAsStream("/icon/default-favicon.png")) {
+				byte[] defaultImg = new byte[in.available()];
+				in.read(defaultImg);
+				this.favicon = defaultImg;
+			}
+			catch (IOException ee) {
+				this.favicon = null;
+			}
+
+			e.printStackTrace();
+			return;
 		}
+		
+		this.favicon = output.toByteArray();
 	}
 	
 	/**

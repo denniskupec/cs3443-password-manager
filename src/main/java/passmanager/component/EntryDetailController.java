@@ -120,7 +120,8 @@ public class EntryDetailController implements Initializable {
 			details.setVisible(true);
 			
 			item = new PasswordEntry();
-			setEditMode(true);			
+			setEditMode(true);
+			clearAllFields();
 		});
 	}
 	
@@ -197,7 +198,7 @@ public class EntryDetailController implements Initializable {
 		passwordMasked.setVisible(value);
 		passwordMasked.setDisable(!value);
 		
-		toggleHide.setText(value ? "Hide" : "Show");
+		toggleHide.setText(value ? "Show" : "Hide");
 	}
 	
 	
@@ -274,6 +275,7 @@ public class EntryDetailController implements Initializable {
 		item.setNote(notes.getText());
 		item.setUrl(website.getText());
 		item.setUpdatedAt(null);
+		item.setFavicon(null);
 		
 		try {
 			Dao<PasswordEntry, Integer> temp = Database.getDao(PasswordEntry.class);
@@ -299,6 +301,20 @@ public class EntryDetailController implements Initializable {
 				callSave.run();
 			}
 		}
+	}
+	
+	/**
+	 * Clears all editable elements, and sets the default favicon image.
+	 */
+	protected void clearAllFields() {
+		editTitle.clear();
+		website.clear();
+		username.clear();
+		passwordPlain.clear();
+		passwordMasked.clear();
+		notes.clear();
+		
+		favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
 	}
 
 }
