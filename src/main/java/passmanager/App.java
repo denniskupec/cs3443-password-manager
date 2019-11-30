@@ -21,7 +21,7 @@ public class App extends Application {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "INFO");
+		System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "ERROR");
 		
 		launch(args);
 		Database.close();
