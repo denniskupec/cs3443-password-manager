@@ -142,7 +142,7 @@ public class EntryDetailController implements Initializable {
 	public void setData(PasswordEntry data) {
 		item = data;
 		
-		boolean nullData = (data == null || data == null);
+		boolean nullData = (data == null);
 		
 		favicon.setVisible(!nullData);
 		title.setVisible(!nullData);

@@ -16,7 +16,6 @@ import passmanager.interfaces.*;
  * All other controllers extend this controller. This provides the methods to switch scenes.
  */
 public abstract class BaseController implements Initializable {
-	private final static Logger Log = Util.getLogger(BaseController.class);
 
 	protected static Stage stage;
 	protected Parent root;
@@ -51,12 +50,10 @@ public abstract class BaseController implements Initializable {
 				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 
 			T controller = loader.getController();
-
-				controller.root = root2;
-				controller.scene = s;
-				stage.setScene(s);
+			controller.root = root2;
+			controller.scene = s;
+			stage.setScene(s);
 				
-			Log.info("Controller loaded: " + controller.getClass().getName());
 			return controller;
 		}
 		catch (IOException e) {
@@ -78,16 +75,14 @@ public abstract class BaseController implements Initializable {
 			s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 
 			T controller = loader.getController();
-
-				controller.root = root2;
-				controller.scene = s;
-				popStage.getIcons().add(new Image("/icon/lock.png"));
-				popStage.setScene(s);
-				popStage.initModality(Modality.APPLICATION_MODAL);
-				popStage.setResizable(false);
-				popStage.show();
+			controller.root = root2;
+			controller.scene = s;
+			popStage.getIcons().add(new Image("/icon/lock.png"));
+			popStage.setScene(s);
+			popStage.initModality(Modality.APPLICATION_MODAL);
+			popStage.setResizable(false);
+			popStage.show();
 				
-			Log.info("Controller loaded: " + controller.getClass().getName());
 			return controller;
 		}
 		catch (IOException e) {

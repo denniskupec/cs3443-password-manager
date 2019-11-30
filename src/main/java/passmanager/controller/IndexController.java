@@ -52,6 +52,11 @@ public class IndexController extends BaseController implements Initializable {
 			entryCollection.add(entry);
 		}
 		entryListView.setItems( entryCollection );
+		
+		if (entryCollection.isEmpty()) {
+			setStatusMessage("Empty database. Try adding a new item.");
+			entryDetail.setData(null);
+		}
 
 		/* this updates the detail pane with the correct model when a list item is selected/clicked */
 		entryListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> entryDetail.setData(newValue));
