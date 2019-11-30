@@ -242,20 +242,25 @@ public class PasswordEntry {
 			/* favicon wasn't found, not connected to the internet, etc. 
 			 * We don't store the default one in the database, since it would just be wasted space. 
 			 * A null value also makes it easy to retry later. */
-			try (InputStream in = getClass().getResourceAsStream("/icon/default-favicon.png")) {
-				byte[] defaultImg = new byte[in.available()];
-				in.read(defaultImg);
-				this.favicon = defaultImg;
-			}
-			catch (IOException ee) {
-				this.favicon = null;
-			}
-
-			e.printStackTrace();
+			setDefaultFavicon();
 			return;
 		}
 		
 		this.favicon = output.toByteArray();
+	}
+	
+	/**
+	 * Set the default favicon.
+	 */
+	public void setDefaultFavicon() {
+		try (InputStream in = getClass().getResourceAsStream("/icon/default-favicon.png")) {
+			byte[] defaultImg = new byte[in.available()];
+			in.read(defaultImg);
+			this.favicon = defaultImg;
+		}
+		catch (IOException ee) {
+			this.favicon = null;
+		}
 	}
 	
 	/**
