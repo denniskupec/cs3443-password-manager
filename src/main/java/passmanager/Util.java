@@ -1,5 +1,7 @@
 package passmanager;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -60,7 +62,11 @@ public class Util {
 	 * @return Path - Absolute path to the configuration directory
 	 */
 	public static Path getStoragePath() {
-		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager");
+		Path p = Paths.get(Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager").toString());
+		File pf = new File(p.toString());
+			pf.mkdir();
+			
+		return p;
 	}
 	
 	/**
@@ -69,7 +75,17 @@ public class Util {
 	 * @return Path - Absolute path to the file in the configuration directory.
 	 */
 	public static Path getStoragePath(String filename)  {
-		return Paths.get(Util.getStoragePath().toString(), filename);
+		Path p = Paths.get(Util.getStoragePath().toString(), filename);
+		File pf = new File(p.toString());
+		
+		try {
+			pf.createNewFile();
+		} 
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+			
+		return p;
 	}
 
 	/**

@@ -1,9 +1,9 @@
 package passmanager;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -84,11 +84,11 @@ public class Database {
 	}
 	
 	/**
-	 * Copies a premade demo database, instead of creating tables.
+	 * Copies a premade demo database instead of creating a fresh one. 
 	 */
 	public static void setupDemo() {
 		try (InputStream resource = App.class.getResourceAsStream("/storage.sqlite3"))  {
-			Files.copy(resource, Util.getStoragePath("storage.sqlite3"));
+			Files.copy(resource, Util.getStoragePath("storage.sqlite3"), StandardCopyOption.REPLACE_EXISTING);
 			Database.setup();
 		}
 		catch (SQLException | IOException e) {
