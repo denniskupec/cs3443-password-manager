@@ -1,17 +1,35 @@
 package passmanager.controller;
 
+<<<<<<< HEAD
 import java.sql.SQLException;
+=======
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Date;
+
+>>>>>>> develop
 import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+<<<<<<< HEAD
+=======
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+>>>>>>> develop
 import passmanager.Database;
 import passmanager.component.EntryDetailController;
 import passmanager.component.EntryListCell;
 import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
+<<<<<<< HEAD
+=======
+import passmanager.model.Settings;
+>>>>>>> develop
 
 /**
  * Controller manages the 'index' view. 
@@ -25,6 +43,11 @@ public class IndexController extends BaseController implements Initializable {
 	@FXML Label statusMessage;
 	@FXML SplitPane splitPane;
 	
+<<<<<<< HEAD
+=======
+	Date lastActive;
+	Settings settings;
+>>>>>>> develop
 	EntryDetailController entryDetail;
 	ObservableList<PasswordEntry> entryCollection = FXCollections.observableArrayList();
 
@@ -33,8 +56,19 @@ public class IndexController extends BaseController implements Initializable {
 	 */
 	@Override
 	public void initialize() {
+<<<<<<< HEAD
 		entryDetail = new EntryDetailController();
 		
+=======
+		try {
+			settings = Database.getDao(Settings.class).queryForId(1);
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		entryDetail = new EntryDetailController();
+>>>>>>> develop
 		splitPane.getItems().add( entryDetail.getBox() );
 		
 		/* fill our collection of entries */
@@ -43,6 +77,14 @@ public class IndexController extends BaseController implements Initializable {
 			entryCollection.add(entry);
 		}
 		entryListView.setItems( entryCollection );
+<<<<<<< HEAD
+=======
+		
+		if (entryCollection.isEmpty()) {
+			setStatusMessage("Empty database. Try adding a new item.");
+			entryDetail.setData(null);
+		}
+>>>>>>> develop
 
 		/* this updates the detail pane with the correct model when a list item is selected/clicked */
 		entryListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> entryDetail.setData(newValue));
@@ -53,15 +95,54 @@ public class IndexController extends BaseController implements Initializable {
 		/* register any callbacks */
 		entryDetail.setDeleteCallback(this::doDeleteCallback);
 		
+<<<<<<< HEAD
 		entryDetail.setEditCallback(() -> entryListView.setDisable(true));
 		
 		entryDetail.setCancelCallback(() -> {
 			entryListView.setDisable(false);
+=======
+		entryDetail.setEditCallback(() -> {
+			searchButton.setDisable(true);
+			searchText.setDisable(true);
+			entryListView.setDisable(true);
+		});
+		
+		entryDetail.setCancelCallback(() -> {
+			entryListView.setDisable(false);
+			searchButton.setDisable(false);
+			searchText.setDisable(false);
+>>>>>>> develop
 			entryDetail.setData(entryListView.getSelectionModel().getSelectedItem());
 		});
 		
 		entryDetail.setSaveCallback(this::reload);
 		
+<<<<<<< HEAD
+=======
+		searchButton.setOnMouseClicked(this::doSearch);
+		searchText.setOnKeyPressed(event -> {
+			switch (event.getCode()) {
+			case ESCAPE:
+				searchText.clear();
+				reload();
+				break;
+				
+			case ENTER:
+				doSearch(null);
+				break;
+				
+			default:
+				break;
+			}
+		});
+		
+		searchText.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!oldValue.isEmpty() && newValue.isEmpty()) {
+				reload();
+			}
+		});
+		
+>>>>>>> develop
 		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
 	
@@ -91,6 +172,12 @@ public class IndexController extends BaseController implements Initializable {
 		entryCollection.remove(item);
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Reloads the list of items from the database. Does not change selected item.
+	 */
+>>>>>>> develop
 	public void reload() {
 		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
 		entryCollection.clear();
@@ -115,7 +202,11 @@ public class IndexController extends BaseController implements Initializable {
 			break;
 			
 		case "Export":
+<<<<<<< HEAD
 			// TODO: Export functionality
+=======
+			doExport();
+>>>>>>> develop
 			break;
 			
 		case "Preferences":
@@ -142,5 +233,58 @@ public class IndexController extends BaseController implements Initializable {
 	public void setStatusMessage(String msg) {
 		statusMessage.setText(msg);
 	}
+<<<<<<< HEAD
+=======
+	
+	/**
+	 * Searches the current entry list collection for a title containing a keyword, and sets the entry list to display only the found items.
+	 * @param MouseEvent event
+	 */
+	protected void doSearch(MouseEvent event) {
+		String searchString = searchText.getText();
+		if (searchString.isEmpty()) {
+			return;
+		}
+		
+		ObservableList<PasswordEntry> temp = FXCollections.observableArrayList();
+
+		for (PasswordEntry p : entryCollection) {
+			if (p.getTitle().contains(searchString)) {
+				temp.add(p);
+			}
+		}
+		
+		entryListView.setItems(temp);
+	}
+	
+	/**
+	 * Exports all entries to a CSV file specified by the user.
+	 */
+	protected void doExport() {
+		FileChooser chooser = new FileChooser();
+		
+		File output = chooser.showSaveDialog(getStage());
+		if (output == null) {
+			return;
+		}
+		
+		if (!output.getName().endsWith(".csv")) {
+			output = new File(output.getAbsolutePath() + ".csv");
+		}
+		
+		try (FileWriter writer = new FileWriter(output)) {
+			
+			for (PasswordEntry p : entryCollection) {
+				writer.write(p.toString());
+				writer.write(System.lineSeparator());
+			}
+			
+			setStatusMessage("Exported to: " + output.getAbsolutePath());
+		}
+		catch (IOException e) {
+			setStatusMessage("Export Failed!");
+		}
+	}
+>>>>>>> develop
 
 }

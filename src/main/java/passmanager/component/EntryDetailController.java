@@ -2,7 +2,14 @@ package passmanager.component;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+<<<<<<< HEAD
 import java.sql.SQLException;
+=======
+import java.security.SecureRandom;
+import java.sql.SQLException;
+import java.util.stream.Collectors;
+
+>>>>>>> develop
 import com.j256.ormlite.dao.Dao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +54,10 @@ public class EntryDetailController implements Initializable {
 	@FXML Button deleteButton;
 	@FXML Button cancelEdit;
 	@FXML Button saveButton;
+<<<<<<< HEAD
+=======
+	@FXML Button generateButton;
+>>>>>>> develop
 	
 	PasswordEntry item = null;
 	Runnable callCancel, callDelete, callEdit, callSave;
@@ -90,6 +101,12 @@ public class EntryDetailController implements Initializable {
 		/* when in edit mode, persist to database */
 		saveButton.setOnMouseClicked(this::onSaveEdit);
 		
+<<<<<<< HEAD
+=======
+		/* keeps the masked and plain password text in sync */
+		passwordPlain.textProperty().addListener((ob, oldValue, newValue) -> passwordMasked.setText(newValue));
+		
+>>>>>>> develop
 		/* button will enter edit mode */
 		editButton.setOnMouseClicked(event -> {
 			setEditMode(true);
@@ -120,7 +137,27 @@ public class EntryDetailController implements Initializable {
 			details.setVisible(true);
 			
 			item = new PasswordEntry();
+<<<<<<< HEAD
 			setEditMode(true);			
+=======
+			setEditMode(true);
+			clearAllFields();
+			
+			if (callEdit != null) {
+				callEdit.run();
+			}
+		});
+		
+		/* generates a random password for convenience */
+		generateButton.setOnMouseClicked(event -> {
+			String charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_+-=[]?";
+
+			String generated = new SecureRandom().ints(17, 0, charset.length())
+									 			 .mapToObj(i -> String.valueOf(charset.charAt(i)))
+									 			 .collect(Collectors.joining());
+			
+			passwordPlain.setText(generated);
+>>>>>>> develop
 		});
 	}
 	
@@ -141,7 +178,11 @@ public class EntryDetailController implements Initializable {
 	public void setData(PasswordEntry data) {
 		item = data;
 		
+<<<<<<< HEAD
 		boolean nullData = (data == null || data == null);
+=======
+		boolean nullData = (data == null);
+>>>>>>> develop
 		
 		favicon.setVisible(!nullData);
 		title.setVisible(!nullData);
@@ -157,7 +198,10 @@ public class EntryDetailController implements Initializable {
 		title.setText( data.getTitle() );
 		website.setText( data.getUrl() );
 		username.setText( data.getUsername() );
+<<<<<<< HEAD
 		passwordMasked.setText( new String(data.getPassword()) );
+=======
+>>>>>>> develop
 		notes.setText( data.getNote() );
 		lastUpdateLabel.setText( Util.formatDate(data.getUpdatedAt()) );
 		
@@ -197,7 +241,11 @@ public class EntryDetailController implements Initializable {
 		passwordMasked.setVisible(value);
 		passwordMasked.setDisable(!value);
 		
+<<<<<<< HEAD
 		toggleHide.setText(value ? "Hide" : "Show");
+=======
+		toggleHide.setText(value ? "Show" : "Hide");
+>>>>>>> develop
 	}
 	
 	
@@ -237,9 +285,16 @@ public class EntryDetailController implements Initializable {
 			toggleHide.setDisable(true);
 			setReadOnly(false);
 			setMasked(false);
+<<<<<<< HEAD
 		
 			title.setVisible(false);
 			editTitle.setVisible(true);
+=======
+
+			title.setVisible(false);
+			editTitle.setVisible(true);
+			editTitle.setText(title.getText());
+>>>>>>> develop
 			addNewButton.setVisible(false);
 			editButton.setVisible(false);
 			editControls.setVisible(true);
@@ -258,6 +313,11 @@ public class EntryDetailController implements Initializable {
 			editControls.setVisible(false);
 			deleteButton.setVisible(false);
 		}
+<<<<<<< HEAD
+=======
+		
+		generateButton.setVisible(value);
+>>>>>>> develop
 	}
 
 	
@@ -274,6 +334,10 @@ public class EntryDetailController implements Initializable {
 		item.setNote(notes.getText());
 		item.setUrl(website.getText());
 		item.setUpdatedAt(null);
+<<<<<<< HEAD
+=======
+		item.setFavicon(null);
+>>>>>>> develop
 		
 		try {
 			Dao<PasswordEntry, Integer> temp = Database.getDao(PasswordEntry.class);
@@ -300,5 +364,21 @@ public class EntryDetailController implements Initializable {
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+	
+	/**
+	 * Clears all editable elements, and sets the default favicon image.
+	 */
+	protected void clearAllFields() {
+		editTitle.clear();
+		website.clear();
+		username.clear();
+		passwordPlain.clear();
+		notes.clear();
+		
+		favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
+	}
+>>>>>>> develop
 
 }

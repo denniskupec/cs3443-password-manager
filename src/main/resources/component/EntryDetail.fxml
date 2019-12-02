@@ -64,7 +64,11 @@
          <children>
             <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="70.0" prefWidth="486.0">
                <children>
+<<<<<<< HEAD
                   <ImageView fx:id="favicon" cache="true" cacheHint="QUALITY" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+=======
+                  <ImageView fx:id="favicon" cache="true" cacheHint="QUALITY" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+>>>>>>> develop
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
@@ -82,10 +86,20 @@
                                  </font>
                               </TextField>
                            </children>
+<<<<<<< HEAD
                         </StackPane>
                </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
+=======
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </StackPane>
+               </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+>>>>>>> develop
                      </VBox.margin>
             </HBox>
          </children>
@@ -131,6 +145,14 @@
                                        </children>
                                     </StackPane>
                                     <Button fx:id="toggleHide" mnemonicParsing="false" prefWidth="45.0" style="-fx-background-radius: 0 3px 3px 0;" text="Show" />
+<<<<<<< HEAD
+=======
+                                          <Button fx:id="generateButton" mnemonicParsing="false" text="Generate" visible="false">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+>>>>>>> develop
                                  </children>
                               </HBox>
                            </children>

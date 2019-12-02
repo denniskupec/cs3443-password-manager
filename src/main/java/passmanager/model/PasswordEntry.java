@@ -1,16 +1,30 @@
 package passmanager.model;
 
+<<<<<<< HEAD
+=======
+import java.io.BufferedInputStream;
+>>>>>>> develop
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+<<<<<<< HEAD
 import java.net.URL;
+=======
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+>>>>>>> develop
 import java.util.Date;
 import java.util.Random;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import javafx.scene.image.Image;
+<<<<<<< HEAD
+=======
+import passmanager.Util;
+>>>>>>> develop
 
 /**
  * Reflects the 'entries' table.
@@ -217,6 +231,7 @@ public class PasswordEntry {
 			return;
 		}
 		
+<<<<<<< HEAD
 		int n = 0;
 		byte[] tmpBuffer = new byte[2048];
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -228,18 +243,59 @@ public class PasswordEntry {
 			try (InputStream is = imgUrl.openStream()) {
 			
 				while ( (n = is.read(tmpBuffer)) > 0 ) {
+=======
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+		/* fetching a favicon image */
+		try {
+			URL url = new URL("http://icon.ptmx.dev/icon?size=50&url=" + this.url);
+			URLConnection conn = url.openConnection();
+			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
+			conn.setConnectTimeout(5000);
+			conn.setReadTimeout(15000);
+			conn.setDoInput(true);
+			
+			try (BufferedInputStream bin = new BufferedInputStream(conn.getInputStream())) {
+				int n = 0;
+				byte[] tmpBuffer = new byte[4096];
+				
+				while ( (n = bin.read(tmpBuffer)) > 0 ) {
+>>>>>>> develop
 					output.write(tmpBuffer, 0, n);
 				}
 				
 				output.flush();
 			}
+<<<<<<< HEAD
 			
 			this.favicon = output.toByteArray();
+=======
+>>>>>>> develop
 		}
 		catch (IOException e) {
 			/* favicon wasn't found, not connected to the internet, etc. 
 			 * We don't store the default one in the database, since it would just be wasted space. 
 			 * A null value also makes it easy to retry later. */
+<<<<<<< HEAD
+=======
+			setDefaultFavicon();
+			return;
+		}
+		
+		this.favicon = output.toByteArray();
+	}
+	
+	/**
+	 * Set the default favicon.
+	 */
+	public void setDefaultFavicon() {
+		try (InputStream in = getClass().getResourceAsStream("/icon/default-favicon.png")) {
+			byte[] defaultImg = new byte[in.available()];
+			in.read(defaultImg);
+			this.favicon = defaultImg;
+		}
+		catch (IOException ee) {
+>>>>>>> develop
 			this.favicon = null;
 		}
 	}
@@ -280,4 +336,21 @@ public class PasswordEntry {
 		return id == ((PasswordEntry) other).getId();
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Converts this object to a CSV string. Only certain fields are included.
+	 * @return String
+	 */
+	public String toString() {
+		try {
+			String[] data = { Util.formatDate(updated_at), "\"" + url + "\"", username, "\"" + new String(password, "UTF-8") + "\"", "\"" + note + "\"" };
+			return String.join(",", data);
+		}
+		catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+>>>>>>> develop
 }

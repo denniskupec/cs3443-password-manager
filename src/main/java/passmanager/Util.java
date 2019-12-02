@@ -1,5 +1,10 @@
 package passmanager;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.IOException;
+>>>>>>> develop
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
+/**
+ * Utility functions for convenience.
+ */
 public class Util {
 
 	/**
@@ -60,7 +68,18 @@ public class Util {
 	 * @return Path - Absolute path to the configuration directory
 	 */
 	public static Path getStoragePath() {
+<<<<<<< HEAD
 		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager");
+=======
+		Path p = Paths.get(Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager").toString());
+		File pf = new File(p.toString());
+		
+		if (pf.mkdirs()) {
+			Util.getLogger(Util.class).info("Created data directories.");
+		}
+			
+		return p;
+>>>>>>> develop
 	}
 	
 	/**
@@ -69,7 +88,21 @@ public class Util {
 	 * @return Path - Absolute path to the file in the configuration directory.
 	 */
 	public static Path getStoragePath(String filename)  {
+<<<<<<< HEAD
 		return Paths.get(Util.getStoragePath().toString(), filename);
+=======
+		Path p = Paths.get(Util.getStoragePath().toString(), filename);
+		File pf = new File(p.toString());
+		
+		try {
+			pf.createNewFile();
+		} 
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+			
+		return p;
+>>>>>>> develop
 	}
 
 	/**

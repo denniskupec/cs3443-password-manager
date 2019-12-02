@@ -44,7 +44,11 @@
         <menus>
           <Menu mnemonicParsing="false" onAction="#onMenuClick" text="File">
             <items>
+<<<<<<< HEAD
                   <MenuItem mnemonicParsing="false" text="Export" />
+=======
+                  <MenuItem mnemonicParsing="false" text="Export CSV" />
+>>>>>>> develop
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Logout" />
             </items>
