@@ -20,7 +20,7 @@ public class App extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args) throws IOException {
-		
+		/* makes ormlite logging less verbose */
 		System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "ERROR");
 		
 		launch(args);
@@ -32,7 +32,8 @@ public class App extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Database.setupDemo();
+		Database.setupDemo(); // sets up the program to use the demo files
+		//Database.setup();
 		
 		BaseController.setup(primaryStage, "Password Manager");
 

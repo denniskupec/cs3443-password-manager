@@ -34,10 +34,8 @@ public class Database {
 			return DaoManager.createDao(connectionSource, clazz);
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		
-		return null;
 	}
 	
 	/**
@@ -50,10 +48,22 @@ public class Database {
 		TableUtils.createTableIfNotExists(connectionSource, Settings.class);
 		TableUtils.createTableIfNotExists(connectionSource, PasswordEntry.class);
 	}
+	
+	/**
+	 * Copies a premade demo database resource instead of creating a fresh one. 
+	 */
+	public static void setupDemo() {
+		try (InputStream resource = App.class.getResourceAsStream("/storage.sqlite3"))  {
+			Files.copy(resource, Util.getStoragePath("storage.sqlite3"), StandardCopyOption.REPLACE_EXISTING);
+			Database.setup();
+		}
+		catch (SQLException | IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
-	 * Only checks if the database was copied already. 
-	 * true = exists, false = doesn't exist
+	 * Only checks if the database file exists on disk. 
 	 * @return boolean
 	 */
 	public static boolean exists() {
@@ -62,7 +72,7 @@ public class Database {
 	
 	/**
 	 * Deletes the database from the disk. Don't use this, unless you're doing tests or something...
-	 * @return boolean		true = success
+	 * @return boolean
 	 */
 	public static boolean deleteFromDisk() {
 		return Util.getStoragePath("storage.sqlite3").toFile().delete();
@@ -76,23 +86,10 @@ public class Database {
 			connectionSource.close();
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		catch (NullPointerException e) {
-			return;
-		}
-	}
-	
-	/**
-	 * Copies a premade demo database instead of creating a fresh one. 
-	 */
-	public static void setupDemo() {
-		try (InputStream resource = App.class.getResourceAsStream("/storage.sqlite3"))  {
-			Files.copy(resource, Util.getStoragePath("storage.sqlite3"), StandardCopyOption.REPLACE_EXISTING);
-			Database.setup();
-		}
-		catch (SQLException | IOException e) {
-			throw new RuntimeException(e);
+			/* intentionally left blank */
 		}
 	}
 
