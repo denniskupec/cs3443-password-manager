@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
+/**
+ * Utility functions for convenience.
+ */
 public class Util {
 
 	/**
@@ -64,7 +67,10 @@ public class Util {
 	public static Path getStoragePath() {
 		Path p = Paths.get(Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager").toString());
 		File pf = new File(p.toString());
-			pf.mkdir();
+		
+		if (pf.mkdirs()) {
+			Util.getLogger(Util.class).info("Created data directories.");
+		}
 			
 		return p;
 	}
