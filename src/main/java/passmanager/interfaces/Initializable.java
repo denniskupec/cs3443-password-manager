@@ -2,6 +2,7 @@ package passmanager.interfaces;
 
 /**
  * Replaces javafx.fxml.Initializable
+ * New behavior injects location and resources properties automatically.
  */
 public interface Initializable {
 	

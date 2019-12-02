@@ -18,7 +18,6 @@ import passmanager.Util;
 
 /**
  * Reflects the 'entries' table.
- * All setter methods return true on success or false on failure.
  */
 @DatabaseTable(tableName = "entries")
 public class PasswordEntry {

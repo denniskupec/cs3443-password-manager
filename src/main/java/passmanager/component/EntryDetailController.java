@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
-
 import com.j256.ormlite.dao.Dao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,13 +121,13 @@ public class EntryDetailController implements Initializable {
 		});
 		
 		addNewButton.setOnMouseClicked(event -> {
-			deleteButton.setDisable(true);
-			noSelection.setVisible(false);
-			details.setVisible(true);
-			
 			item = new PasswordEntry();
 			setEditMode(true);
 			clearAllFields();
+			
+			noSelection.setVisible(false);
+			details.setVisible(true);
+			deleteButton.setDisable(true);
 			
 			if (callEdit != null) {
 				callEdit.run();
@@ -147,7 +146,6 @@ public class EntryDetailController implements Initializable {
 		});
 	}
 	
-	
 	/**
 	 * Returns the bounding container for EntryData.
 	 * @return GridPane
@@ -155,7 +153,6 @@ public class EntryDetailController implements Initializable {
 	public GridPane getBox() {
 		return gridpane;
 	}
-	
 	
 	/**
 	 * Populate the EntryDetail view with the correct data.
@@ -192,7 +189,8 @@ public class EntryDetailController implements Initializable {
 		
 		/* use a placeholder image for entries without a favicon set */
 		if (data.getFavicon() == null) {
-			favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
+			// favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
+			item.setDefaultFavicon();
 		}
 		else {
 			favicon.setImage(data.getFavicon());
@@ -215,10 +213,8 @@ public class EntryDetailController implements Initializable {
 	public void setMasked(boolean value) {
 		passwordPlain.setVisible(!value);
 		passwordPlain.setDisable(value);
-		
 		passwordMasked.setVisible(value);
 		passwordMasked.setDisable(!value);
-		
 		toggleHide.setText(value ? "Show" : "Hide");
 	}
 	
@@ -255,19 +251,20 @@ public class EntryDetailController implements Initializable {
 	 * @param boolean value
 	 */
 	public void setEditMode(boolean value) {
+		/*
 		if (value) {
-			toggleHide.setDisable(true);
-			setReadOnly(false);
-			setMasked(false);
+			toggleHide.setDisable(value);
+			setReadOnly(!value);
+			setMasked(!value);
 
-			title.setVisible(false);
-			editTitle.setVisible(true);
+			title.setVisible(!value);
+			editTitle.setVisible(value);
 			editTitle.setText(title.getText());
-			addNewButton.setVisible(false);
-			editButton.setVisible(false);
-			editControls.setVisible(true);
-			deleteButton.setVisible(true);
-			deleteButton.setDisable(false);
+			addNewButton.setVisible(!value);
+			editButton.setVisible(!value);
+			editControls.setVisible(value);
+			deleteButton.setVisible(value);
+			deleteButton.setDisable(!value);
 		}
 		else {
 			toggleHide.setDisable(false);
@@ -281,6 +278,19 @@ public class EntryDetailController implements Initializable {
 			editControls.setVisible(false);
 			deleteButton.setVisible(false);
 		}
+		*/
+		toggleHide.setDisable(value);
+		setReadOnly(!value);
+		setMasked(!value);
+
+		title.setVisible(!value);
+		editTitle.setVisible(value);
+		editTitle.setText(title.getText());
+		addNewButton.setVisible(!value);
+		editButton.setVisible(!value);
+		editControls.setVisible(value);
+		deleteButton.setVisible(value);
+		deleteButton.setDisable(!value);
 		
 		generateButton.setVisible(value);
 	}

@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
-
 import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
