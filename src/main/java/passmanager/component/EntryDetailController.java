@@ -27,10 +27,12 @@ import passmanager.model.PasswordEntry;
 
 public class EntryDetailController implements Initializable {
 
+	/* enclosing containers */
 	@FXML GridPane gridpane;
 	@FXML VBox noSelection;
 	@FXML Pane details;
 	
+	/* entry detail contents */
 	@FXML ImageView favicon;
 	@FXML Label title;
 	@FXML TextField website;
@@ -44,6 +46,7 @@ public class EntryDetailController implements Initializable {
 	@FXML Button editButton;
 	@FXML HBox updatedBox;
 	
+	/* edit mode specific elements */
 	@FXML HBox editControls;
 	@FXML TextField editTitle;
 	@FXML Button deleteButton;
@@ -189,7 +192,6 @@ public class EntryDetailController implements Initializable {
 		
 		/* use a placeholder image for entries without a favicon set */
 		if (data.getFavicon() == null) {
-			// favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
 			item.setDefaultFavicon();
 		}
 		else {
@@ -251,47 +253,21 @@ public class EntryDetailController implements Initializable {
 	 * @param boolean value
 	 */
 	public void setEditMode(boolean value) {
-		/*
-		if (value) {
-			toggleHide.setDisable(value);
-			setReadOnly(!value);
-			setMasked(!value);
-
-			title.setVisible(!value);
-			editTitle.setVisible(value);
-			editTitle.setText(title.getText());
-			addNewButton.setVisible(!value);
-			editButton.setVisible(!value);
-			editControls.setVisible(value);
-			deleteButton.setVisible(value);
-			deleteButton.setDisable(!value);
-		}
-		else {
-			toggleHide.setDisable(false);
-			setReadOnly(true);
-			setMasked(true);
-			
-			title.setVisible(true);
-			editTitle.setVisible(false);
-			addNewButton.setVisible(true);
-			editButton.setVisible(true);
-			editControls.setVisible(false);
-			deleteButton.setVisible(false);
-		}
-		*/
-		toggleHide.setDisable(value);
 		setReadOnly(!value);
 		setMasked(!value);
-
-		title.setVisible(!value);
+		
 		editTitle.setVisible(value);
-		editTitle.setText(title.getText());
+		if (value) {
+			editTitle.setText(title.getText());
+		}
+
+		toggleHide.setDisable(value);
+		title.setVisible(!value);
 		addNewButton.setVisible(!value);
 		editButton.setVisible(!value);
 		editControls.setVisible(value);
 		deleteButton.setVisible(value);
 		deleteButton.setDisable(!value);
-		
 		generateButton.setVisible(value);
 	}
 
