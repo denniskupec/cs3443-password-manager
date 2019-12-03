@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import passmanager.Database;
 import passmanager.component.EntryDetailController;
 import passmanager.component.EntryListCell;
@@ -166,7 +167,7 @@ public class IndexController extends BaseController implements Initializable {
 			loadScene("/layout/login.fxml");
 			break;
 			
-		case "Export":
+		case "Export CSV":
 			doExport();
 			break;
 			
@@ -221,6 +222,9 @@ public class IndexController extends BaseController implements Initializable {
 	 */
 	protected void doExport() {
 		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Export To");
+		chooser.setInitialFileName("passwords.csv");
+		chooser.getExtensionFilters().add( new ExtensionFilter("CSV (Comma separated values)", "*.csv") );
 		
 		File output = chooser.showSaveDialog(getStage());
 		if (output == null) {
@@ -234,8 +238,7 @@ public class IndexController extends BaseController implements Initializable {
 		try (FileWriter writer = new FileWriter(output)) {
 			
 			for (PasswordEntry p : entryCollection) {
-				writer.write(p.toString());
-				writer.write(System.lineSeparator());
+				writer.write(p.toString() + "\n");
 			}
 			
 			setStatusMessage("Exported to: " + output.getAbsolutePath());

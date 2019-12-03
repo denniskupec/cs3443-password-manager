@@ -10,7 +10,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
-
 import javafx.scene.Node;
 
 /**
@@ -120,6 +119,21 @@ public class Util {
 	 */
 	public static String formatDate(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
+		return sdf.format(date);
+	}
+	
+	/**
+	 * Formats a Date object into a readable string, with optional specific format argument.
+	 * @param Date date
+	 * @param String formatString
+	 * @return String
+	 */
+	public static String formatDate(Date date, String formatString) {
+		if (formatString.isEmpty()) {
+			return Util.formatDate(date);
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(formatString);
 		return sdf.format(date);
 	}
 	
