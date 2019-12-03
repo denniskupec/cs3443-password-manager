@@ -2,6 +2,12 @@ package passmanager;
 
 import java.io.IOException;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+>>>>>>> develop
 =======
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -28,6 +34,7 @@ public class Database {
 	public static ConnectionSource getSource() {
 		return connectionSource;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	
 	/*
@@ -37,6 +44,8 @@ public class Database {
 		try {
 			return DaoManager.createDao(connectionSource, clazz);
 =======
+=======
+>>>>>>> develop
 	}
 	
 	/*
@@ -69,6 +78,9 @@ public class Database {
 		try (InputStream resource = App.class.getResourceAsStream("/storage.sqlite3"))  {
 			Files.copy(resource, Util.getStoragePath("storage.sqlite3"), StandardCopyOption.REPLACE_EXISTING);
 			Database.setup();
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		}
 		catch (SQLException | IOException e) {
@@ -78,6 +90,7 @@ public class Database {
 		return null;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Used to initialize the sqlite database with the proper schema.
@@ -94,6 +107,10 @@ public class Database {
 	 * Only checks if the database was copied already. 
 	 * true = exists, false = doesn't exist
 =======
+	 * Only checks if the database file exists on disk. 
+>>>>>>> develop
+=======
+	/**
 	 * Only checks if the database file exists on disk. 
 >>>>>>> develop
 	 * @return boolean
@@ -119,15 +136,21 @@ public class Database {
 		} 
 		catch (IOException e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			e.printStackTrace();
 		}
 		catch (NullPointerException e) {
 			return;
 =======
+=======
+>>>>>>> develop
 			throw new RuntimeException(e);
 		}
 		catch (NullPointerException e) {
 			/* intentionally left blank */
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		}
 	}

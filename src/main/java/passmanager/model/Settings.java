@@ -7,7 +7,10 @@ import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Reflects the 'settings' table
+<<<<<<< HEAD
  * All setter functions return true or false, depending on success or failure.
+=======
+>>>>>>> develop
  */
 @DatabaseTable(tableName = "settings")
 public class Settings {

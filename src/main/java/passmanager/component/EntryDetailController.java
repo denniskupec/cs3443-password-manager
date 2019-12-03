@@ -3,12 +3,18 @@ package passmanager.component;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.sql.SQLException;
 =======
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
 
+>>>>>>> develop
+=======
+import java.security.SecureRandom;
+import java.sql.SQLException;
+import java.util.stream.Collectors;
 >>>>>>> develop
 import com.j256.ormlite.dao.Dao;
 import javafx.fxml.FXML;
@@ -32,10 +38,18 @@ import passmanager.model.PasswordEntry;
 
 public class EntryDetailController implements Initializable {
 
+<<<<<<< HEAD
+=======
+	/* enclosing containers */
+>>>>>>> develop
 	@FXML GridPane gridpane;
 	@FXML VBox noSelection;
 	@FXML Pane details;
 	
+<<<<<<< HEAD
+=======
+	/* entry detail contents */
+>>>>>>> develop
 	@FXML ImageView favicon;
 	@FXML Label title;
 	@FXML TextField website;
@@ -49,12 +63,20 @@ public class EntryDetailController implements Initializable {
 	@FXML Button editButton;
 	@FXML HBox updatedBox;
 	
+<<<<<<< HEAD
+=======
+	/* edit mode specific elements */
+>>>>>>> develop
 	@FXML HBox editControls;
 	@FXML TextField editTitle;
 	@FXML Button deleteButton;
 	@FXML Button cancelEdit;
 	@FXML Button saveButton;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	@FXML Button generateButton;
+>>>>>>> develop
 =======
 	@FXML Button generateButton;
 >>>>>>> develop
@@ -102,6 +124,12 @@ public class EntryDetailController implements Initializable {
 		saveButton.setOnMouseClicked(this::onSaveEdit);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* keeps the masked and plain password text in sync */
+		passwordPlain.textProperty().addListener((ob, oldValue, newValue) -> passwordMasked.setText(newValue));
+		
+>>>>>>> develop
 =======
 		/* keeps the masked and plain password text in sync */
 		passwordPlain.textProperty().addListener((ob, oldValue, newValue) -> passwordMasked.setText(newValue));
@@ -132,6 +160,7 @@ public class EntryDetailController implements Initializable {
 		});
 		
 		addNewButton.setOnMouseClicked(event -> {
+<<<<<<< HEAD
 			deleteButton.setDisable(true);
 			noSelection.setVisible(false);
 			details.setVisible(true);
@@ -143,6 +172,16 @@ public class EntryDetailController implements Initializable {
 			setEditMode(true);
 			clearAllFields();
 			
+=======
+			item = new PasswordEntry();
+			setEditMode(true);
+			clearAllFields();
+			
+			noSelection.setVisible(false);
+			details.setVisible(true);
+			deleteButton.setDisable(true);
+			
+>>>>>>> develop
 			if (callEdit != null) {
 				callEdit.run();
 			}
@@ -157,11 +196,17 @@ public class EntryDetailController implements Initializable {
 									 			 .collect(Collectors.joining());
 			
 			passwordPlain.setText(generated);
+<<<<<<< HEAD
 >>>>>>> develop
 		});
 	}
 	
 	
+=======
+		});
+	}
+	
+>>>>>>> develop
 	/**
 	 * Returns the bounding container for EntryData.
 	 * @return GridPane
@@ -170,7 +215,10 @@ public class EntryDetailController implements Initializable {
 		return gridpane;
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> develop
 	/**
 	 * Populate the EntryDetail view with the correct data.
 	 * @param PasswordEntry data
@@ -179,7 +227,11 @@ public class EntryDetailController implements Initializable {
 		item = data;
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		boolean nullData = (data == null || data == null);
+=======
+		boolean nullData = (data == null);
+>>>>>>> develop
 =======
 		boolean nullData = (data == null);
 >>>>>>> develop
@@ -199,7 +251,10 @@ public class EntryDetailController implements Initializable {
 		website.setText( data.getUrl() );
 		username.setText( data.getUsername() );
 <<<<<<< HEAD
+<<<<<<< HEAD
 		passwordMasked.setText( new String(data.getPassword()) );
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 		notes.setText( data.getNote() );
@@ -214,7 +269,11 @@ public class EntryDetailController implements Initializable {
 		
 		/* use a placeholder image for entries without a favicon set */
 		if (data.getFavicon() == null) {
+<<<<<<< HEAD
 			favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
+=======
+			item.setDefaultFavicon();
+>>>>>>> develop
 		}
 		else {
 			favicon.setImage(data.getFavicon());
@@ -237,6 +296,7 @@ public class EntryDetailController implements Initializable {
 	public void setMasked(boolean value) {
 		passwordPlain.setVisible(!value);
 		passwordPlain.setDisable(value);
+<<<<<<< HEAD
 		
 		passwordMasked.setVisible(value);
 		passwordMasked.setDisable(!value);
@@ -244,6 +304,11 @@ public class EntryDetailController implements Initializable {
 <<<<<<< HEAD
 		toggleHide.setText(value ? "Hide" : "Show");
 =======
+		toggleHide.setText(value ? "Show" : "Hide");
+>>>>>>> develop
+=======
+		passwordMasked.setVisible(value);
+		passwordMasked.setDisable(!value);
 		toggleHide.setText(value ? "Show" : "Hide");
 >>>>>>> develop
 	}
@@ -281,6 +346,7 @@ public class EntryDetailController implements Initializable {
 	 * @param boolean value
 	 */
 	public void setEditMode(boolean value) {
+<<<<<<< HEAD
 		if (value) {
 			toggleHide.setDisable(true);
 			setReadOnly(false);
@@ -318,6 +384,24 @@ public class EntryDetailController implements Initializable {
 		
 		generateButton.setVisible(value);
 >>>>>>> develop
+=======
+		setReadOnly(!value);
+		setMasked(!value);
+		
+		editTitle.setVisible(value);
+		if (value) {
+			editTitle.setText(title.getText());
+		}
+
+		toggleHide.setDisable(value);
+		title.setVisible(!value);
+		addNewButton.setVisible(!value);
+		editButton.setVisible(!value);
+		editControls.setVisible(value);
+		deleteButton.setVisible(value);
+		deleteButton.setDisable(!value);
+		generateButton.setVisible(value);
+>>>>>>> develop
 	}
 
 	
@@ -335,6 +419,10 @@ public class EntryDetailController implements Initializable {
 		item.setUrl(website.getText());
 		item.setUpdatedAt(null);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		item.setFavicon(null);
+>>>>>>> develop
 =======
 		item.setFavicon(null);
 >>>>>>> develop
@@ -365,7 +453,10 @@ public class EntryDetailController implements Initializable {
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 	
 	/**
 	 * Clears all editable elements, and sets the default favicon image.
@@ -379,6 +470,9 @@ public class EntryDetailController implements Initializable {
 		
 		favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
 	}
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 
 }

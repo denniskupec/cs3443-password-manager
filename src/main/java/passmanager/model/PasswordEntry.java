@@ -1,6 +1,10 @@
 package passmanager.model;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.io.BufferedInputStream;
+>>>>>>> develop
 =======
 import java.io.BufferedInputStream;
 >>>>>>> develop
@@ -9,11 +13,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.net.URL;
 =======
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+>>>>>>> develop
+=======
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.Base64;
+import java.util.Base64.Encoder;
 >>>>>>> develop
 import java.util.Date;
 import java.util.Random;
@@ -22,6 +35,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import javafx.scene.image.Image;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import passmanager.Util;
 >>>>>>> develop
@@ -29,6 +43,12 @@ import passmanager.Util;
 /**
  * Reflects the 'entries' table.
  * All setter methods return true on success or false on failure.
+=======
+import passmanager.Util;
+
+/**
+ * Reflects the 'entries' table.
+>>>>>>> develop
  */
 @DatabaseTable(tableName = "entries")
 public class PasswordEntry {
@@ -232,6 +252,7 @@ public class PasswordEntry {
 		}
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int n = 0;
 		byte[] tmpBuffer = new byte[2048];
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -244,15 +265,26 @@ public class PasswordEntry {
 			
 				while ( (n = is.read(tmpBuffer)) > 0 ) {
 =======
+=======
+>>>>>>> develop
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 
 		/* fetching a favicon image */
 		try {
+<<<<<<< HEAD
 			URL url = new URL("http://icon.ptmx.dev/icon?size=50&url=" + this.url);
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
 			conn.setConnectTimeout(5000);
 			conn.setReadTimeout(15000);
+=======
+			URL url = new URL("http://icon.ptmx.dev/icon?size=50&formats=png&url=" + this.url);
+			
+			URLConnection conn = url.openConnection();
+			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
+			conn.setConnectTimeout(3000);
+			conn.setReadTimeout(3000);
+>>>>>>> develop
 			conn.setDoInput(true);
 			
 			try (BufferedInputStream bin = new BufferedInputStream(conn.getInputStream())) {
@@ -260,12 +292,16 @@ public class PasswordEntry {
 				byte[] tmpBuffer = new byte[4096];
 				
 				while ( (n = bin.read(tmpBuffer)) > 0 ) {
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 					output.write(tmpBuffer, 0, n);
 				}
 				
 				output.flush();
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			
 			this.favicon = output.toByteArray();
@@ -278,6 +314,13 @@ public class PasswordEntry {
 			 * A null value also makes it easy to retry later. */
 <<<<<<< HEAD
 =======
+=======
+		}
+		catch (IOException e) {
+			/* favicon wasn't found, found but not the right format, not connected to the internet, etc. 
+			 * We don't store the default one in the database, since it would just be wasted space. 
+			 * A null value also makes it easy to check and retry later. */
+>>>>>>> develop
 			setDefaultFavicon();
 			return;
 		}
@@ -286,6 +329,7 @@ public class PasswordEntry {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Set the default favicon.
 	 */
 	public void setDefaultFavicon() {
@@ -297,6 +341,17 @@ public class PasswordEntry {
 		catch (IOException ee) {
 >>>>>>> develop
 			this.favicon = null;
+=======
+	 * Set the default favicon image from resources.
+	 */
+	public void setDefaultFavicon() {
+		try (InputStream in = getClass().getResourceAsStream("/icon/default-favicon.png")) {
+			favicon = new byte[in.available()];
+			in.read(favicon);
+		}
+		catch (IOException ee) {
+			favicon = null;
+>>>>>>> develop
 		}
 	}
 	
@@ -337,19 +392,48 @@ public class PasswordEntry {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 	/**
 	 * Converts this object to a CSV string. Only certain fields are included.
 	 * @return String
 	 */
 	public String toString() {
+<<<<<<< HEAD
 		try {
 			String[] data = { Util.formatDate(updated_at), "\"" + url + "\"", username, "\"" + new String(password, "UTF-8") + "\"", "\"" + note + "\"" };
 			return String.join(",", data);
+=======
+		StringBuilder sb = new StringBuilder();
+		Encoder enc = Base64.getEncoder();
+		
+		try {
+			String[] data = { Util.formatDate(updated_at, "yyyy-MM-dd'T'HH:mm:ss.SSSZ"), url, username, new String(password, "UTF-8")};
+			
+			for (String s : data) {
+				sb.append("\"" + s + "\",");
+			}
+
+			if (note.isEmpty()) {
+				sb.append("\"\"");
+			}
+			else {
+				sb.append("\"data:text/plain;base64," + enc.encodeToString(note.getBytes(Charset.forName("UTF-8"))) + "\""); 	
+			}
+>>>>>>> develop
 		}
 		catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
+<<<<<<< HEAD
+	}
+	
+>>>>>>> develop
+=======
+		
+		return sb.toString();
 	}
 	
 >>>>>>> develop

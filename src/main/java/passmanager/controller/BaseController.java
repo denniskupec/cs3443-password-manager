@@ -3,7 +3,10 @@ package passmanager.controller;
 import java.io.IOException;
 import java.net.URL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.logging.Logger;
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 import javafx.fxml.FXMLLoader;
@@ -15,6 +18,7 @@ import javafx.stage.Stage;
 import passmanager.*;
 import passmanager.interfaces.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * All other controllers extend this controller. This provides the methods to switch scenes.
@@ -22,6 +26,14 @@ import passmanager.interfaces.*;
 public abstract class BaseController implements Initializable {
 	private final static Logger Log = Util.getLogger(BaseController.class);
 
+=======
+
+/**
+ * All other controllers extend this controller. This provides the methods to switch scenes.
+ */
+public abstract class BaseController implements Initializable {
+
+>>>>>>> develop
 =======
 
 /**
@@ -60,6 +72,7 @@ public abstract class BaseController implements Initializable {
 			Parent root2 = loader.load();
 	
 			Scene s = new Scene(root2, 800, 600);
+<<<<<<< HEAD
 <<<<<<< HEAD
 				s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 =======
@@ -118,10 +131,36 @@ public abstract class BaseController implements Initializable {
 
 			Scene s = new Scene(root2);
 
+=======
+>>>>>>> develop
 			s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
 
 			T controller = loader.getController();
+			controller.root = root2;
+			controller.scene = s;
+			stage.setScene(s);
+				
+			return controller;
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static final <T extends BaseController> T loadNewEntry(String resourceName) {
+		URL resource = App.class.getResource(resourceName);
+		FXMLLoader loader = new FXMLLoader(resource);
+		Stage popStage = new Stage();
 
+		try {
+			Parent root2 = loader.load();
+	
+
+			Scene s = new Scene(root2);
+
+			s.getStylesheets().add(App.class.getResource("/style/app.css").toString());
+
+<<<<<<< HEAD
 				controller.root = root2;
 				controller.scene = s;
 				popStage.getIcons().add(new Image("/icon/lock.png"));
@@ -129,8 +168,17 @@ public abstract class BaseController implements Initializable {
 				popStage.initModality(Modality.APPLICATION_MODAL);
 				popStage.setResizable(false);
 				popStage.show();
+=======
+			T controller = loader.getController();
+			controller.root = root2;
+			controller.scene = s;
+			popStage.getIcons().add(new Image("/icon/lock.png"));
+			popStage.setScene(s);
+			popStage.initModality(Modality.APPLICATION_MODAL);
+			popStage.setResizable(false);
+			popStage.show();
+>>>>>>> develop
 				
-			Log.info("Controller loaded: " + controller.getClass().getName());
 			return controller;
 		}
 		catch (IOException e) {

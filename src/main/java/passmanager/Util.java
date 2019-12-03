@@ -1,6 +1,11 @@
 package passmanager;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.IOException;
+>>>>>>> develop
 =======
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
+import javafx.scene.Node;
 
 /**
  * Utility functions for convenience.
@@ -69,8 +75,11 @@ public class Util {
 	 */
 	public static Path getStoragePath() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager");
 =======
+=======
+>>>>>>> develop
 		Path p = Paths.get(Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager").toString());
 		File pf = new File(p.toString());
 		
@@ -79,6 +88,9 @@ public class Util {
 		}
 			
 		return p;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 	}
 	
@@ -89,8 +101,11 @@ public class Util {
 	 */
 	public static Path getStoragePath(String filename)  {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return Paths.get(Util.getStoragePath().toString(), filename);
 =======
+=======
+>>>>>>> develop
 		Path p = Paths.get(Util.getStoragePath().toString(), filename);
 		File pf = new File(p.toString());
 		
@@ -102,6 +117,9 @@ public class Util {
 		}
 			
 		return p;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 	}
 
@@ -131,5 +149,45 @@ public class Util {
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		return sdf.format(date);
 	}
+<<<<<<< HEAD
+=======
+	
+	/**
+	 * Formats a Date object into a readable string, with optional specific format argument.
+	 * @param Date date
+	 * @param String formatString
+	 * @return String
+	 */
+	public static String formatDate(Date date, String formatString) {
+		if (formatString.isEmpty()) {
+			return Util.formatDate(date);
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(formatString);
+		return sdf.format(date);
+	}
+	
+	/**
+	 * Takes a variable number of Node arguments, and sets their disabled status.
+	 * @param boolean status
+	 * @param Node nodes
+	 */
+	public static void setDisabled(boolean status, Node ...nodes) {
+		for (Node n : nodes) {
+			n.setDisable(status);
+		}
+	}
+	
+	/**
+	 * Takes a variable number of Node arguments, and sets their visibility status.
+	 * @param boolean status
+	 * @param Node nodes
+	 */
+	public static void setVisible(boolean status, Node ...nodes) {
+		for (Node n : nodes) {
+			n.setVisible(status);
+		}
+	}
+>>>>>>> develop
 
 }

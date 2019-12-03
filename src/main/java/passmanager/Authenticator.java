@@ -1,15 +1,21 @@
 package passmanager;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import passmanager.model.Settings;
 import java.util.Arrays;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
 =======
+=======
+>>>>>>> develop
 import java.util.Arrays;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
 import passmanager.model.Settings;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 
 public class Authenticator {
@@ -34,7 +40,11 @@ public class Authenticator {
 	
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Attempts to login with the given credential. Returns a boolean value depending on if it's valid.
+=======
+	 * Attempts to verify the given login password. Returns FALSE if the password is incorrect.
+>>>>>>> develop
 =======
 	 * Attempts to verify the given login password. Returns FALSE if the password is incorrect.
 >>>>>>> develop
@@ -46,7 +56,11 @@ public class Authenticator {
 	
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Attempts to register a new user with the given credential
+=======
+	 * Attempts to register a new master password with the one given. 
+>>>>>>> develop
 =======
 	 * Attempts to register a new master password with the one given. 
 >>>>>>> develop

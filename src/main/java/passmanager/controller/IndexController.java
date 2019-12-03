@@ -1,14 +1,20 @@
 package passmanager.controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.sql.SQLException;
 =======
+=======
+>>>>>>> develop
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+<<<<<<< HEAD
 
+>>>>>>> develop
+=======
 >>>>>>> develop
 import com.j256.ormlite.dao.Dao;
 import javafx.collections.FXCollections;
@@ -17,9 +23,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+>>>>>>> develop
+=======
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 >>>>>>> develop
 import passmanager.Database;
 import passmanager.component.EntryDetailController;
@@ -27,6 +39,10 @@ import passmanager.component.EntryListCell;
 import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import passmanager.model.Settings;
+>>>>>>> develop
 =======
 import passmanager.model.Settings;
 >>>>>>> develop
@@ -44,6 +60,11 @@ public class IndexController extends BaseController implements Initializable {
 	@FXML SplitPane splitPane;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	Date lastActive;
+	Settings settings;
+>>>>>>> develop
 =======
 	Date lastActive;
 	Settings settings;
@@ -57,9 +78,12 @@ public class IndexController extends BaseController implements Initializable {
 	@Override
 	public void initialize() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entryDetail = new EntryDetailController();
 		
 =======
+=======
+>>>>>>> develop
 		try {
 			settings = Database.getDao(Settings.class).queryForId(1);
 		}
@@ -68,6 +92,9 @@ public class IndexController extends BaseController implements Initializable {
 		}
 		
 		entryDetail = new EntryDetailController();
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		splitPane.getItems().add( entryDetail.getBox() );
 		
@@ -78,12 +105,18 @@ public class IndexController extends BaseController implements Initializable {
 		}
 		entryListView.setItems( entryCollection );
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 		
 		if (entryCollection.isEmpty()) {
 			setStatusMessage("Empty database. Try adding a new item.");
 			entryDetail.setData(null);
 		}
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 
 		/* this updates the detail pane with the correct model when a list item is selected/clicked */
@@ -96,11 +129,14 @@ public class IndexController extends BaseController implements Initializable {
 		entryDetail.setDeleteCallback(this::doDeleteCallback);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entryDetail.setEditCallback(() -> entryListView.setDisable(true));
 		
 		entryDetail.setCancelCallback(() -> {
 			entryListView.setDisable(false);
 =======
+=======
+>>>>>>> develop
 		entryDetail.setEditCallback(() -> {
 			searchButton.setDisable(true);
 			searchText.setDisable(true);
@@ -111,6 +147,9 @@ public class IndexController extends BaseController implements Initializable {
 			entryListView.setDisable(false);
 			searchButton.setDisable(false);
 			searchText.setDisable(false);
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 			entryDetail.setData(entryListView.getSelectionModel().getSelectedItem());
 		});
@@ -118,7 +157,10 @@ public class IndexController extends BaseController implements Initializable {
 		entryDetail.setSaveCallback(this::reload);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 		searchButton.setOnMouseClicked(this::doSearch);
 		searchText.setOnKeyPressed(event -> {
 			switch (event.getCode()) {
@@ -142,6 +184,9 @@ public class IndexController extends BaseController implements Initializable {
 			}
 		});
 		
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
@@ -173,6 +218,12 @@ public class IndexController extends BaseController implements Initializable {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/**
+	 * Reloads the list of items from the database. Does not change selected item.
+	 */
+>>>>>>> develop
 =======
 	/**
 	 * Reloads the list of items from the database. Does not change selected item.
@@ -201,10 +252,15 @@ public class IndexController extends BaseController implements Initializable {
 			loadScene("/layout/login.fxml");
 			break;
 			
+<<<<<<< HEAD
 		case "Export":
 <<<<<<< HEAD
 			// TODO: Export functionality
 =======
+			doExport();
+>>>>>>> develop
+=======
+		case "Export CSV":
 			doExport();
 >>>>>>> develop
 			break;
@@ -234,7 +290,10 @@ public class IndexController extends BaseController implements Initializable {
 		statusMessage.setText(msg);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 	
 	/**
 	 * Searches the current entry list collection for a title containing a keyword, and sets the entry list to display only the found items.
@@ -262,6 +321,12 @@ public class IndexController extends BaseController implements Initializable {
 	 */
 	protected void doExport() {
 		FileChooser chooser = new FileChooser();
+<<<<<<< HEAD
+=======
+		chooser.setTitle("Export To");
+		chooser.setInitialFileName("passwords.csv");
+		chooser.getExtensionFilters().add( new ExtensionFilter("CSV (Comma separated values)", "*.csv") );
+>>>>>>> develop
 		
 		File output = chooser.showSaveDialog(getStage());
 		if (output == null) {
@@ -275,8 +340,12 @@ public class IndexController extends BaseController implements Initializable {
 		try (FileWriter writer = new FileWriter(output)) {
 			
 			for (PasswordEntry p : entryCollection) {
+<<<<<<< HEAD
 				writer.write(p.toString());
 				writer.write(System.lineSeparator());
+=======
+				writer.write(p.toString() + "\n");
+>>>>>>> develop
 			}
 			
 			setStatusMessage("Exported to: " + output.getAbsolutePath());
@@ -285,6 +354,9 @@ public class IndexController extends BaseController implements Initializable {
 			setStatusMessage("Export Failed!");
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 
 }

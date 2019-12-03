@@ -17,10 +17,13 @@ public class App extends Application {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private final static Logger Log = Util.getLogger(App.class);
 
 	public static void main(String[] args) {
 =======
+=======
+>>>>>>> develop
 	/**
 	 * Program entry
 	 * @param args
@@ -29,11 +32,15 @@ public class App extends Application {
 		/* makes ormlite logging less verbose */
 		System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "ERROR");
 		
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		launch(args);
 		Database.close();
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -70,20 +77,36 @@ public class App extends Application {
 		//Database.setup();
 		
 >>>>>>> develop
+=======
+	/**
+	 * JavaFX entry
+	 */
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Database.setupDemo(); // sets up the program to use the demo files
+		//Database.setup();
+		
+>>>>>>> develop
 		BaseController.setup(primaryStage, "Password Manager");
 
 		if (Database.getDao(Settings.class).countOf() == 0) {
 			BaseController.loadScene("/layout/firstrun.fxml");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		}
 		else {
 			BaseController.loadScene("/layout/login.fxml");
 		}
 =======
+=======
+>>>>>>> develop
 		}
 		else {
 			BaseController.loadScene("/layout/login.fxml");
 		}
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 
 		primaryStage.getIcons().add(new Image("/icon/password.png"));
