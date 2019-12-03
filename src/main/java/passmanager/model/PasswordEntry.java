@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.Base64;
+import java.util.Base64.Encoder;
 import java.util.Date;
 import java.util.Random;
 import com.j256.ormlite.field.DataType;
@@ -224,11 +227,12 @@ public class PasswordEntry {
 
 		/* fetching a favicon image */
 		try {
-			URL url = new URL("http://icon.ptmx.dev/icon?size=50&url=" + this.url);
+			URL url = new URL("http://icon.ptmx.dev/icon?size=50&formats=png&url=" + this.url);
+			
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
-			conn.setConnectTimeout(5000);
-			conn.setReadTimeout(15000);
+			conn.setConnectTimeout(3000);
+			conn.setReadTimeout(3000);
 			conn.setDoInput(true);
 			
 			try (BufferedInputStream bin = new BufferedInputStream(conn.getInputStream())) {
@@ -243,9 +247,9 @@ public class PasswordEntry {
 			}
 		}
 		catch (IOException e) {
-			/* favicon wasn't found, not connected to the internet, etc. 
+			/* favicon wasn't found, found but not the right format, not connected to the internet, etc. 
 			 * We don't store the default one in the database, since it would just be wasted space. 
-			 * A null value also makes it easy to retry later. */
+			 * A null value also makes it easy to check and retry later. */
 			setDefaultFavicon();
 			return;
 		}
@@ -254,16 +258,15 @@ public class PasswordEntry {
 	}
 	
 	/**
-	 * Set the default favicon.
+	 * Set the default favicon image from resources.
 	 */
 	public void setDefaultFavicon() {
 		try (InputStream in = getClass().getResourceAsStream("/icon/default-favicon.png")) {
-			byte[] defaultImg = new byte[in.available()];
-			in.read(defaultImg);
-			this.favicon = defaultImg;
+			favicon = new byte[in.available()];
+			in.read(favicon);
 		}
 		catch (IOException ee) {
-			this.favicon = null;
+			favicon = null;
 		}
 	}
 	
@@ -308,13 +311,28 @@ public class PasswordEntry {
 	 * @return String
 	 */
 	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Encoder enc = Base64.getEncoder();
+		
 		try {
-			String[] data = { Util.formatDate(updated_at), "\"" + url + "\"", username, "\"" + new String(password, "UTF-8") + "\"", "\"" + note + "\"" };
-			return String.join(",", data);
+			String[] data = { Util.formatDate(updated_at, "yyyy-MM-dd'T'HH:mm:ss.SSSZ"), url, username, new String(password, "UTF-8")};
+			
+			for (String s : data) {
+				sb.append("\"" + s + "\",");
+			}
+
+			if (note.isEmpty()) {
+				sb.append("\"\"");
+			}
+			else {
+				sb.append("\"data:text/plain;base64," + enc.encodeToString(note.getBytes(Charset.forName("UTF-8"))) + "\""); 	
+			}
 		}
 		catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
+		
+		return sb.toString();
 	}
 	
 }
