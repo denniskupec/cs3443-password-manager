@@ -21,18 +21,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import passmanager.Database;
-import passmanager.Util;
+import static passmanager.Util.*;
 import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
 
 public class EntryDetailController implements Initializable {
 
-	/* enclosing containers */
+	// enclosing containers
 	@FXML GridPane gridpane;
 	@FXML VBox noSelection;
 	@FXML Pane details;
 	
-	/* entry detail contents */
+	// entry detail contents
 	@FXML ImageView favicon;
 	@FXML Label title;
 	@FXML TextField website;
@@ -46,7 +46,7 @@ public class EntryDetailController implements Initializable {
 	@FXML Button editButton;
 	@FXML HBox updatedBox;
 	
-	/* edit mode specific elements */
+	// edit mode specific elements
 	@FXML HBox editControls;
 	@FXML TextField editTitle;
 	@FXML Button deleteButton;
@@ -68,23 +68,6 @@ public class EntryDetailController implements Initializable {
 		}
 	}
 	
-	
-	public void setCancelCallback(Runnable callback) {
-		this.callCancel = callback;
-	}
-	
-	public void setDeleteCallback(Runnable callback) {
-		this.callDelete = callback;
-	}
-	
-	public void setEditCallback(Runnable callback) {
-		this.callEdit = callback;
-	}
-	
-	public void setSaveCallback(Runnable callback) {
-		this.callSave = callback;
-	}
-	
 	/**
 	 * Called by FXMLLoader
 	 */
@@ -102,25 +85,19 @@ public class EntryDetailController implements Initializable {
 		/* button will enter edit mode */
 		editButton.setOnMouseClicked(event -> {
 			setEditMode(true);
-			if (callEdit != null) {
-				callEdit.run();
-			}
+			if (callEdit != null) callEdit.run();
 		});
 		
 		/* discard changes and revert back to read-only mode */
 		cancelEdit.setOnMouseClicked(event -> {
 			setEditMode(false);
-			if (callCancel != null) {
-				callCancel.run();
-			}
+			if (callCancel != null) callCancel.run();
 		});
 		
 		/* deletes the current entry and refreshes the view */
 		deleteButton.setOnMouseClicked(event -> {
 			setEditMode(false);
-			if (callDelete != null) {
-				callDelete.run();
-			}
+			if (callDelete != null) callDelete.run();
 		});
 		
 		addNewButton.setOnMouseClicked(event -> {
@@ -132,9 +109,7 @@ public class EntryDetailController implements Initializable {
 			details.setVisible(true);
 			deleteButton.setDisable(true);
 			
-			if (callEdit != null) {
-				callEdit.run();
-			}
+			if (callEdit != null) callEdit.run();
 		});
 		
 		/* generates a random password for convenience */
@@ -166,12 +141,9 @@ public class EntryDetailController implements Initializable {
 		
 		boolean nullData = (data == null);
 		
-		favicon.setVisible(!nullData);
-		title.setVisible(!nullData);
+		setVisible(!nullData, favicon, title, details, updatedBox);
 		noSelection.setVisible(nullData);
 		editButton.setDisable(nullData);
-		details.setVisible(!nullData);
-		updatedBox.setVisible(!nullData);
 		
 		if (nullData) {
 			return;
@@ -181,7 +153,7 @@ public class EntryDetailController implements Initializable {
 		website.setText( data.getUrl() );
 		username.setText( data.getUsername() );
 		notes.setText( data.getNote() );
-		lastUpdateLabel.setText( Util.formatDate(data.getUpdatedAt()) );
+		lastUpdateLabel.setText( formatDate(data.getUpdatedAt()) );
 		
 		try {
 			passwordPlain.setText( new String(data.getPassword(), "UTF-8") );
@@ -261,14 +233,11 @@ public class EntryDetailController implements Initializable {
 			editTitle.setText(title.getText());
 		}
 
+		setVisible(value, editControls, deleteButton, generateButton);
+		setVisible(!value, title, addNewButton, editButton);
+		
 		toggleHide.setDisable(value);
-		title.setVisible(!value);
-		addNewButton.setVisible(!value);
-		editButton.setVisible(!value);
-		editControls.setVisible(value);
-		deleteButton.setVisible(value);
 		deleteButton.setDisable(!value);
-		generateButton.setVisible(value);
 	}
 
 	
@@ -293,23 +262,16 @@ public class EntryDetailController implements Initializable {
 			if (item.getId() == -1) {
 				temp.create(item);
 			}
-			else {
-				if (temp.update(item) != 1) {
-					throw new SQLException();
-				}
+			else if (temp.update(item) != 1) {
+				throw new SQLException();
 			}
 		}
 		catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		finally {
-			if (callCancel != null) {
-				callCancel.run();
-			}
-			
-			if (callSave != null) {
-				callSave.run();
-			}
+			if (callCancel != null) callCancel.run();
+			if (callSave != null) callSave.run();
 		}
 	}
 	
@@ -317,13 +279,29 @@ public class EntryDetailController implements Initializable {
 	 * Clears all editable elements, and sets the default favicon image.
 	 */
 	protected void clearAllFields() {
-		editTitle.clear();
-		website.clear();
-		username.clear();
-		passwordPlain.clear();
-		notes.clear();
+		clearText(editTitle, website, username, passwordPlain, notes);
 		
 		favicon.setImage(new Image(getClass().getResourceAsStream("/icon/default-favicon.png")));
+	}
+	
+	/**
+	 * Setter methods for various callbacks.
+	 * @param callback
+	 */
+	public void setCancelCallback(Runnable callback) {
+		callCancel = callback;
+	}
+	
+	public void setDeleteCallback(Runnable callback) {
+		callDelete = callback;
+	}
+	
+	public void setEditCallback(Runnable callback) {
+		callEdit = callback;
+	}
+	
+	public void setSaveCallback(Runnable callback) {
+		callSave = callback;
 	}
 
 }

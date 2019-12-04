@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 import javafx.scene.Node;
+import javafx.scene.control.TextInputControl;
 
 /**
  * Utility functions for convenience.
@@ -140,9 +141,9 @@ public class Util {
 	/**
 	 * Takes a variable number of Node arguments, and sets their disabled status.
 	 * @param boolean status
-	 * @param Node nodes
+	 * @param Node... nodes
 	 */
-	public static void setDisabled(boolean status, Node ...nodes) {
+	public static void setDisabled(boolean status, Node...nodes) {
 		for (Node n : nodes) {
 			n.setDisable(status);
 		}
@@ -151,12 +152,21 @@ public class Util {
 	/**
 	 * Takes a variable number of Node arguments, and sets their visibility status.
 	 * @param boolean status
-	 * @param Node nodes
+	 * @param Node... nodes
 	 */
-	public static void setVisible(boolean status, Node ...nodes) {
+	public static void setVisible(boolean status, Node...nodes) {
 		for (Node n : nodes) {
 			n.setVisible(status);
 		}
 	}
-
+	
+	/**
+	 * Takes a variable number of TextInputControl arguments, and clears their contents.
+	 * @param TextInputControl... nodes
+	 */
+	public static void clearText(TextInputControl...nodes) {
+		for (TextInputControl n : nodes) {
+			n.clear();
+		}
+	}
 }
