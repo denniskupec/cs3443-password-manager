@@ -3,6 +3,7 @@
 
 ### Building & Running
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. Requires Java 8
 <<<<<<< HEAD
 2. Gradle is required to fetch dependencies. 
@@ -28,6 +29,8 @@
 >>>>>>> develop
 
 =======
+=======
+>>>>>>> develop
 1. Requires Java 8 (version used on VDI)
 	- Gradle is required to fetch dependencies. (Wrapper is included in this repo)
 2. Clone the repo and run `init.bat` on Windows, or `init.sh` on Linux.  
@@ -46,4 +49,7 @@
 - Automatic password hiding/showing. Currently it defaults to hidden.
 - Inactivity logout.
 - macOS has some element sizing issues, but otherwise still functional.
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop

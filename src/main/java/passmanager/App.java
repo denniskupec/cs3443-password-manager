@@ -18,10 +18,13 @@ public class App extends Application {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private final static Logger Log = Util.getLogger(App.class);
 
 	public static void main(String[] args) {
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 	/**
@@ -33,6 +36,9 @@ public class App extends Application {
 		System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "ERROR");
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
@@ -40,6 +46,7 @@ public class App extends Application {
 		Database.close();
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	@Override
@@ -87,10 +94,21 @@ public class App extends Application {
 		//Database.setup();
 		
 >>>>>>> develop
+=======
+	/**
+	 * JavaFX entry
+	 */
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Database.setupDemo(); // sets up the program to use the demo files
+		//Database.setup();
+		
+>>>>>>> develop
 		BaseController.setup(primaryStage, "Password Manager");
 
 		if (Database.getDao(Settings.class).countOf() == 0) {
 			BaseController.loadScene("/layout/firstrun.fxml");
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		}
@@ -100,11 +118,16 @@ public class App extends Application {
 =======
 =======
 >>>>>>> develop
+=======
+>>>>>>> develop
 		}
 		else {
 			BaseController.loadScene("/layout/login.fxml");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop

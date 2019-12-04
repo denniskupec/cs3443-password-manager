@@ -2,6 +2,11 @@ package passmanager;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.IOException;
+>>>>>>> develop
 =======
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 import javafx.scene.Node;
+<<<<<<< HEAD
+=======
+import javafx.scene.control.TextInputControl;
+>>>>>>> develop
 
 /**
  * Utility functions for convenience.
@@ -76,8 +85,11 @@ public class Util {
 	public static Path getStoragePath() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager");
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 		Path p = Paths.get(Paths.get(System.getProperty("user.home"), ".config", "CS3442-passmanager").toString());
@@ -89,6 +101,9 @@ public class Util {
 			
 		return p;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
@@ -102,8 +117,11 @@ public class Util {
 	public static Path getStoragePath(String filename)  {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return Paths.get(Util.getStoragePath().toString(), filename);
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 		Path p = Paths.get(Util.getStoragePath().toString(), filename);
@@ -117,6 +135,7 @@ public class Util {
 		}
 			
 		return p;
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> develop
 =======
@@ -189,5 +208,81 @@ public class Util {
 		}
 	}
 >>>>>>> develop
+=======
+	}
+>>>>>>> develop
 
+	/**
+	 * Get the path of a resource file. 
+	 * @param String name 		name of the resource file requested
+	 * @return Path - Absolute path to application resource(s)
+	 * @throws URISyntaxException
+	 */
+	public static Path getResourcePath(String name) {
+		try {
+			return Paths.get( App.class.getResource(name).toURI() );
+		} 
+		catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Formats a Date object into a readable string.
+	 * @param Date date
+	 * @return String
+	 */
+	public static String formatDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		return sdf.format(date);
+	}
+	
+	/**
+	 * Formats a Date object into a readable string, with optional specific format argument.
+	 * @param Date date
+	 * @param String formatString
+	 * @return String
+	 */
+	public static String formatDate(Date date, String formatString) {
+		if (formatString.isEmpty()) {
+			return Util.formatDate(date);
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(formatString);
+		return sdf.format(date);
+	}
+	
+	/**
+	 * Takes a variable number of Node arguments, and sets their disabled status.
+	 * @param boolean status
+	 * @param Node... nodes
+	 */
+	public static void setDisabled(boolean status, Node...nodes) {
+		for (Node n : nodes) {
+			n.setDisable(status);
+		}
+	}
+	
+	/**
+	 * Takes a variable number of Node arguments, and sets their visibility status.
+	 * @param boolean status
+	 * @param Node... nodes
+	 */
+	public static void setVisible(boolean status, Node...nodes) {
+		for (Node n : nodes) {
+			n.setVisible(status);
+		}
+	}
+	
+	/**
+	 * Takes a variable number of TextInputControl arguments, and clears their contents.
+	 * @param TextInputControl... nodes
+	 */
+	public static void clearText(TextInputControl...nodes) {
+		for (TextInputControl n : nodes) {
+			n.clear();
+		}
+	}
 }

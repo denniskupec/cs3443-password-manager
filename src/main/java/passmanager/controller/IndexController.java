@@ -2,17 +2,23 @@ package passmanager.controller;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.sql.SQLException;
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.util.Date;
 <<<<<<< HEAD
 
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
@@ -24,9 +30,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+>>>>>>> develop
+=======
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 >>>>>>> develop
 =======
 import javafx.scene.input.MouseEvent;
@@ -40,11 +52,16 @@ import passmanager.interfaces.Initializable;
 import passmanager.model.PasswordEntry;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import passmanager.model.Settings;
 >>>>>>> develop
 =======
 import passmanager.model.Settings;
+>>>>>>> develop
+=======
+import passmanager.model.Settings;
+import passmanager.Util;
 >>>>>>> develop
 
 /**
@@ -61,12 +78,16 @@ public class IndexController extends BaseController implements Initializable {
 	
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	Date lastActive;
 	Settings settings;
 >>>>>>> develop
 =======
 	Date lastActive;
+	Settings settings;
+>>>>>>> develop
+=======
 	Settings settings;
 >>>>>>> develop
 	EntryDetailController entryDetail;
@@ -79,9 +100,12 @@ public class IndexController extends BaseController implements Initializable {
 	public void initialize() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entryDetail = new EntryDetailController();
 		
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 		try {
@@ -92,6 +116,7 @@ public class IndexController extends BaseController implements Initializable {
 		}
 		
 		entryDetail = new EntryDetailController();
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> develop
 =======
@@ -161,11 +186,35 @@ public class IndexController extends BaseController implements Initializable {
 =======
 =======
 >>>>>>> develop
+=======
+		
+		// this updates the detail pane with the correct model when a list item is selected/clicked
+		entryListView.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> entryDetail.setData(newValue));
+		entryListView.setCellFactory(listview -> new EntryListCell());
+
+		/* fill our collection of entries */
+		reload();
+
+		// register any callbacks
+		entryDetail.setDeleteCallback(this::doDeleteCallback);
+		entryDetail.setSaveCallback(this::reload);
+		entryDetail.setEditCallback(() -> Util.setDisabled(true, searchButton, searchText, entryListView));
+		
+		entryDetail.setCancelCallback(() -> {
+			Util.setDisabled(false, searchButton, searchText, entryListView);
+			entryDetail.setData( entryListView.getSelectionModel().getSelectedItem() );
+		});
+		
+>>>>>>> develop
 		searchButton.setOnMouseClicked(this::doSearch);
 		searchText.setOnKeyPressed(event -> {
 			switch (event.getCode()) {
 			case ESCAPE:
 				searchText.clear();
+<<<<<<< HEAD
+=======
+				entryListView.setItems(null);
+>>>>>>> develop
 				reload();
 				break;
 				
@@ -173,20 +222,33 @@ public class IndexController extends BaseController implements Initializable {
 				doSearch(null);
 				break;
 				
+<<<<<<< HEAD
 			default:
 				break;
 			}
 		});
 		
 		searchText.textProperty().addListener((observable, oldValue, newValue) -> {
+=======
+			default: break;
+			}
+		});
+		
+		searchText.textProperty().addListener((obs, oldValue, newValue) -> {
+>>>>>>> develop
 			if (!oldValue.isEmpty() && newValue.isEmpty()) {
 				reload();
 			}
 		});
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> develop
 =======
+>>>>>>> develop
+=======
+		splitPane.getItems().add( entryDetail.getBox() );
+
 >>>>>>> develop
 		setStatusMessage("Loaded " + entryCollection.size() + " entries.");
 	}
@@ -196,7 +258,12 @@ public class IndexController extends BaseController implements Initializable {
 	 * This probably should be moved to EntryDetailController.
 	 */
 	protected void doDeleteCallback() {
+<<<<<<< HEAD
 		PasswordEntry item = entryListView.getSelectionModel().getSelectedItem();
+=======
+		MultipleSelectionModel<PasswordEntry> sm = entryListView.getSelectionModel();
+		PasswordEntry item = sm.getSelectedItem();
+>>>>>>> develop
 		
 		try {
 			Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
@@ -210,6 +277,7 @@ public class IndexController extends BaseController implements Initializable {
 			entryListView.setDisable(false);
 		}
 		
+<<<<<<< HEAD
 		setStatusMessage("Entry deleted.");
 		
 		entryListView.getSelectionModel().clearSelection();
@@ -229,6 +297,18 @@ public class IndexController extends BaseController implements Initializable {
 	 * Reloads the list of items from the database. Does not change selected item.
 	 */
 >>>>>>> develop
+=======
+		sm.selectNext();
+		entryCollection.remove(item);
+		
+		setStatusMessage("Entry deleted.");
+	}
+
+	/**
+	 * Reloads the list of items from the database. If there are any items found, then the
+	 * first is selected.
+	 */
+>>>>>>> develop
 	public void reload() {
 		Dao<PasswordEntry, Integer> pdao = Database.getDao(PasswordEntry.class);
 		entryCollection.clear();
@@ -237,11 +317,25 @@ public class IndexController extends BaseController implements Initializable {
 			entryCollection.add(entry);
 		}
 		entryListView.setItems( entryCollection );
+<<<<<<< HEAD
+=======
+
+		if (entryCollection.isEmpty()) {
+			setStatusMessage("Empty database. Try adding a new item.");
+			entryDetail.setData(null);
+		}
+		else {
+			entryListView.getSelectionModel().selectFirst();
+		}
+>>>>>>> develop
 	}
 
 	/**
 	 * used to process the different choices in the menu bar
+<<<<<<< HEAD
 	 * 
+=======
+>>>>>>> develop
 	 * @param ActionEvent event
 	 */
 	public void onMenuClick(ActionEvent event) {
@@ -253,10 +347,15 @@ public class IndexController extends BaseController implements Initializable {
 			break;
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case "Export":
 <<<<<<< HEAD
 			// TODO: Export functionality
 =======
+			doExport();
+>>>>>>> develop
+=======
+		case "Export CSV":
 			doExport();
 >>>>>>> develop
 =======
@@ -277,8 +376,12 @@ public class IndexController extends BaseController implements Initializable {
 		case "Close":
 			getStage().close();
 
+<<<<<<< HEAD
 		default:
 			/* Shouldn't normally be able to get here. */
+=======
+		default: /* Shouldn't normally be able to get here. */
+>>>>>>> develop
 		}
 	}
 
@@ -291,12 +394,19 @@ public class IndexController extends BaseController implements Initializable {
 	}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> develop
 	
 	/**
 	 * Searches the current entry list collection for a title containing a keyword, and sets the entry list to display only the found items.
+=======
+	
+	/**
+	 * Searches the current entry list collection for a title containing a keyword, and 
+	 * sets the entry list to display only the found items.
+>>>>>>> develop
 	 * @param MouseEvent event
 	 */
 	protected void doSearch(MouseEvent event) {
@@ -305,6 +415,7 @@ public class IndexController extends BaseController implements Initializable {
 			return;
 		}
 		
+<<<<<<< HEAD
 		ObservableList<PasswordEntry> temp = FXCollections.observableArrayList();
 
 		for (PasswordEntry p : entryCollection) {
@@ -314,6 +425,10 @@ public class IndexController extends BaseController implements Initializable {
 		}
 		
 		entryListView.setItems(temp);
+=======
+		ObservableList<PasswordEntry> filtered = entryCollection.filtered(entry -> entry.getTitle().contains(searchString));
+		entryListView.setItems(filtered);
+>>>>>>> develop
 	}
 	
 	/**
@@ -322,10 +437,16 @@ public class IndexController extends BaseController implements Initializable {
 	protected void doExport() {
 		FileChooser chooser = new FileChooser();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		chooser.setTitle("Export To");
 		chooser.setInitialFileName("passwords.csv");
 		chooser.getExtensionFilters().add( new ExtensionFilter("CSV (Comma separated values)", "*.csv") );
+>>>>>>> develop
+=======
+		chooser.setTitle("Export To");
+		chooser.setInitialFileName("passwords.csv");
+		chooser.getExtensionFilters().add( new ExtensionFilter("CSV (Comma Separated Values)", "*.csv") );
 >>>>>>> develop
 		
 		File output = chooser.showSaveDialog(getStage());
@@ -333,17 +454,27 @@ public class IndexController extends BaseController implements Initializable {
 			return;
 		}
 		
+<<<<<<< HEAD
+=======
+		// makes sure the output file has the 'csv' extension
+>>>>>>> develop
 		if (!output.getName().endsWith(".csv")) {
 			output = new File(output.getAbsolutePath() + ".csv");
 		}
 		
 		try (FileWriter writer = new FileWriter(output)) {
+<<<<<<< HEAD
 			
 			for (PasswordEntry p : entryCollection) {
 <<<<<<< HEAD
 				writer.write(p.toString());
 				writer.write(System.lineSeparator());
 =======
+				writer.write(p.toString() + "\n");
+>>>>>>> develop
+=======
+
+			for (PasswordEntry p : entryCollection) {
 				writer.write(p.toString() + "\n");
 >>>>>>> develop
 			}
@@ -355,6 +486,9 @@ public class IndexController extends BaseController implements Initializable {
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop

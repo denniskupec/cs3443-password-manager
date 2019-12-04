@@ -2,6 +2,10 @@ package passmanager.model;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.io.BufferedInputStream;
+>>>>>>> develop
 =======
 import java.io.BufferedInputStream;
 >>>>>>> develop
@@ -14,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.net.URL;
 =======
 import java.io.UnsupportedEncodingException;
@@ -21,12 +26,17 @@ import java.net.URL;
 import java.net.URLConnection;
 >>>>>>> develop
 =======
+=======
+>>>>>>> develop
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Base64.Encoder;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 import java.util.Date;
 import java.util.Random;
@@ -36,6 +46,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import javafx.scene.image.Image;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import passmanager.Util;
 >>>>>>> develop
@@ -43,6 +54,12 @@ import passmanager.Util;
 /**
  * Reflects the 'entries' table.
  * All setter methods return true on success or false on failure.
+=======
+import passmanager.Util;
+
+/**
+ * Reflects the 'entries' table.
+>>>>>>> develop
 =======
 import passmanager.Util;
 
@@ -253,6 +270,7 @@ public class PasswordEntry {
 		
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int n = 0;
 		byte[] tmpBuffer = new byte[2048];
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -267,10 +285,13 @@ public class PasswordEntry {
 =======
 =======
 >>>>>>> develop
+=======
+>>>>>>> develop
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 
 		/* fetching a favicon image */
 		try {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			URL url = new URL("http://icon.ptmx.dev/icon?size=50&url=" + this.url);
 			URLConnection conn = url.openConnection();
@@ -278,12 +299,17 @@ public class PasswordEntry {
 			conn.setConnectTimeout(5000);
 			conn.setReadTimeout(15000);
 =======
+=======
+>>>>>>> develop
 			URL url = new URL("http://icon.ptmx.dev/icon?size=50&formats=png&url=" + this.url);
 			
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0");
 			conn.setConnectTimeout(3000);
 			conn.setReadTimeout(3000);
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 			conn.setDoInput(true);
 			
@@ -293,6 +319,9 @@ public class PasswordEntry {
 				
 				while ( (n = bin.read(tmpBuffer)) > 0 ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
@@ -301,6 +330,7 @@ public class PasswordEntry {
 				
 				output.flush();
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 			
@@ -315,11 +345,16 @@ public class PasswordEntry {
 <<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> develop
 		}
 		catch (IOException e) {
 			/* favicon wasn't found, found but not the right format, not connected to the internet, etc. 
 			 * We don't store the default one in the database, since it would just be wasted space. 
 			 * A null value also makes it easy to check and retry later. */
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 			setDefaultFavicon();
 			return;
@@ -329,6 +364,7 @@ public class PasswordEntry {
 	}
 	
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set the default favicon.
 	 */
@@ -342,6 +378,8 @@ public class PasswordEntry {
 >>>>>>> develop
 			this.favicon = null;
 =======
+=======
+>>>>>>> develop
 	 * Set the default favicon image from resources.
 	 */
 	public void setDefaultFavicon() {
@@ -351,6 +389,9 @@ public class PasswordEntry {
 		}
 		catch (IOException ee) {
 			favicon = null;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		}
 	}
@@ -393,7 +434,10 @@ public class PasswordEntry {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 	/**
@@ -402,10 +446,13 @@ public class PasswordEntry {
 	 */
 	public String toString() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		try {
 			String[] data = { Util.formatDate(updated_at), "\"" + url + "\"", username, "\"" + new String(password, "UTF-8") + "\"", "\"" + note + "\"" };
 			return String.join(",", data);
 =======
+=======
+>>>>>>> develop
 		StringBuilder sb = new StringBuilder();
 		Encoder enc = Base64.getEncoder();
 		
@@ -422,19 +469,28 @@ public class PasswordEntry {
 			else {
 				sb.append("\"data:text/plain;base64," + enc.encodeToString(note.getBytes(Charset.forName("UTF-8"))) + "\""); 	
 			}
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 		}
 		catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	
 >>>>>>> develop
 =======
+=======
+>>>>>>> develop
 		
 		return sb.toString();
 	}
 	
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 }

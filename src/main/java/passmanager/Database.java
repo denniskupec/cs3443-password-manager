@@ -3,6 +3,12 @@ package passmanager;
 import java.io.IOException;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+>>>>>>> develop
 =======
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -35,6 +41,7 @@ public class Database {
 		return connectionSource;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	
 	/*
@@ -44,6 +51,8 @@ public class Database {
 		try {
 			return DaoManager.createDao(connectionSource, clazz);
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
 	}
@@ -63,6 +72,7 @@ public class Database {
 	/**
 	 * Used to initialize the sqlite database with the proper schema.
 	 * @throws SQLException 
+<<<<<<< HEAD
 	 */
 	public static void setup() throws SQLException {
 		connectionSource = new JdbcConnectionSource("jdbc:sqlite:" + Util.getStoragePath("storage.sqlite3"));
@@ -74,11 +84,27 @@ public class Database {
 	/**
 	 * Copies a premade demo database resource instead of creating a fresh one. 
 	 */
+=======
+	 */
+	public static void setup() throws SQLException {
+		connectionSource = new JdbcConnectionSource("jdbc:sqlite:" + Util.getStoragePath("storage.sqlite3"));
+
+		TableUtils.createTableIfNotExists(connectionSource, Settings.class);
+		TableUtils.createTableIfNotExists(connectionSource, PasswordEntry.class);
+	}
+	
+	/**
+	 * Copies a premade demo database resource instead of creating a fresh one. 
+	 */
+>>>>>>> develop
 	public static void setupDemo() {
 		try (InputStream resource = App.class.getResourceAsStream("/storage.sqlite3"))  {
 			Files.copy(resource, Util.getStoragePath("storage.sqlite3"), StandardCopyOption.REPLACE_EXISTING);
 			Database.setup();
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
@@ -90,6 +116,7 @@ public class Database {
 		return null;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/**
 <<<<<<< HEAD
@@ -107,6 +134,10 @@ public class Database {
 	 * Only checks if the database was copied already. 
 	 * true = exists, false = doesn't exist
 =======
+	 * Only checks if the database file exists on disk. 
+>>>>>>> develop
+=======
+	/**
 	 * Only checks if the database file exists on disk. 
 >>>>>>> develop
 =======
@@ -137,6 +168,7 @@ public class Database {
 		catch (IOException e) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			e.printStackTrace();
 		}
 		catch (NullPointerException e) {
@@ -144,11 +176,16 @@ public class Database {
 =======
 =======
 >>>>>>> develop
+=======
+>>>>>>> develop
 			throw new RuntimeException(e);
 		}
 		catch (NullPointerException e) {
 			/* intentionally left blank */
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop

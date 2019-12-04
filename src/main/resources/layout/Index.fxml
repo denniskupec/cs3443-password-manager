@@ -46,7 +46,11 @@
             <items>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <MenuItem mnemonicParsing="false" text="Export" />
+=======
+                  <MenuItem mnemonicParsing="false" text="Export CSV" />
+>>>>>>> develop
 =======
                   <MenuItem mnemonicParsing="false" text="Export CSV" />
 >>>>>>> develop

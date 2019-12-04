@@ -1,6 +1,9 @@
 package passmanager.controller;
 
+<<<<<<< HEAD
 import java.util.logging.Logger;
+=======
+>>>>>>> develop
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.control.*;
@@ -8,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.fxml.*;
 import passmanager.*;
 import passmanager.interfaces.Initializable;
+<<<<<<< HEAD
 
 /**
  * Handles the first launch of the application, and in cases where the database doesnt exist.
@@ -15,6 +19,14 @@ import passmanager.interfaces.Initializable;
 public class FirstRunController extends BaseController implements Initializable {
 	private final static Logger Log = Util.getLogger(FirstRunController.class);
 	
+=======
+
+/**
+ * Handles the first launch of the application, and in cases where the database doesnt exist.
+ */
+public class FirstRunController extends BaseController implements Initializable {
+
+>>>>>>> develop
 	@FXML PasswordField password;
 	@FXML PasswordField passwordConfirm;
 	@FXML Button save;
@@ -35,8 +47,6 @@ public class FirstRunController extends BaseController implements Initializable 
 	 */
 	@FXML
 	public void onSave(Event event) {
-		Log.fine("Saving new password.");
-		
 		errorMsg.setVisible(false);
 		
 		if (!password.getText().equals(passwordConfirm.getText())) {
@@ -65,7 +75,11 @@ public class FirstRunController extends BaseController implements Initializable 
 		
 		if (!password.getText().equals(passwordConfirm.getText()) && !passwordConfirm.getText().isEmpty()) {
 			save.setDisable(true);
+<<<<<<< HEAD
 			showErrorMessage("Both passwords need to match. They are case-sensitive.");
+=======
+			showErrorMessage("Both passwords must match. They are case-sensitive.");
+>>>>>>> develop
 		}
 		
 		if (password.getText().equals(passwordConfirm.getText())) {

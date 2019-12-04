@@ -66,7 +66,11 @@
                <children>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <ImageView fx:id="favicon" cache="true" cacheHint="QUALITY" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+=======
+                  <ImageView fx:id="favicon" cache="true" cacheHint="QUALITY" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+>>>>>>> develop
 =======
                   <ImageView fx:id="favicon" cache="true" cacheHint="QUALITY" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
 >>>>>>> develop
@@ -92,11 +96,14 @@
                            </children>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                         </StackPane>
                </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
                            <HBox.margin>
@@ -107,6 +114,9 @@
                      <VBox.margin>
                         <Insets bottom="10.0" top="5.0" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
@@ -157,7 +167,10 @@
                                     <Button fx:id="toggleHide" mnemonicParsing="false" prefWidth="45.0" style="-fx-background-radius: 0 3px 3px 0;" text="Show" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
                                           <Button fx:id="generateButton" mnemonicParsing="false" text="Generate" visible="false">
@@ -166,6 +179,9 @@
                                              </HBox.margin>
                                           </Button>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
 =======
 >>>>>>> develop
