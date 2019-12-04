@@ -66,7 +66,7 @@ public class IndexController extends BaseController implements Initializable {
 		}
 
 		/* this updates the detail pane with the correct model when a list item is selected/clicked */
-		entryListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> entryDetail.setData(newValue));
+		entryListView.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> entryDetail.setData(newValue));
 		
 		entryListView.setCellFactory(listview -> new EntryListCell());
 		entryListView.getSelectionModel().selectFirst();
@@ -101,8 +101,7 @@ public class IndexController extends BaseController implements Initializable {
 				doSearch(null);
 				break;
 				
-			default:
-				break;
+			default: break;
 			}
 		});
 		
@@ -183,8 +182,7 @@ public class IndexController extends BaseController implements Initializable {
 		case "Close":
 			getStage().close();
 
-		default:
-			/* Shouldn't normally be able to get here. */
+		default: /* Shouldn't normally be able to get here. */
 		}
 	}
 
